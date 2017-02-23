@@ -1,8 +1,63 @@
-# Basic-knowledge-of-js
-js 相关的基础知识
+# JS 基础知识
+> 本仓库主要是JS基础知识的讲解，md文件格式，建议下载一个markdown编辑器用于演示内容。
 
-本仓库主要是js的一些基础知识，欢迎阅读。
+## js文件引入方式
 
-<p style="color:red">有点儿意思哟</p>
+  js文件的引入方式主要分为两种
 
-- dsad
+### 内嵌方式
+
+直接在html文档的`head`或`body`标签中嵌入js，如下所示：
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+    <script>
+        // insert javascript codes in here....
+    </script>
+</head>
+<body>
+    <script>
+        // insert javascript codes in here....
+    </script>
+</body>
+</html>
+```
+
+> tips：`script`标签可以放在网页任意位置，不过不建议这样使用，一般放置在`heade`标签内，或`body`结束标签之前。
+
+### 外链方式
+
+创建js文件，在html的`head`标签中引入js文件，代码如下：
+
+```javascript
+// my.js
+window.onload() = function() {
+  // insert javascript codes in here...
+}
+
+```
+
+```html
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+    <script type="text/javascript" src="my.js"></script>
+</head>
+<body>
+	
+</body>
+</html>
+```
+
+> tips：这里建议大家使用外链方式，将js代码独立放置到一个文件中，便于我们后期维护整合优化。
+
+## 知识点概要
+
+> 第01章 基础语法
