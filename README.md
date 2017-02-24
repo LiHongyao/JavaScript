@@ -40,10 +40,9 @@
 
 ```javascript
 // my.js
-window.onload() = function() {
+window.onload = function() {
   // insert javascript codes in here...
 }
-
 ```
 
 ```html
