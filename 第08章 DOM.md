@@ -18,7 +18,7 @@
 
 - ***Document***：整个文档树的顶层节点（**重点**）
 - ***DocumentType***：*doctype*标签（比如*<!DOCTYPE html>*）
-- ***Element***：网页的各种HTML标签（比如*<body>*、*<a>*等）（**重点**）
+- ***Element***：网页的各种HTML标签（比如*\<body>*、*\<a>*等）（**重点**）
 - ***Attribute***：网页元素的属性（比如*class="right"*）（**重点**）
 - ***Text***：标签之间或标签包含的文本（**重点**）
 - ***Comment***：注释
