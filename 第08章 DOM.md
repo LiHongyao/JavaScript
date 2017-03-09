@@ -4,7 +4,7 @@
 
 ### 1.1、DOM
 
-  DOM是JavaScript操作网页的接口，全称为“***文档对象模型***”（Document Object Model）。它的作用是将网页转为一个JavaScript对象，从而可以用脚本进行各种操作（比如增删内容）。
+  DOM是JavaScript操作网页的接口，全称为“*文档对象模型* ”（Document Object Model）。它的作用是将网页转为一个JavaScript对象，从而可以用脚本进行各种操作（比如增删内容）。
 
   浏览器会根据DOM模型，将结构化文档（比如HTML和XML）解析成一系列的节点，再由这些节点组成一个树状结构（DOM Tree）。所有的节点和最终的树状结构，都有规范的对外接口。所以，DOM可以理解成网页的编程接口。DOM有自己的国际标准，目前的通用版本是DOM 3，下一代版本DOM 4正在拟定中。
 
@@ -16,11 +16,11 @@
 
   节点的类型有七种：
 
-- ***Document***：整个文档树的顶层节点（**重点**）
+- ***Document***：整个文档树的顶层节点
 - ***DocumentType***：*doctype*标签（比如*<!DOCTYPE html>*）
-- ***Element***：网页的各种HTML标签（比如*\<body>*、*\<a>*等）（**重点**）
-- ***Attribute***：网页元素的属性（比如*class="right"*）（**重点**）
-- ***Text***：标签之间或标签包含的文本（**重点**）
+- ***Element***：网页的各种HTML标签（比如*\<body>*、*\<a>*等）
+- ***Attribute***：网页元素的属性（比如*class="right"*）
+- ***Text***：标签之间或标签包含的文本
 - ***Comment***：注释
 - ***DocumentFragment***：文档的片段
 
@@ -30,26 +30,26 @@
 
   一个文档的所有节点，按照所在的层级，可以抽象成一种树状结构。这种树状结构就是DOM。
 
-  最顶层的节点就是***document***节点，它代表了整个文档。文档里面最高一层的HTML标签，一般是***\<html>***，它构成树结构的根节点（root node），其他HTML标签节点都是它的下级。
+  最顶层的节点就是*document*节点，它代表了整个文档。文档里面最高一层的HTML标签，一般是*\<html>*，它构成树结构的根节点（root node），其他HTML标签节点都是它的下级。
 
   除了根节点以外，其他节点对于周围的节点都存在三种关系。
 
-- ***父节点关系（parentNode）***：直接的那个上级节点
-- ***子节点关系（childNodes）***：直接的下级节点
-- ***同级节点关系（sibling***）：拥有同一个父节点的节点
+- ***父节点关系 parentNode***：直接的那个上级节点
+- ***子节点关系 childNodes***：直接的下级节点
+- ***同级节点关系 sibling***：拥有同一个父节点的节点
 
-  DOM提供操作接口，用来获取三种关系的节点。其中，子节点接口包括***firstChild***（第一个子节点）和***lastChild***（最后一个子节点）等属性，同级节点接口包括***nextSibling***（紧邻在后的那个同级节点）和***previousSibling***（紧邻在前的那个同级节点）属性。
+  DOM提供操作接口，用来获取三种关系的节点。其中，子节点接口包括*firstChild*（第一个子节点）和*lastChild*（最后一个子节点）等属性，同级节点接口包括*nextSibling*（紧邻在后的那个同级节点）和*previousSibling*（紧邻在前的那个同级节点）属性。
 
   示例：
 
-```javascript
+```html
 <!DOCTYPE html>
 <html>  
 	<head>  
 	    <title>DOM Tutorial</title>   
 	</head>   
 	<body>   
-	    <h1>DOM Lesson one</h1>   
+	    <h1>DOM Lesson one</h1>    
 	    <p>Hello world!</p>   
 	</body>   
 </html> 
@@ -61,13 +61,13 @@
 
 ## 2、特征相关的属性
 
-  所有节点对象都是浏览器内置的***Node***对象的实例，继承了***Node***属性和方法。这是所有节点的共同特征。
+  所有节点对象都是浏览器内置的*Node*对象的实例，继承了*Node*属性和方法。这是所有节点的共同特征。
 
   以下属性与节点对象本身的特征相关。
 
 - **（1）、Node.nodeName，Node.nodeType**
 
-  ***nodeName***属性返回节点的名称，***nodeType***属性返回节点类型的常数值。具体的返回值，可查阅下方的表格。
+  *nodeName*属性返回节点的名称，*nodeType*属性返回节点类型的常数值。具体的返回值，可查阅下方的表格。
 
 | 类型                     | nodeName             | nodeType |
 | ---------------------- | -------------------- | -------- |
@@ -81,13 +81,13 @@
 
 - **（2）、Node.nodeValue**
 
-  ***Node.nodeValue***属性返回一个字符串，表示当前节点本身的文本值，该属性可读写。
+  *Node.nodeValue*属性返回一个字符串，表示当前节点本身的文本值，该属性可读写。
 
-  由于只有Text节点、Comment节点、XML文档的CDATA节点有文本值，因此只有这三类节点的*nodeValue*可以返回结果，其他类型的节点一律返回*null*。同样的，也只有这三类节点可以设置*nodeValue*属性的值。对于那些返回*null*的节点，设置*nodeValue*属性是无效的。
+  由于只有Text节点、Comment节点、XML文档的DATA节点有文本值，因此只有这三类节点的*nodeValue*可以返回结果，其他类型的节点一律返回*null*。同样的，也只有这三类节点可以设置*nodeValue*属性的值。对于那些返回*null*的节点，设置*nodeValue*属性是无效的。
 
 - **（3）、Node.textContent**
 
-  ***Node.textContent***属性返回当前节点和它的所有后代节点的文本内容。
+  *Node.textContent*属性返回当前节点和它的所有后代节点的文本内容。
 
 ```javascript
 // HTML代码为
@@ -97,7 +97,7 @@ document.getElementById('divA').textContent
 // This is some text
 ```
 
-  ***textContent***属性自动忽略当前节点内部的HTML标签，返回所有文本内容。
+  *textContent*属性自动忽略当前节点内部的HTML标签，返回所有文本内容。
 
   该属性是可读写的，设置该属性的值，会用一个新的文本节点，替换所有原来的子节点。它还有一个好处，就是自动对HTML标签转义。这很适合用于用户提供的内容。
 
@@ -107,13 +107,13 @@ document.getElementById('test').textContent = '<p>GoodBye!</p>';
 
   上面代码在插入文本时，会将*\<p>*标签解释为文本，而不会当作标签处理。
 
-  对于***Text***节点和***Comment***节点，该属性的值与***nodeValue***属性相同。对于其他类型的节点，该属性会将每个子节点的内容连接在一起返回，但是不包括***Comment***节点。如果一个节点没有子节点，则返回空字符串。
+  对于*Text*节点和*Comment*节点，该属性的值与*nodeValue*属性相同。对于其他类型的节点，该属性会将每个子节点的内容连接在一起返回，但是不包括*Comment*节点。如果一个节点没有子节点，则返回空字符串。
 
-  ***document***节点和***doctype***节点的***textContent***属性为***null***。如果要读取整个文档的内容，可以使用***document.documentElement.textContent***。
+  *document*节点和*doctype*节点的*textContent*属性为*null*。如果要读取整个文档的内容，可以使用*document.documentElement.textContent*。
 
 - **（4）、Node.baseURI**
 
-  ***Node.baseURI***属性返回一个字符串，表示当前网页的绝对路径。如果无法取到这个值，则返回***null***。浏览器根据这个属性，计算网页上的相对路径的URL。该属性为只读。
+  *Node.baseURI*属性返回一个字符串，表示当前网页的绝对路径。如果无法取到这个值，则返回*null*。浏览器根据这个属性，计算网页上的相对路径的URL。该属性为只读。
 
 ```javascript
 // 当前网页的网址为
@@ -129,7 +129,7 @@ document.baseURI
 <base target="_blank" href="http://www.example.com/page.html">
 ```
 
-  设置了以后，*baseURI*属性就返回*<base>*标签设置的值。
+  设置了以后，*baseURI*属性就返回*\<base>*标签设置的值。
 
 ## 3、相关节点的属性
 
@@ -145,7 +145,7 @@ document.baseURI
 
 - **（3）、Node.nextElementSibling**
 
-  该属性用于返回紧跟在当前节点后面的第一个同级Element节点，也就是说它不会返回文本节点（包括空格或换行的文本节点）。它属于ECMAScript 5标准新增的属性。
+  该属性返回紧跟在当前节点后面的第一个同级Element节点，也就是说它不会返回文本节点（包括空格或换行的文本节点）。它属于ECMAScript 5标准新增的属性。
 
 - **（4）、Node.previousSibling**
 
@@ -157,7 +157,7 @@ document.baseURI
 
 - **（6）、Node.parentNode**
 
-  该属性返回当前节点的父节点。对于一个节点来说，它的父节点只可能是三种类型：*element节点*、*document节点*和*documentfragment节点*。
+  该属性返回当前节点的父节点。对于一个节点来说，它的父节点只可能是三种类型：*element节点*、*document节点*
 
   对于*document节点*和*documentfragment节点*，它们的父节点都是*nul*l。另外，对于那些生成后还没插入DOM树的节点，父节点也是*null*。
 
@@ -231,7 +231,7 @@ document.baseURI
 
 ## 5、节点集合
 
-  节点都是单个对象，有时会需要一种数据结构，能够容纳多个节点。DOM提供两种集合对象，用于实现这种节点的集合：***NodeList*** 和 ***HTMLCollection***。
+  节点都是单个对象，有时会需要一种数据结构，能够容纳多个节点。DOM提供两种集合对象，用于实现这种节点的集合：*NodeList* 和 *HTMLCollection*。
 
   这两个对象都是构造函数。
 
@@ -240,18 +240,18 @@ typeof NodeList // "function"
 typeof HTMLCollection // "function"
 ```
 
-  但是，一般不把它们当作函数使用，甚至都没有直接使用它们的场合。主要是许多DOM属性和方法，返回的结果是***NodeList***实例或***HTMLCollection***实例，所以一般只使用它们的实例。
+  但是，一般不把它们当作函数使用，甚至都没有直接使用它们的场合。主要是许多DOM属性和方法，返回的结果是*NodeList*实例或*HTMLCollection*实例，所以一般只使用它们的实例。
 
 ### 5.1、NodeList
 
-  ***NodeList***实例对象是一个类似数组的对象，它的成员是节点对象。***Node.childNodes***、***document.querySelectorAll()***返回的都是***NodeList***实例对象。
+  *NodeList*实例对象是一个“*类似数组*”的对象，它的成员是节点对象。*Node.childNodes*、*document.querySelectorAll()* 返回的都是*NodeList*实例对象。
 
 ```javascript
 // instanceof 用于判断对象或函数的类型
 document.childNodes instanceof NodeList // true
 ```
 
-  ***NodeList***实例对象可能是动态集合，也可能是静态集合。所谓动态集合就是一个活的集合，DOM树删除或新增一个相关节点，都会立刻反映在NodeList接口之中。***Node.childNodes***返回的，就是一个动态集合。
+  *NodeList*实例对象可能是动态集合，也可能是静态集合。所谓动态集合就是一个活的集合，DOM树删除或新增一个相关节点，都会立刻反映在NodeList接口之中。*Node.childNodes*返回的，就是一个动态集合。
 
 ```javascript
 var parent = document.getElementById('parent');
@@ -260,11 +260,11 @@ parent.appendChild(document.createElement('div'));
 parent.childNodes.length // 3
 ```
 
-  上面代码中，***parent.childNodes***返回的是一个*NodeList*实例对象。当*parent*节点新增一个子节点以后，该对象的成员个数就增加了1。
+  上面代码中，*parent.childNodes*返回的是一个*NodeList*实例对象。当*parent*节点新增一个子节点以后，该对象的成员个数就增加了1。
 
-  ***document.querySelectorAll***方法返回的是一个静态集合。DOM内部的变化，并不会实时反映在该方法的返回结果之中。
+  *document.querySelectorAll*方法返回的是一个静态集合。DOM内部的变化，并不会实时反映在该方法的返回结果之中。
 
-  ***NodeList***接口实例对象提供*length*属性和数字索引，因此可以像数组那样，使用数字索引取出每个节点，但是它本身并不是数组，不能使用*pop*或*push*之类数组特有的方法。
+  *NodeList*接口实例对象提供*length*属性和数字索引，因此可以像数组那样，使用数字索引取出每个节点，但是它本身并不是数组，不能使用*pop*或*push*之类数组特有的方法。
 
 ```javascript
 // 数组的继承链
@@ -274,7 +274,7 @@ myArray --> Array.prototype --> Object.prototype --> null
 myNodeList --> NodeList.prototype --> Object.prototype --> null
 ```
 
-  从上面的继承链可以看到，***NodeList***实例对象并不继承***Array.prototype***，因此不具有数组的方法。如果要在***NodeList***实例对象使用数组方法，可以将***NodeList***实例转为真正的数组。
+  从上面的继承链可以看到，*NodeList*实例对象并不继承*Array.prototype*，因此不具有数组的方法。如果要在*NodeList*实例对象使用数组方法，可以将*NodeList*实例转为真正的数组。
 
 ```javascript
 var div_list = document.querySelectorAll('div');
@@ -283,7 +283,7 @@ var div_array = Array.prototype.slice.call(div_list);
 
   注意，采用上面的方法将*NodeList*实例转为真正的数组以后，*div_array*就是一个静态集合了，不再能动态反映DOM的变化。
 
-  另一种方法是通过***call***方法，间接在*NodeList*实例上使用数组方法。
+  另一种方法是通过*call*方法，间接在*NodeList*实例上使用数组方法。
 
 ```javascript
 var forEach = Array.prototype.forEach;
@@ -334,9 +334,9 @@ nodeItem = nodeList[index]
 
 ### 5.2、HTMLCollection
 
-  ***HTMLCollection***实例对象与***NodeList***实例对象类似，也是节点的集合，返回一个类似数组的对象。*document.links*、*docuement.forms*、*document.images*等属性，返回的都是*HTMLCollection*实例对象。
+  *HTMLCollection*实例对象与*NodeList*实例对象类似，也是节点的集合，返回一个类似数组的对象。*document.links*、*docuement.forms*、*document.images*等属性，返回的都是*HTMLCollection*实例对象。
 
-  ***HTMLCollection***实例对象与***NodeList***实例对象的区别在于：
+  *HTMLCollection*实例对象与*NodeList*实例对象的区别在于：
 
 - a、*HTMLCollection*实例对象的成员只能是*Element*节点，*NodeList*实例对象的成员可以包含其他节点。
 - b、*HTMLCollection*实例对象都是动态集合，节点的变化会实时反映在集合中。*NodeList*实例对象可以是静态集合。
@@ -352,7 +352,7 @@ var img1 = c.item(1);
 var img1 = c[1];
 ```
 
-  *HTMLCollection*实例的*namedItem*方法根据成员的*ID*属性或*name*属性，返回该成员。如果没有对应的成员，则返回*null*。这个方法是`NodeList`实例不具有的。
+  *HTMLCollection*实例的*namedItem*方法根据成员的*ID*属性或*name*属性，返回该成员。如果没有对应的成员，则返回*null*。这个方法是*NodeList*实例不具有的。
 
 ```javascript
 // HTML代码为
@@ -362,7 +362,7 @@ var elem = document.forms.namedItem('myForm');
 var elem = document.forms['myForm'];
 ```
 
-  由于`item`方法和`namedItem`方法，都可以用方括号运算符代替，所以建议一律使用方括号运算符
+  由于*item*方法和*namedItem*方法，都可以用方括号运算符代替，所以建议一律使用方括号运算符
 
 ## 6、ParentNode接口，ChildNode接口
 
@@ -439,13 +439,13 @@ var elem = document.forms['myForm'];
 
 # 二、document 节点
 
-    ***document***节点是文档的根节点，每张网页都有自己的*document*节点。*window.document*属性就指向这个节点。只要浏览器开始载入HTML文档，这个节点对象就存在了，可以直接调用。
+   *document*节点是文档的根节点，每张网页都有自己的*document*节点。*window.document*属性就指向这个节点。只要浏览器开始载入HTML文档，这个节点对象就存在了，可以直接调用。
 
   *document*节点有不同的办法可以获取。
 
 - 对于正常的网页，直接使用*document*或*window.document*。
 - 对于*iframe*载入的网页，使用*iframe*节点的*contentDocument*属性。
-- 对Ajax操作返回的文档，使用XMLHttpRequest对象的*responseXML*属性。
+- 对Ajax操作返回的文档，使用*XMLHttpRequest*对象的*responseXML*属性。
 - 对于包含某个节点的文档，使用该节点的*ownerDocument*属性。
 
   上面这四种*document*节点，都部署了[Document接口](http://dom.spec.whatwg.org/#interface-document)，因此有共同的属性和方法。当然，各自也有一些自己独特的属性和方法，比如HTML和XML文档的*document*节点就不一样。
@@ -454,7 +454,7 @@ var elem = document.forms['myForm'];
 
 ### 1.1、document.doctype，document.documentElement，document.defaultView
 
-  对于HTML文档来说，`document`对象一般有两个子节点。第一个子节点是`document.doctype`，它是一个对象，包含了当前文档类型（Document Type Declaration，简写DTD）信息。对于HTML5文档，该节点就代表`<!DOCTYPE html>`。如果网页没有声明DTD，该属性返回`null`。
+  对于HTML文档来说，*document*对象一般有两个子节点。第一个子节点是*document.doctype*，它是一个对象，包含了当前文档类型（Document Type Declaration，简写DTD）信息。对于HTML5文档，该节点就代表*<!DOCTYPE html>*。如果网页没有声明DTD，该属性返回*null*。
 
 ```javascript
 var doctype = document.doctype;
@@ -474,7 +474,7 @@ document.defaultView === window // true
 
 ### 1.2、document.body，document.head
 
-  *document.head*属性返回当前文档的`<head>`节点，*document.body*属性返回当前文档的`<body>`。
+  *document.head*属性返回当前文档的*\<head>*节点，*document.body*属性返回当前文档的*\<body>*。
 
 ```javascript
 document.head === document.querySelector('head') // true
@@ -494,7 +494,7 @@ document.body === document.querySelector('body') // true
 - *document.links*属性返回当前文档所有设定了`href`属性的`a`及`area`元素。
 - *document.forms*属性返回页面中所有表单元素`form`。
 - *document.images*属性返回页面所有图片元素（即`img`标签）。
-- document.embeds*属性返回网页中所有嵌入对象，即`embed`标签。
+- *document.embeds*属性返回网页中所有嵌入对象，即`embed`标签。
 
 ### 2.2、document.scripts，document.styleSheets
 
@@ -555,7 +555,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
 
   如果在页面渲染过程中调用*write*方法，并不会调用*open*方法。（可以理解成，*open*方法已调用，但*close*方法还未调用）
 
-```javascript
+```html
 <html>
 <body>
 hello
@@ -566,7 +566,7 @@ hello
 </html>
 ```
 
-  在浏览器打开上面网页，将会显示`hello world`。
+  在浏览器打开上面网页，将会显示*hello world*。
 
   *document.write*是JavaScript语言标准化之前就存在的方法，现在完全有更符合标准的方法向文档写入内容（比如对*innerHTML*属性赋值）。所以，除了某些特殊情况，应该尽量**避免使用** *document.write*这个方法。
 
@@ -636,7 +636,7 @@ document.writeln(2);
 
 - **（1）、Element.attributes**
 
-  元素属性集合，***Element.attributes[idx]*** 返回属性节点对象，***Element.attributes.attributeName*** 返回或设置属性值，属性节点对象有***name***和***value***属性，相当于***nodeName***和***nodeValue***。
+  元素属性集合，*Element.attributes[idx]*返回属性节点对象，*Element.attributes.attributeName*返回或设置属性值，属性节点对象有*name*和*value*属性，相当于*nodeName*和 *nodeValue*。
 
 - **（2）、Element.getAttribute()**
 
@@ -659,7 +659,7 @@ document.writeln(2);
   dataset属性用于获取或设置用户自定义的属性名（data-*）,该属性设置属性名和setAttribute()方法不同，它是通过赋值的方式实现的。
 
 
-# 四、Element 节点对象
+# 四、element 节点对象
 
   Element对象实际上是一个构造函数的实例化对象，该对象包含了一系列的属性和方法来返回或设置当前对象指向元素的相关信息。
 
@@ -708,7 +708,7 @@ document.writeln(2);
 
 - **（9）、Element.focus()**
 
-  该方法可以上元素获得焦点。用户使用键盘Tab键可以切换获得焦点的元素，都可以使用该方法来获得焦点。
+  该方法可以让元素获得焦点。用户使用键盘Tab键可以切换获得焦点的元素，都可以使用该方法来获得焦点。
 
 - **（10）、Element.remove()**
 
@@ -718,7 +718,19 @@ document.writeln(2);
 
   每一个网页元素对应一个DOM节点对象。这个对象的style属性可以直接操作，用来读写行内CSS样式。style对象的属性值都是字符串，设置时必须包括单位，但是不含规则结尾的分号。比如，divStyle.width不能写为100，而要写为100px。
 
+```javascript
+var el = document.getElementById('div');
+el.style.width = '100px';
+el.style.height = '100px';
+el.style.backgroundColor = 'red';
+```
+
   style对象的*cssText*属性属性允许直接以字符串的形式来设置一个元素的样式，可以设置一个样式，也可以是多个，其语法与CSS文件选择器内部的语法完全一致。
+
+```javascript
+var el = document.getElementById('div');
+el.style.cssText = 'width:100px; height:100px; background-color:red;'
+```
 
   另外，我们还可以使用“document.body.style.CSS样式属性名”或“document.body.style["CSS样式属性名"]”的方式来检测当前的浏览器是否支持某一CSS样式，只要返回的值是一个非undefined的值，就说明当前浏览器是支持该CSS样式的。
 
@@ -726,7 +738,7 @@ document.writeln(2);
 
   *CSS.supports("属性名", "属性值")* 或 *CSS.supports("(属性名1: 属性值2) and (属性名1: 属性值2)")*
 
-# 六、Class属性的操作
+# 六、Class属性操作
 
   每个Element节点对象都具有两个关于Class的属性：“Element.className”和“Element.classList”。className属性用来读写当前元素节点的class属性。它的值是一个字符串，每个class之间用空格分割。classList属性则返回一个类似数组的对象，当前元素节点的每个class就是这个对象的一个成员。
 
