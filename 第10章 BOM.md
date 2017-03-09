@@ -596,13 +596,13 @@ sessionStorage.clear()
 
   该对象的所有方法和sessionStorage完全一致。在浏览器查看的位置位于开发者工具中“Application”栏中“Storage”一栏的“Local Storage”子菜单中。它们的区别在于，localStorage可以真正地实现数据的“永久存储”，即使用户关闭浏览器，或使用清除浏览历史等功能，通过localStorage存储的数据仍然存在。
 
-## 3、扩充
+## 3、extension
 
-  这两个存储对象可以通过 *key()* 方法遍历出所有的键名，现在以localStorage为例先创建几个键值对，然后对其进行键名的遍历存入一个数组：
+  这两个存储对象可以通过 *key(idx)* 方法遍历出所有的键名，现在以localStorage为例先创建几个键值对，然后对其进行键名的遍历存入一个数组：
 
 ```javascript
 localStorage.setItem('name', "Henrry Lee");
-localStorage.setItem('age', 24);
+localStorage.setItem('age', "24");
 localStorage.setItem('profession', "Web前端工程师");
 localStorage.setItem('address', "四川省成都市");
 
@@ -629,10 +629,40 @@ window.addEventListener('storage', function(e) {
 	console.log(e.oldValue);
 	console.log(e.newValue);
 	console.log(e.url);
-}, false);
+});
 ```
 
   值得特别注意的是，该事件不在导致数据变化的当前页面触发。如果浏览器同时打开一个域名下面的多个页面，当其中的一个页面改变sessionStorage或localStorage的数据时，其他所有页面的storage事件会被触发，而原始页面并不触发storage事件。可以通过这种机制，实现多个窗口之间的通信。所有浏览器之中，只有IE浏览器除外，它会在所有页面触发storage事件。
 
-  对于“Web Storage”还有一点需要补充说明的是，它们只能存储字符串的值。存储为数值和布尔值的值，在读取的时候都是一个布尔值，若需要进行数值计算和条件判断的时候记得需要进行数据类型转换。而存储为数组形式的值，在读取的也是一段用逗号分隔的字符串的字符串，也需要用split(",")方法重新转换回数组的形式。但如果是存储内容为一个对象的时候，返回的是"[object Object]"的字符串，如下。
+  对于“Web Storage”还有一点需要补充说明的是，它们只能存储字符串的值。若需要进行数值计算和条件判断的时候记得需要进行数据类型转换。存储为数组形式的值，取到的值也是一段用逗号分隔的字符串，也需要用“*split(",")* ”方法重新转换回数组的形式。但如果是存储内容为一个对象的时候，返回的是"[object Object]"的字符串，如下。
+
+```javascript
+var obj = {
+	name: "Henrry Lee",
+	age: 24,
+	address: "四川省成都市"
+}
+localStorage.setItem("userInfo", obj);
+localStorage.getItem("userInfo");
+// [object Object]
+```
+
+  这个时候我们需要用JSON提供的两个方法来完成“Web Storage”对对象的存储，即：parse()和stringify()方法，使用方法如例：
+
+```javascript
+var obj = {
+	name: "Henrry Lee",
+	age: 24,
+	address: "四川省成都市"
+}
+// 转成JSON字符串格式
+var strObj = JSON.stringify(obj);
+localStorage.setItem("userInfo", strObj);
+
+// 访问
+var storageStrObj = localStorage.getItem("userInfo");
+// 将JSON字符串转为JS对象
+var jsObj = JSON.parse(storageStrObj);
+console.log(jsObj);
+```
 
