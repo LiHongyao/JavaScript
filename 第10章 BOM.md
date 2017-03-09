@@ -155,11 +155,9 @@ window对象下主要包含了以下子对象：
 
 ## 4、setTimeout()
 
-  在一个稍微复杂一点的项目中，很多时候我们是需要控制代码执行的时间的，也就是需要控制代码执行的顺序。单纯地调整代码执行的位置很多时候在满满都是各种回调函数的程序里面是行不通的,这个时候我们就需要用到延时函数又称“延迟函数”）“*setTimeout()*”。
+  在一个稍微复杂一点的项目中，很多时候我们是需要控制代码执行的时间的，也就是需要控制代码执行的顺序。单纯地调整代码执行的位置很多时候在满满都是各种回调函数的程序里面是行不通的,这个时候我们就需要用到延时函数（又称“延迟函数”）“*setTimeout(function, delay)*”。
 
-  这个函数包含两个参数，第一个参数接收一个function数据类型的值（也可以是“函数名+()”的字符串），第二个参数表示延时执行的时间，单位为“毫秒”。
-
-  这个函数的简单用法我们在课件的很多地方都已经见过了，本节主要讲解的是这个函数的几种用法和它的一些简单的特性。
+  这个函数包含两个参数，第一个参数接收一个function数据类型的值（也可以是“函数名+()”的字符串），第二个参数表示延时执行的时间，单位为“毫秒”。接下来我们来看一下延时函数的用法。
 
   第一种用法就是直接将需要执行的函数的名称作为第一个参数，或写成需要执行的“函数名+()”的字符串形式，如下：
 
@@ -190,7 +188,87 @@ setTimeout("printText('延时输出内容！')"); // 正确2
 
   关于setTimeout()函数的第二种写法就是直接将第一个参数设为一个匿名函数，然后再在里面编写语句或调用方法。在功能比较复杂的项目中，这种写法更被推崇。因为这样可以让一个延时函数执行多个函数或方法，一定程度上降低了代码的耦合度，参数的配置也更符合我们平时开发的习惯。
 
+```javascript
+function sum(a, b) {
+	return a + b;
+}
+
+setTimeout(function () {
+	console.log(sum(10, 20) + sum(20, 30));
+}, 1000);
+```
+
+  在实际开发中还有一种需求，就是需要延时执行的代码因为某种条件的成立需要取消执行，这个时候就可以用到“与之配套”的“*clearTimeout()*函数”，它可以清除正处于延时过程中的函数，使之不再执行。它的参数为延时函数的实例化对象（变量）名称。也就是说，哪怕将setTimeout()函数赋给一个变量它也是也能执行的。我们来看下面的例子：
+
+```html
+<!-- HTML部分 -->
+<form>
+	<button type="button">延迟显示结果</button>
+	<button type="button">取消结果显示</button>
+</form>
+<p id="resShow"></p>
+
+<!-- JavaScript部分 -->
+<script type="text/javascript">
+
+var btn1 = document.getElementsByTagName('button')[0];
+var btn2 = document.getElementsByTagName('button')[1];
+var p    = document.getElementById('resShow');
+
+function printText() {
+	p.textContent = "这是延迟显示的结果！";
+}
+
+// 接收延时函数
+var timeout;
+
+btn1.onclick = function() {
+	// 执行延时函数
+	timeout = setTimeout(function() {
+		printText();
+	}, 2000);
+}
+
+btn2.onclick = function() {
+	// 取消延时函数
+	clearTimeout(timeout);
+}
+
+</script>
+```
+
+  对于将一个延时函数赋给一个变量的方式需要说明一点，就是这样的做法不需要任何事件去触发，它也是会执行的。所以不要企图将一个延时函数存为一个变量，待需要的时候才去调用这个变量。
+
 ## 5、setInterval()
+
+  该函数的代码结构及大体功能和 *setTimeout()* 函数一样，但区别是该函数会根据设置的第二个参数的毫秒数作为间隔来 *重复执行*，它同样有一个配套的中止函数方法“*clearInterval()*”。
+
+```javascript
+var n = 10;
+var interval;
+interval = setInterval(function(){
+	if (n == 0) {
+		this.clearInterval(interval);
+		console.log('定时器停止！');
+	}else {
+		console.log(--n);
+	}
+}, 1000);
+
+// test.html:17 9
+// test.html:17 8
+// test.html:17 7
+// test.html:17 6
+// test.html:17 5
+// test.html:17 4
+// test.html:17 3
+// test.html:17 2
+// test.html:17 1
+// test.html:17 0
+// test.html:15 定时器停止！
+```
+
+  定时执行函数在现在的项目中有有非常多的用处，基本每个项目都会有所涉及，常用于开发如图片轮播，倒计时，定时数据更新，计时关闭跳转页面等功能，务必要熟悉其使用方法。
 
 # 四、文档对象 document
 
@@ -471,4 +549,90 @@ function testIPhone() {
   由于我们还没有正式地开始学习Ajax的相关内容，这两个方法现在就暂时不作深入的讲解了，在以后学习Ajax后再将这两个方法拿来做实际运用的例子。
 
 # 十、Web Storage机制
+
+  “*Web Storage*”是HTML5新增的一种数据存储机制，随着浏览器对HTML5的支持度不断增加，在新建的项目中基本已经取代了*cookie*，它是服务器保存在浏览器的一小段文本信息，每个Cookie的大小一般不能超过4KB，超过这个长度的Cookie，将被忽略，不会被设置。
+
+  “Web Storage”更像是cookie的强化版，能够动用大得多的存储空间。目前，每个域名的存储上限据浏览器而定，Chrome是2.5MB，Firefox和Opera是5MB，IE是10MB。其中，Firefox的存储空间由一级域名决定，而其他浏览器没有这个限制。也就是说，在Firefox中，“https://music.baidu.com”和“https://zhidao.baidu.com”共享5MB的存储空间。另外，与Cookie一样，它们也受同域限制。某个网页存入的数据，只有同域下的网页才能读取。
+
+  “Web Storage”存储机制包含*sessionStorage*和*localStorage*这两个对象，从名称上直译，可以将其称作“*会话存储*”和“*本地存储*”。它们存储值的方式和JavaScript中对象属性储存值的方式一样，都是以“键值对”存在的，这两个对象的区别是：会话存储（sessionStorage）的键值在浏览器关闭后会被清除，而本地存储（localStorage）存储的键值会一直存在于浏览器中，除非被手动清除或使用clear()方法清除。需要注意，浏览器自带的“历史记录”清除功能也无法将其清除。这样一来我们Web前端开发者也可以达到“数据持久化存储”的目的了。接下来我们看学习这两个对象的使用方式。
+
+## 1、window.sessionStorage
+
+  学习这个对象首先要从*setItem()*这个方法开始，这个方法包含两个参数，第一个参数为这个对象的键名（属性名），第二个参数为这个对象的键值（属性值），配置和访问方法如下：
+
+![](IMGS/part_10_16.jpeg)
+
+  这样一来我们就将这个属性名为“name”的键值对存入了浏览器。除了直接输出sessionStorage这个对象以外，我们还可以在开发者工具的“Application”中“Storage”一栏的“Session Storage”子菜单中去查看存储的值。
+
+![](IMGS/part_10_17.jpeg)
+
+  这个值现在已经被存入浏览器，只要不关闭浏览器，当前域名下的这个值就始终是存在的，关闭浏览器后再次打开浏览器会发现这个键值对已经被销毁了。
+
+  如果是要读取已经存储于浏览器内的sessionStorage的值就需要用到 *getItem()* 这个方法了，方法参数为指定的键名，如例：
+
+```javascript
+var name = sessionStorage.getItem('name')
+console.log(`您上次存储的作者名为：“${name}”`)
+// 您上次存储的作者名为：“Henrry Lee”
+```
+
+  如果需要清除指定的键值对可以使用*removeItem()*，方法参数为指定的键名，如例：
+
+```javascript
+sessionStorage.removeItem('name')
+sessionStorage.getItem('name')
+// null
+```
+
+  这个时候再去开发者工具“Application”栏里去查看刚才存储的值，发现“name”键值对已经不存在了。
+
+  如果是要一次性清除所有sessionStorage对象存储的键值对，可以使用*clear()*方法，该方法不需要参数。
+
+```javascript
+sessionStorage.clear()
+```
+
+## 2、window.localStorage
+
+  该对象的所有方法和sessionStorage完全一致。在浏览器查看的位置位于开发者工具中“Application”栏中“Storage”一栏的“Local Storage”子菜单中。它们的区别在于，localStorage可以真正地实现数据的“永久存储”，即使用户关闭浏览器，或使用清除浏览历史等功能，通过localStorage存储的数据仍然存在。
+
+## 3、扩充
+
+  这两个存储对象可以通过 *key()* 方法遍历出所有的键名，现在以localStorage为例先创建几个键值对，然后对其进行键名的遍历存入一个数组：
+
+```javascript
+localStorage.setItem('name', "Henrry Lee");
+localStorage.setItem('age', 24);
+localStorage.setItem('profession', "Web前端工程师");
+localStorage.setItem('address', "四川省成都市");
+
+var arr = [];
+for (var i = 0; i < localStorage.length; i++) {
+	arr.push(localStorage.key(i))
+}
+console.log(arr);
+// ["address", "age", "name", "profession"]
+```
+
+  当储存的数据发生变化时，会触发storage事件。我们可以为window添加监听函数来监听“Web Storage”的两个对象发生值变化事件，通过回调函数来执行相应的函数操作，回调函数接受一个event对象作为参数。这个event对象主要包含4个属性：
+
+- ***key***：保存发生变化的键名
+- ***oldValue***：更新前的值。如果该键为新增加，则这个属性为null
+- ***newValue***：更新后的值。如果该键被删除，则这个属性为null
+- ***url***：原始触发storage事件的那个网页的网址
+
+监听函数的格式如下：
+
+```javascript
+window.addEventListener('storage', function(e) {
+	console.log(e.key);
+	console.log(e.oldValue);
+	console.log(e.newValue);
+	console.log(e.url);
+}, false);
+```
+
+  值得特别注意的是，该事件不在导致数据变化的当前页面触发。如果浏览器同时打开一个域名下面的多个页面，当其中的一个页面改变sessionStorage或localStorage的数据时，其他所有页面的storage事件会被触发，而原始页面并不触发storage事件。可以通过这种机制，实现多个窗口之间的通信。所有浏览器之中，只有IE浏览器除外，它会在所有页面触发storage事件。
+
+  对于“Web Storage”还有一点需要补充说明的是，它们只能存储字符串的值。存储为数值和布尔值的值，在读取的时候都是一个布尔值，若需要进行数值计算和条件判断的时候记得需要进行数据类型转换。而存储为数组形式的值，在读取的也是一段用逗号分隔的字符串的字符串，也需要用split(",")方法重新转换回数组的形式。但如果是存储内容为一个对象的时候，返回的是"[object Object]"的字符串，如下。
 
