@@ -510,7 +510,7 @@ function testIPhone() {
 
 ![](IMGS/part_10_14.jpeg)
 
-  可以发现，这个对象只有3个属性，分别是：记录长度、记录回滚和状态，但实际上这个这个对象的真正实用的方法都是“藏”在了原型里，我将“__proto__”展开后再看看这些方法。
+  可以发现，这个对象只有3个属性，分别是：记录长度、记录回滚和状态，但实际上这个对象的真正实用的方法都是“藏”在了原型里，我将“__proto__”展开后再看看这些方法。
 
 ![](IMGS/part_10_15.jpeg)
 
@@ -550,7 +550,7 @@ function testIPhone() {
 
 # 十、Web Storage机制
 
-  “*Web Storage*”是HTML5新增的一种数据存储机制，随着浏览器对HTML5的支持度不断增加，在新建的项目中基本已经取代了*cookie*，它是服务器保存在浏览器的一小段文本信息，每个Cookie的大小一般不能超过4KB，超过这个长度的Cookie，将被忽略，不会被设置。
+  “*Web Storage*”是HTML5新增的一种数据存储机制，随着浏览器对HTML5的支持度不断增加，在新建的项目中基本已经取代了*cookie*（它是服务器保存在浏览器的一小段文本信息，每个Cookie的大小一般不能超过4KB，超过这个长度的Cookie，将被忽略，不会被设置）。
 
   “Web Storage”更像是cookie的强化版，能够动用大得多的存储空间。目前，每个域名的存储上限据浏览器而定，Chrome是2.5MB，Firefox和Opera是5MB，IE是10MB。其中，Firefox的存储空间由一级域名决定，而其他浏览器没有这个限制。也就是说，在Firefox中，“https://music.baidu.com”和“https://zhidao.baidu.com”共享5MB的存储空间。另外，与Cookie一样，它们也受同域限制。某个网页存入的数据，只有同域下的网页才能读取。
 
