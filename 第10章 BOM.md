@@ -130,7 +130,7 @@ window对象下主要包含了以下子对象：
 
   getSelection()方法返回一个Selection对象，表示用户现在选中的文本。而用这个方法的toString()方法可以用于返回被选中的文本。我们来通过一个简单的示例来了解该方法的实际运用：
 
-```javascript
+```html
 <!-- HTML部分 -->
 <div id="selection">这是一段用于测试被选中的内容的文本。</div>
 <div id="resText">
@@ -151,7 +151,7 @@ window对象下主要包含了以下子对象：
 </script>
 ```
 
-  示例中使用了一个“*onmouseup*”事件来激活用户选择文本的操作，该事件触发条件是用户松开鼠标左键的时候。通过我们后面章节学习的“JavaScript事件”可以利用该方法来完成一些有意思的功能，也可以用来简化界面操作，提升用户体验。
+  示例中使用了一个“*onmouseup*”事件来激活用户选择文本的操作，该事件触发户松开鼠标左键的时候。通过我们后面章节学习的“JavaScript事件”可以利用该方法来完成一些有意思的功能，也可以用来简化界面操作，提升用户体验。
 
 ## 4、setTimeout()
 
@@ -241,7 +241,7 @@ btn2.onclick = function() {
 
 ## 5、setInterval()
 
-  该函数的代码结构及大体功能和 *setTimeout()* 函数一样，但区别是该函数会根据设置的第二个参数的毫秒数作为间隔来 *重复执行*，它同样有一个配套的中止函数方法“*clearInterval()*”。
+  该函数的代码结构及大体功能和 *setTimeout()* 函数一样，但区别是该函数会根据设置的第二个参数的毫秒数作为间隔来 *重复执行*，它同样有一个配套的中止函数方法“*clearInterval(function, delay)*”。
 
 ```javascript
 var n = 10;
@@ -598,7 +598,7 @@ sessionStorage.clear()
 
 ## 3、extension
 
-  这两个存储对象可以通过 *key(idx)* 方法遍历出所有的键名，现在以localStorage为例先创建几个键值对，然后对其进行键名的遍历存入一个数组：
+  这两个存储对象可以通过 *key()* 方法遍历出所有的键名，现在以localStorage为例先创建几个键值对，然后对其进行键名的遍历存入一个数组：
 
 ```javascript
 localStorage.setItem('name', "Henrry Lee");
