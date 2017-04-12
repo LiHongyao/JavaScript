@@ -30,7 +30,7 @@
 
   一个文档的所有节点，按照所在的层级，可以抽象成一种树状结构。这种树状结构就是DOM。
 
-  最顶层的节点就是 **document** 节点，它代表了整个文档。文档里面最高一层的HTML标签，一般是 *\<html>*，它构成树结构的根节点（root node），其他HTML标签节点都是它的下级。
+  最顶层的节点就是 **document** 节点，它代表了整个文档。文档里面最高一层的HTML标签，一般是 `<html>`，它构成树结构的根节点（root node），其他HTML标签节点都是它的下级。
 
   除了根节点以外，其他节点对于周围的节点都存在三种关系。
 
@@ -50,7 +50,7 @@
 	</head>   
 	<body>   
 	    <h1>DOM Lesson one</h1>    
-	    <p>Hello world!</p>   
+	    <a href="javascript:;">主页</a>   
 	</body>   
 </html> 
 ```
@@ -83,7 +83,7 @@
 
   `Node.nodeValue` 属性返回一个字符串，表示当前节点本身的文本值，该属性可读写。
 
-  由于只有 *Text节点、Comment节点* 有文本值，因此只有这两类节点的 *nodeValue* 可以返回结果，其他类型的节点一律返回 `null`。同样的，也只有这两类节点可以设置 *nodeValue* 属性的值。对于那些返回 *null* 的节点，设置 *nodeValue* 属性是无效的。
+  由于只有 **Text**节点、**Comment** 节点有文本值，因此只有这两类节点的 *nodeValue* 可以返回结果，其他类型的节点一律返回 `null`。同样的，也只有这两类节点可以设置 *nodeValue* 属性的值。对于那些返回 *null* 的节点，设置 *nodeValue* 属性是无效的。
 
 - **（3）、Node.textContent**
 
@@ -97,7 +97,7 @@ document.getElementById('divA').textContent
 // This is some text
 ```
 
-  *textContent* 属性自动忽略当前节点内部的HTML标签，返回所有文本内容。
+  **textContent* 属性自动忽略当前节点内部的HTML标签，返回所有文本内容。
 
   该属性是可读写的，设置该属性的值，会用一个新的文本节点，替换所有原来的子节点。它还有一个好处，就是自动对HTML标签转义。这很适合用于用户提供的内容。
 
@@ -113,16 +113,16 @@ document.getElementById('test').textContent = '<p>GoodBye!</p>';
 
 - **（4）、Node.baseURI**
 
-  *Node.baseURI*属性返回一个字符串，表示当前网页的绝对路径。如果无法取到这个值，则返回*null*。浏览器根据这个属性，计算网页上的相对路径的URL。该属性为只读。
+  *Node.baseURI* 属性返回一个字符串，表示当前网页的绝对路径。如果无法取到这个值，则返回`null`。浏览器根据这个属性，计算网页上的相对路径的URL。该属性为只读。
 
 ```javascript
-// 当前网页的网址为
-// http://www.example.com/index.html
-document.baseURI
+// 当前网页的网址为：http://www.example.com/index.html
+
+console.log(document.baseURI);
 // "http://www.example.com/index.html"
 ```
 
-  不同节点都可以调用这个属性（比如*document.baseURI*和*element.baseURI*），通常它们的值是相同的。该属性的值一般由当前网址的URL（即*window.location*属性）决定，但是可以使用HTML的*\<base>*标签，改变该属性的值。
+  不同节点都可以调用这个属性（比如 `document.baseURI` 和 `element.baseURI`），通常它们的值是相同的。该属性的值一般由当前网址的URL（即 `window.location` 属性）决定，但是可以使用HTML的 `<base>`标签，改变该属性的值。
 
 ```html
 <base href="http://www.example.com/page.html">
@@ -149,7 +149,7 @@ document.baseURI
 
 - **（4）、Node.previousSibling**
 
-  该属性返回当前节点前面的、距离最近的一个同级节点。如果当前节点前面没有同级节点，则返回null。对于当前节点前面有空格，则 *previousSibling* 属性会返回一个内容为空格的文本节点。
+  该属性返回当前节点前面的、距离最近的一个同级节点。如果当前节点前面没有同级节点，则返回null。对于当前节点前面有空格，则  *previousSibling*  属性会返回一个内容为空格的文本节点。
 
 - **（5）、Node.previousElementSibling**
 
@@ -244,14 +244,14 @@ typeof HTMLCollection // "function"
 
 ### 5.1、NodeList
 
-  *NodeList* 实例对象是一个“类似数组”的对象，它的成员是节点对象。*Node.childNodes*、*document.querySelectorAll()* 返回的都是*NodeList*实例对象。
+  **NodeList** 实例对象是一个“类似数组”的对象，它的成员是节点对象。*Node.childNodes*、*document.querySelectorAll()* 返回的都是 NodeList 实例对象。
 
 ```javascript
 // instanceof 用于判断对象或函数的类型
 document.childNodes instanceof NodeList // true
 ```
 
-  *NodeList* 实例对象可能是动态集合，也可能是静态集合。所谓动态集合就是一个活的集合，DOM树删除或新增一个相关节点，都会立刻反映在NodeList接口之中。*Node.childNodes* 返回的，就是一个动态集合。
+  **NodeList** 实例对象可能是动态集合，也可能是静态集合。所谓动态集合就是一个活的集合，DOM树删除或新增一个相关节点，都会立刻反映在 NodeList 接口之中。*Node.childNodes*  返回的，就是一个动态集合。
 
 ```javascript
 let parent = document.getElementById('parent');
@@ -260,11 +260,11 @@ parent.appendChild(document.createElement('div'));
 parent.childNodes.length // 3
 ```
 
-  上面代码中，*parent.childNodes* 返回的是一个*NodeList*实例对象。当*parent*节点新增一个子节点以后，该对象的成员个数就增加了1。
+  上面代码中，`parent.childNodes` 返回的是一个 **NodeList** 实例对象。当 `parent` 节点新增一个子节点以后，该对象的成员个数就增加了1。
 
   *document.querySelectorAll* 方法返回的是一个静态集合。DOM内部的变化，并不会实时反映在该方法的返回结果之中。
 
-  *NodeList*接口实例对象提供*length*属性和数字索引，因此可以像数组那样，使用数字索引取出每个节点，但是它本身并不是数组，不能使用*pop*或*push*之类数组特有的方法。
+  **NodeList** 接口实例对象提供 `length` 属性和数字索引，因此可以像数组那样，使用数字索引取出每个节点，但是它本身并不是数组，不能使用 *pop* 或 *push* 之类数组特有的方法。
 
 ```javascript
 // 数组的继承链
@@ -274,16 +274,16 @@ myArray --> Array.prototype --> Object.prototype --> null
 myNodeList --> NodeList.prototype --> Object.prototype --> null
 ```
 
-  从上面的继承链可以看到，*NodeList*实例对象并不继承*Array.prototype*，因此不具有数组的方法。如果要在*NodeList*实例对象使用数组方法，可以将*NodeList*实例转为真正的数组。
+  从上面的继承链可以看到，**NodeList** 实例对象并不继承 *Array.prototype*，因此不具有数组的方法。如果要在 **NodeList** 实例对象使用数组方法，可以将 **NodeList** 实例转为真正的数组。
 
 ```javascript
 var div_list = document.querySelectorAll('div');
 var div_array = Array.prototype.slice.call(div_list);
 ```
 
-  注意，采用上面的方法将*NodeList*实例转为真正的数组以后，*div_array*就是一个静态集合了，不再能动态反映DOM的变化。
+  注意，采用上面的方法将 **NodeList** 实例转为真正的数组以后，`div_array` 就是一个静态集合了，不再能动态反映DOM的变化。
 
-  另一种方法是通过*call*方法，间接在*NodeList*实例上使用数组方法。
+  另一种方法是通过 *call* 方法，间接在 NodeList 实例上使用数组方法。
 
 ```javascript
 var forEach = Array.prototype.forEach;
@@ -293,9 +293,9 @@ forEach.call(element.childNodes, function(child){
 });
 ```
 
-  上面代码让数组的*forEach*方法在*NodeList*实例对象上调用。注意，Chrome浏览器在*NodeList.prototype*上部署了*forEach*方法，所以可以直接使用，但它是非标准的。
+  上面代码让数组的 *forEach* 方法在 NodeList 实例对象上调用。注意，Chrome浏览器在 *NodeList.prototype* 上部署了*forEach*方法，所以可以直接使用，但它是非标准的。
 
-  遍历*NodeList*实例对象的首选方法，是使用*for*循环。
+  遍历 NodeList 实例对象的首选方法，是使用 `for` 循环。
 
 ```javascript
 for (var i = 0; i < myNodeList.length; ++i) {
@@ -303,9 +303,9 @@ for (var i = 0; i < myNodeList.length; ++i) {
 }
 ```
 
-  不要使用*for...in*循环去遍历*NodeList*实例对象，因为*for...in*循环会将非数字索引的*length*属性和下面要讲到的*item*方法，也遍历进去，而且不保证各个成员遍历的顺序。
+  不要使用 `for...in` 循环去遍历NodeList实例对象，因为 `for...in` 循环会将非数字索引的 **length** 属性和下面要讲到的 **item** 方法，也遍历进去，而且不保证各个成员遍历的顺序。
 
-  ES6新增的*for...of*循环，也可以正确遍历*NodeList*实例对象。
+  ES6新增的 `for...of` 循环，也可以正确遍历 NodeList 实例对象。
 
 ```javascript
 var list = document.querySelectorAll('input[type=checkbox]');
@@ -314,7 +314,7 @@ for (var item of list) {
 }
 ```
 
-  *NodeList* 实例对象的*item*方法，接受一个数字索引作为参数，返回该索引对应的成员。如果取不到成员，或者索引不合法，则返回*null*。
+  NodeList 实例对象的 *item* 方法，接受一个数字索引作为参数，返回该索引对应的成员。如果取不到成员，或者索引不合法，则返回*null*。
 
 ```javascript
 nodeItem = nodeList.item(index)
@@ -603,7 +603,7 @@ document.writeln(2);
 
   该方法返回当前元素节点的最接近的父元素（或者当前节点本身），条件是必须匹配给定的CSS选择器（可以是CSS3高级选择器）。如果不满足匹配，则返回null。（了解）
 
-## 6、节点生成
+### 6、节点生成
 
   以下方法可以用于生成DOM节点：
 
