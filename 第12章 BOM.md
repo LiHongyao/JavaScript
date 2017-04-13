@@ -1,17 +1,17 @@
 # 一、概述
 
-  *BOM*（Browers Object Model，浏览器对象模型）是浏览器为JavaScript提供的一个*API*（Application Programming Interface，应用编程接口），所以它不是原生JavaScript提供的。通过BOM我们可以访问和设置浏览器的一些属性和函数。
+  **BOM**（Browers Object Model，浏览器对象模型）是浏览器为JavaScript提供的一个API（Application Programming Interface，应用编程接口），所以它不是原生JavaScript提供的。通过BOM我们可以访问和设置浏览器的一些属性和函数。
 
-  对于BOM的几乎所有操作都以依赖一个*全局对象*，那就是“*window*”对象。由于它是一个全局对象，所以很多时候在访问它内部的子对象的属性和方法的时候都是可以将window一词省略不写的，如“window.screen”可以直接写成“screen”也正常访问该子对象。
+  对于BOM的几乎所有操作都依赖于一个全局对象，那就是“**window**”对象。由于它是一个全局对象，所以很多时候在访问它内部的子对象的属性和方法的时候都是可以将window一词省略不写的，如“window.screen”可以直接写成“screen”也能正常访问该子对象。
 
 window对象下主要包含了以下子对象：
 
-- ***document***：文档对象
-- ***frames***：浏览器的框架（如iframe和现在废弃了的frameset）
-- ***history***：浏览器浏览历史对象
-- ***location***：浏览器页面所处位置对象
-- ***navigator***：浏览器信息导航对象
-- ***screen***：浏览器屏幕对象
+- **document**：文档对象
+- **frames**：浏览器的框架（如iframe和现在废弃了的frameset）
+- **history**：浏览器浏览历史对象
+- **location**：浏览器页面所处位置对象
+- **navigator**：浏览器信息导航对象
+- **screen**：浏览器屏幕对象
 
   除了这些属性，window对象还提供了一些方法函数，如：*alert()*、*open()*、*close()*、*setTimeout()*、*clearTimeout()*、*setIntelval()*、*clearInterval()*等。
 
@@ -19,10 +19,10 @@ window对象下主要包含了以下子对象：
 
   在全局环境下，window对象以下几种表示法：
 
-- ***window***
-- ***this***
-- ***self***
-- ***fremes***
+- **window**
+- **this**
+- **self**
+- **fremes**
 
   它们在全局环境下都是指向window对象
 
@@ -30,13 +30,13 @@ window对象下主要包含了以下子对象：
 
 
 
-  window对象下的属性和方法非常之多，多至现在也没有一份权威的统计表明window下到底有多少个属性和方法，这个只需要打开Google Chrome（主要推荐，但也可以是其它非IE系列的主流浏览器）的控制台（ctrl+shift+J），然后输入“window.”（后面需要加上“点”）就可以看到window下的属性们了，而且里面很多属性下还包含二级、三级甚至更多级的属性。也就是说想要完全去掌握window下的所有属性和方法肯定是不现实的，我们只需要掌握一些常用的，对我们实际项目开发中有一定帮助的即可。接下来我们我们开始对window的这些主要属性和方法进行讲解。
+  window 对象下的属性和方法非常之多，多至现在也没有一份权威的统计表明window下到底有多少个属性和方法，这个只需要打开Google Chrome（主要推荐，但也可以是其它非IE系列的主流浏览器）的控制台，然后输入“window.”（后面需要加上“点”）就可以看到window下的属性了，而且里面很多属性下还包含二级、三级甚至更多级的属性。也就是说想要完全去掌握window下的所有属性和方法肯定是不现实的，我们只需要掌握一些常用的，对我们实际项目开发中有一定帮助的即可。接下来我们我们开始对window的这些主要属性和方法进行讲解。
 
 # 二、窗口属性
 
   用于描述当前浏览器窗口的相关属性，这对于现在这个屏幕小到“160x160”（如智能手表），大到“4096×2160”（4K屏幕）的互联网时代来说，要做到同一个项目在不同分辨率屏幕的设备上做出响应式的设计一直是前端开发工程师头痛的问题。虽然说现在已经有很多CSS框架都或多或少的能帮上一些忙，但它们都有各自的局限性，而且还存在一些学习成本。但是如果能掌握原生JavaScript一些关于浏览器窗口的属性，对于我们做响应式设计也有不小的帮助。
 
-  浏览器窗口相关的主要属性有以下（数值表示的统一为像素）:
+  浏览器窗口相关的主要属性有以下（数值表示的单位统一为像素）:
 
 - **window.innerWidth**：浏览器窗口的可见宽度
 - **window.innerHeight**：浏览器窗口的可见高度
@@ -49,9 +49,9 @@ window对象下主要包含了以下子对象：
 
 # 三、窗口方法
 
-## 1、window.open()和window.close()
+## 1、window.open() 和 window.close()
 
-  window.open()方法用于打开一个新的窗口（或标签页），而window.close()用于关闭当前窗口，他们同样可以将方法前的window对象省略不写，也能达到同样的方法效果。
+  window.open() 方法用于打开一个新的窗口（或标签页），而window.close() 用于关闭当前窗口，他们同样可以将方法前的window对象省略不写，也能达到同样的方法效果。
 
   相比于close()方法用于直接关闭浏览器窗口，open()方法就要稍微复杂一些，该方法有4个可选参数，它们的作用分别是：
 
@@ -93,18 +93,18 @@ window对象下主要包含了以下子对象：
 ```html
 <!-- HTML部分 -->
 <form>
-	<button type="button" id="nothing">新窗口</button>
+	<button type="button" id="blank">新窗口</button>
 	<button type="button" id="openBaidu">百度</button>
 	<button type="button" id="openTencent">腾讯</button>
 </form>
 
 <!-- JavaScript部分 -->
 <script type="text/javascript">
-	var nothing     = document.getElementById('nothing');
+	var blank     = document.getElementById('blank');
 	var openBaidu   = document.getElementById('openBaidu');
 	var openTencent = document.getElementById('openTencent');
 
-	nothing.onclick = function() {
+	blank.onclick = function() {
 		window.open();
 	}
 	openBaidu.onclick = function() {
@@ -124,34 +124,34 @@ window对象下主要包含了以下子对象：
 <button type="button" onclick="print()">打印</button>
 ```
 
-  在点击了绑定“print()”按钮之后只需要按照平时页面打印的常规设置即可使用打印机进行打印。这里需要注意的一个小细节是，在打印页面最上方会有两段小的文字，一个是当前电脑上的月份和日期，后面一个是写在HTML的\<head>标签里\<title>标签内的文本内容，可以根据需要设置。
+  在点击了绑定 `print()` 按钮之后只需要按照平时页面打印的常规设置即可使用打印机进行打印。这里需要注意的一个小细节是，在打印页面最上方会有两段小的文字，一个是当前电脑上的月份和日期，后面一个是写在HTML的\<head>标签里\<title>标签内的文本内容，可以根据需要设置。
 
 ## 3、window.getSelection()
 
-  getSelection()方法返回一个Selection对象，表示用户现在选中的文本。而用这个方法的toString()方法可以用于返回被选中的文本。我们来通过一个简单的示例来了解该方法的实际运用：
+  `getSelection()` 方法返回一个 **Selection** 对象，表示用户现在选中的文本。而用这个方法的 `toString()` 方法可以用于返回被选中的文本。我们来通过一个简单的示例来了解该方法的实际运用：
 
 ```html
 <!-- HTML部分 -->
-<div id="selection">这是一段用于测试被选中的内容的文本。</div>
-<div id="resText">
-	<span>您选中的是：</span>
-	<span></span>
+<div id="selText">
+	<pre>曾经沧海难为水，除却巫山不是云。</pre>
+	<pre>取次花丛懒回顾，半缘修道半缘君。</pre>
 </div>
+<p id="selDisplay">您选中的内容是：</p>
+
 <!-- JavaScript部分 -->
 <script type="text/javascript">
-	var selection = document.getElementById('selection');
-	var resText = document.getElementById('resText');
+	let oDiv = document.getElementById('selText');
+	let oSel = document.getElementById('selDisplay');
 
-	selection.onmouseup = function() {
-		var sltObj = getSelection();
-		var sltTxt = sltObj.toString();
-		var resShow = document.getElementsByTagName('span')[1];
-		resShow.textContent = sltTxt;
+	oDiv.onmouseup = function() {
+		let selObj = getSelection();
+		let selTxt = selObj.toString();
+		oSel.innerHTML = `您选中的内容是：<b>“${selTxt}”</b>`;
 	}
 </script>
 ```
 
-  示例中使用了一个“*onmouseup*”事件来激活用户选择文本的操作，该事件触发户松开鼠标左键的时候。通过我们后面章节学习的“JavaScript事件”可以利用该方法来完成一些有意思的功能，也可以用来简化界面操作，提升用户体验。
+  示例中使用了一个“*onmouseup*”事件来激活用户选择文本的操作。
 
 # 四、文档对象 document
 
@@ -212,11 +212,11 @@ window对象下主要包含了以下子对象：
 
 ![](IMGS/part_10_4.jpeg)
 
-  在Ajax不盛行的年代，\<iframe>标签是在页面内嵌入网站的最好选择，但随着JavaScript相关编程技术的高速发展，使用\<iframe>标签嵌套子页面的形式已经开始不被推荐，而是用Ajax的异步加载的形式去请求“*文档片段*”，这样可以使得页面不需要再去加载子页面内的整个css和js等文件，和一些不必要的标签（包括整个\<head>标签和文档声明）。这样一来就使得页面加载的速度得到很大提升，页面也不会因为跳转刷新出现短暂白屏的情况，从而使得用户体验得到提升。不需要页面跳转，网站所有功能都通过一个页面完成的页面现在的术语叫法为“*SPA*”（single page application，译为：单页面应用程序。也有叫“SPWA”，其中的“W”表示“web”），是现在Web互联网应用开发的一个主流趋势。
+  在Ajax不盛行的年代，\<iframe>标签是在页面内嵌入网站的最好选择，但随着JavaScript相关编程技术的高速发展，使用\<iframe>标签嵌套子页面的形式已经开始不被推荐，而是用Ajax的异步加载的形式去请求“ 文档片段 ”，这样可以使得页面不需要再去加载子页面内的整个css和js等文件，和一些不必要的标签（包括整个\<head>标签和文档声明）。这样一来就使得页面加载的速度得到很大提升，页面也不会因为跳转刷新出现短暂白屏的情况，从而使得用户体验得到提升。不需要页面跳转，网站所有功能都通过一个页面完成的页面现在的术语叫法为“*SPA*”（single page application，译为：单页面应用程序。也有叫“SPWA”，其中的“W”表示“web”），是现在Web互联网应用开发的一个主流趋势。
 
 # 六、屏幕对象 screen
 
-  屏幕对象和相关的属性都是只读的，它们返回浏览器相对于当前计算机屏幕的数据信息。
+  屏幕对象相关属性都是只读的，它们返回浏览器相对于当前计算机屏幕的数据信息。
 
   screen对象是用于描述当前浏览器相对于屏幕信息的主要对象，所含属性如下：
 
@@ -345,7 +345,7 @@ function testIPhone() {
   }
   ```
 
-  当然，在本例中使用的跳转只是跳转“*同域*”。如果有特殊需要也可以跳转向其它域名，这个时候就需要输入类似于“http://www.?????（注册域名名称）.com”这样的URL地址了。
+  当然，在本例中使用的跳转只是跳转“同域”。如果有特殊需要也可以跳转向其它域名，这个时候就需要输入类似于“http://www.?????（注册域名名称）.com”这样的URL地址了。
 
 - **origin**
 
@@ -365,7 +365,7 @@ function testIPhone() {
 
 - **search**
 
-  设置或返回从问号“？”开始的URL，及查询部分。
+  设置或返回从问号“`?`”开始的URL，及查询部分。
 
   除了这些属性外，location对象包含了三个方法：
 
@@ -399,15 +399,15 @@ function testIPhone() {
 
   细心一点可以发现，这个原型里面基本不包含属性（有也只是之前的那3个属性），基本都是以方法的形式存在的。我们首先来看一下这个对象常用的3个原型方法：
 
-- **history.back()**
+- **1）、history.back()**
 
   返回到上一个访问页面，等同于浏览器的后退键。用于制作手机客户端左上角的返回按钮是个不错的选择。不要将返回的按钮设置为一个超链接，因为有的时候不知道是从哪个页面跳到这个页面的，如果用超链接的方式有时是无法正确回到上一个页面的。
 
-- **history.forward()**
+- **2）、history.forward()**
 
   前进到下一个访问页面，等同于浏览器的前进键。
 
-- **history.go()**
+- **3）、history.go()**
 
   相对当前记录后退或前进到第几个记录，参数为一个“正负整数”。如例说明：
 
@@ -421,9 +421,9 @@ function testIPhone() {
 
   另外，HTML5后还新增了pushState()和replaceState()这两个方法，它们用于新增和修改当前的历史记录，这两个方法都包含三个参数：
 
-- ***state***：一个与指定网址相关的状态对象，popstate事件触发时，该对象会传入回调函数。如果不需要这个对象，此处可以填null。
-- ***title***：新页面的标题，但是所有浏览器目前都忽略这个值，因此这里可以填null。
-- ***url***：新的网址，必须与当前页面处在同一个域。浏览器的地址栏将显示这个网址。
+- **state**：一个与指定网址相关的状态对象，popstate事件触发时，该对象会传入回调函数。如果不需要这个对象，此处可以填null。
+- **title**：新页面的标题，但是所有浏览器目前都忽略这个值，因此这里可以填null。
+- **url**：新的网址，必须与当前页面处在同一个域。浏览器的地址栏将显示这个网址。
 
   “state”这个里面的popstate事件是当同一个文档的history对象出现变化时才会触发。但是，仅仅调用pushState()方法或replaceState()方法 ，并不会触发该事件，只有用户点击浏览器倒退按钮和前进按钮，或者使用JavaScript调用back()、forward()、go()方法时才会触发。另外，该事件只针对同一个文档，如果浏览历史的切换，导致加载不同的文档，该事件也不会触发。
 

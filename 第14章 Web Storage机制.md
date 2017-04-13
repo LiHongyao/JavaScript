@@ -6,7 +6,7 @@
 
   “Web Storage”存储机制包含**sessionStorage（会话存储）**和**localStorage（本地存储）**这两个对象。它们存储值的方式和JavaScript中对象属性储存值的方式一样，都是以“键值对”存在的，这两个对象的区别是：会话存储（sessionStorage）的键值在浏览器关闭后会被清除，而本地存储（localStorage）存储的键值会一直存在于浏览器中，除非被手动清除或使用clear()方法清除。需要注意，浏览器自带的“历史记录”清除功能也无法将其清除。这样一来我们Web前端开发者也可以达到“数据持久化存储”的目的了。接下来我们看学习这两个对象的使用方式。
 
-# 二、sessionStorage
+# 二、会话存储
 
   学习这个对象首先要从 `setItem()` 这个方法开始，这个方法包含两个参数，第一个参数为这个对象的键名（属性名），第二个参数为这个对象的键值（属性值），配置和访问方法如下：
 
@@ -42,7 +42,7 @@ sessionStorage.getItem('name')
 sessionStorage.clear()
 ```
 
-# 三、localStorage
+# 三、本地存储
 
   该对象的所有方法和sessionStorage完全一致。在浏览器查看的位置位于开发者工具中“Application”栏中“Storage”一栏的“Local Storage”子菜单中。它们的区别在于，localStorage可以真正地实现数据的“永久存储”，即使用户关闭浏览器，或使用清除浏览历史等功能，通过localStorage存储的数据仍然存在。
 
