@@ -1,22 +1,8 @@
-# 一、章节索引
-
-> 第01章 [基础语法](https://github.com/LiHongyao/Basic-knowledge-of-js/blob/master/%E7%AC%AC01%E7%AB%A0%20%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.md)
-
-> 第02章 [程序结构](https://github.com/LiHongyao/Basic-knowledge-of-js/blob/master/%E7%AC%AC02%E7%AB%A0%20%E7%A8%8B%E5%BA%8F%E7%BB%93%E6%9E%84.md)
-
-> 第03章 [数值](https://github.com/LiHongyao/Basic-knowledge-of-js/blob/master/%E7%AC%AC03%E7%AB%A0%20%E6%95%B0%E5%80%BC.md)
-
-> 第04章 [字符串](https://github.com/LiHongyao/Basic-knowledge-of-js/blob/master/%E7%AC%AC04%E7%AB%A0%20%E5%AD%97%E7%AC%A6%E4%B8%B2.md)
-
-> 第05章 [数组](https://github.com/LiHongyao/Basic-knowledge-of-js/blob/master/%E7%AC%AC05%E7%AB%A0%20%E6%95%B0%E7%BB%84.md)
-
-…….
 
 
+> 本仓库主要是涉及JavaScript基础知识的讲解，md文件格式，建议下载一个markdown编辑器用于演示内容，推荐使用：Typora。
 
-> 本仓库主要是JS基础知识的讲解，md文件格式，建议下载一个markdown编辑器用于演示内容。
-
-# 二、JavaScript 概述
+# 一、JavaScript 概述
 
 JavaScript是一种轻量级的脚本语言。所谓“脚本语言”，指的是它不具备开发操作系统的能力，而是只用来编写控制其他大型应用程序的“脚本”。
 
@@ -34,7 +20,7 @@ JavaScript的核心语法部分相当精简，只包括两个部分：基本的�
 
 如果宿主环境是服务器，则会提供各种操作系统的API，比如文件操作API、网络通信API等等。这些你都可以在Node环境中找到。
 
-# 三、为什么学习 JavaScript
+# 二、为什么学习 JavaScript
 
 JavaScript语言有一些显著特点，使得它非常值得学习。它既适合当作学习编程的入门语言，也适合当作日常开发的工作语言。它是目前得发展最好、最热门的计算机语言之一。无论是从事Web前端开发还是从事后台数据操作的开发人员都可以去使用它。
 
@@ -44,7 +30,7 @@ JavaScript的发明目的，就是作为浏览器的内置脚本语言，为网�
 
 对于一个互联网开发者来说，如果你想提供漂亮的网页、令用户满意的上网体验、各种基于浏览器的便捷功能、前后端之间紧密高效的联系，JavaScript是必不可少的。
 
-# 四、JavaScript 应用领域
+# 三、JavaScript 应用领域
 
 近年来，正是JavaScript所具有的灵活的语法特性和轻量化以及高运行性能的优势，使得它的使用范围，慢慢超越了浏览器，正在向通用的系统语言发展，正是“遍地开花”之时。
 
@@ -82,7 +68,7 @@ JavaScript的发明目的，就是作为浏览器的内置脚本语言，为网�
 
   Chromium OS、Windows 8等操作系统直接支持JavaScript编写应用程序。Mozilla的Open Web Apps项目、Google的Chrome App项目、Github的Electron项目、以及TideSDK项目，都可以用来编写运行于Windows、Mac OS和Android等多个桌面平台的程序，不依赖浏览器。
 
-# 五、JavaScript 易学性
+# 四、JavaScript 易学性
 
 相比学习其他语言，学习JavaScript有一些有利条件：
 
@@ -108,7 +94,7 @@ JavaScript的发明目的，就是作为浏览器的内置脚本语言，为网�
 
   尽管如此，目前看来，JavaScript的地位还是无法动摇。加之，语言标准的快速进化，使得JavaScript功能日益增强，而语法缺陷和怪异之处得到了弥补。所以，JavaScript还是值得学习，而作为一个Web前端开发工程师，基本上是必学的，况且它的入门相对于其它编程语言的确是非常简单的。
 
-# 六、JavaScript 性能
+# 五、JavaScript 性能
 
   JavaScript的性能优势体现在以下方面:
 
@@ -132,7 +118,7 @@ JavaScript的发明目的，就是作为浏览器的内置脚本语言，为网�
 
     JavaScript程序可以采用事件驱动和非阻塞式设计，在服务器端适合高并发环境，普通的硬件就可以承受很大的访问量。
 
-# 七、JavaScript 历史
+# 六、JavaScript 历史
 
 1990年底，欧洲核能研究组织（CERN）科学家Tim Berners-Lee，在全世界最大的电脑网络——互联网的基础上，发明了万维网（World Wide Web），从此可以在网上浏览网页文件。最早的网页只能在操作系统的终端里浏览，也就是说只能使用命令行操作，网页都是在字符窗口中显示，这当然非常不方便。
 
@@ -165,7 +151,7 @@ Netscape公司的这种浏览器脚本语言，最初名字叫做Mocha，1995年
 
 1996年3月，Navigator 2.0浏览器正式内置了JavaScript脚本语言。
 
-# 八、JavaScript 与 ECMAScript 的关系
+# 七、JavaScript 与 ECMAScript 的关系
 
 1996年8月，微软模仿JavaScript开发了一种相近的语言，取名为JScript（JavaScript是Netscape的注册商标，微软不能用），首先内置于IE 3.0。Netscape公司面临丧失浏览器脚本语言的主导权的局面。
 
@@ -177,7 +163,7 @@ ECMAScript只用来标准化JavaScript这种语言的基本语法结构，与部
 
 ECMA-262标准后来也被另一个国际标准化组织ISO（International Organization for Standardization）批准，标准号是ISO-16262。
 
-# 九、ECMAScript 的历史
+# 八、ECMAScript 的历史
 
 ES6 从开始制定到最后发布，整整用了15年。
 
@@ -201,7 +187,7 @@ ES6 从开始制定到最后发布，整整用了15年。
 
 2015年6月，ECMAScript 6正式通过，成为国际标准。从2000年算起，这时已经过去了15年。
 
-# 十、JavaScript 与 Java 的关系
+# 九、JavaScript 与 Java 的关系
 
 JavaScript和Java是两种不一样的语言，但是它们之间存在联系。
 
@@ -213,11 +199,11 @@ JavaScript的基本语法和对象体系，是模仿Java而设计的。但是，
 
 总之，JavaScript的原始设计目标是一种小型的、简单的动态语言，与Java有足够的相似性，使得使用者（尤其是Java程序员）可以快速上手。
 
-# 十一、JavaScript 引入方式
+# 十、JavaScript 引入方式
 
 ## 1、内嵌方式
 
-直接在html文档的***head***或***body***标签中嵌入js，如下所示：
+直接在 *html* 文档的 **head** 或 **body** 标签中嵌入 *js*，如下所示：
 
 ```html
 <!DOCTYPE html>
@@ -237,11 +223,11 @@ JavaScript的基本语法和对象体系，是模仿Java而设计的。但是，
 </html>
 ```
 
-> tips：***script***标签可以放在网页任意位置，不过不建议这样使用，一般放置在***heade***标签内，或***body***结束标签之前。
+> tips：**script** 标签可以放在网页任意位置，通常不建议这样使用，而是将 *JavaScript* 代码独立放到一个文件中再引入使用，即后面要讲到的外链引入方式。
 
 ## 2、外链方式
 
-创建js文件，在html的***head***标签中引入js文件，代码如下：
+创建 `.js`  文件，在 `head` 标签内或在 `body` 结束标签前引入。引入 `.js` 文件使用 `script` 标签，并通过 `src` 属性指定文件路径，代码如下：
 
 ```javascript
 // my.js
@@ -257,16 +243,18 @@ JavaScript的基本语法和对象体系，是模仿Java而设计的。但是，
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
+    <!-- 引入方式1 -->
     <script type="text/javascript" src="my.js"></script>
 </head>
 <body>
-	
+    <!-- 引入方式2 -->
+	<script type="text/javascript" src="my.js"></script>
 </body>
 </html>
 ```
 
 > tips：这里建议大家使用外链方式，将js代码独立放置到一个文件中，便于我们后期维护整合优化。
 
-# 十二、参考文献
+# 十一、参考文献
 
 > 注：本课主要内容参考了阮一峰老师的著作《JavaScript 标准参考教程（alpha）》
