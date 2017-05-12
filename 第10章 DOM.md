@@ -81,13 +81,13 @@
 
 - **（2）、Node.nodeValue**
 
-  `Node.nodeValue` 属性返回一个字符串，表示当前节点本身的文本值，该属性可读写。
+  该属性返回一个字符串，表示当前节点本身的文本值，该属性可读写。
 
   由于只有 **Text**节点、**Comment** 节点有文本值，因此只有这两类节点的 *nodeValue* 可以返回结果，其他类型的节点一律返回 `null`。同样的，也只有这两类节点可以设置 *nodeValue* 属性的值。对于那些返回 *null* 的节点，设置 *nodeValue* 属性是无效的。
 
 - **（3）、Node.textContent**
 
-  `Node.textContent` 属性返回当前节点和它的所有后代节点的文本内容。
+  该属性返回当前节点和它的所有后代节点的文本内容。
 
 ```javascript
 // HTML代码为
@@ -97,7 +97,7 @@ document.getElementById('divA').textContent
 // This is some text
 ```
 
-  **textContent* 属性自动忽略当前节点内部的HTML标签，返回所有文本内容。
+  `textContent` 属性自动忽略当前节点内部的HTML标签，返回所有文本内容。
 
   该属性是可读写的，设置该属性的值，会用一个新的文本节点，替换所有原来的子节点。它还有一个好处，就是自动对HTML标签转义。这很适合用于用户提供的内容。
 
@@ -107,13 +107,13 @@ document.getElementById('test').textContent = '<p>GoodBye!</p>';
 
   上面代码在插入文本时，会将 *\<p>* 标签解释为文本，而不会当作标签处理。
 
-  对于*Text*节点和*Comment*节点，该属性的值与*nodeValue*属性相同。对于其他类型的节点，该属性会将每个子节点的内容连接在一起返回，但是不包括*Comment*节点。如果一个节点没有子节点，则返回空字符串。
+  对于 *Text* 节点和 *Comment* 节点，该属性的值与 *nodeValue* 属性相同。对于其他类型的节点，该属性会将每个子节点的内容连接在一起返回，但是不包括*Comment*节点。如果一个节点没有子节点，则返回空字符串。
 
-  *document*节点和*doctype*节点的*textContent*属性为*null*。如果要读取整个文档的内容，可以使用*document.documentElement.textContent*。
+  *document* 节点和 *doctype* 节点的 *textContent* 属性为 *null*。如果要读取整个文档的内容，可以使用 `document.documentElement.textContent`
 
 - **（4）、Node.baseURI**
 
-  *Node.baseURI* 属性返回一个字符串，表示当前网页的绝对路径。如果无法取到这个值，则返回`null`。浏览器根据这个属性，计算网页上的相对路径的URL。该属性为只读。
+  该属性返回一个字符串，表示当前网页的绝对路径。如果无法取到这个值，则返回`null`。浏览器根据这个属性，计算网页上的相对路径的URL。该属性为只读。
 
 ```javascript
 // 当前网页的网址为：http://www.example.com/index.html
@@ -370,11 +370,11 @@ var elem = document.forms['myForm'];
 
 ### 6.1、ParentNode接口
 
-  **ParentNode** 接口用于获取Element子节点。Element节点、Document节点和DocumentFragment节点，部署了ParentNode接口。凡是这三类节点，都具有以下四个属性，用于获取Element子节点。
+  **ParentNode** 接口用于获取Element子节点。Element节点、Document节点和DocumentFragment节点，部署了ParentNode 接口。凡是这三类节点，都具有以下四个属性，用于获取Element子节点。
 
 - **（1）、children**
 
-  *children* 属性返回一个动态的HTMLCollection集合，由当前节点的所有Element子节点组成。下面代码遍历指定节点的所有Element子节点。
+  该属性返回一个动态的HTMLCollection集合，由当前节点的所有Element子节点组成。下面代码遍历指定节点的所有Element子节点。
 
   ```javascript
   if (el.children.length) {
@@ -386,7 +386,7 @@ var elem = document.forms['myForm'];
 
 - **（2）、firstElementChild**
 
-  *firstElementChild* 属性返回当前节点的第一个Element子节点，如果不存在任何Element子节点，则返回`null`。
+  该属性返回当前节点的第一个Element子节点，如果不存在任何Element子节点，则返回`null`。
 
   ```javascript
   document.firstElementChild.nodeName
@@ -397,7 +397,7 @@ var elem = document.forms['myForm'];
 
 - **（3）、lastElementChild**
 
-  *lastElementChild* 属性返回当前节点的最后一个Element子节点，如果不存在任何Element子节点，则返回`null`。
+  该属性返回当前节点的最后一个Element子节点，如果不存在任何Element子节点，则返回`null`。
 
   ```javascript
   document.lastElementChild.nodeName
@@ -408,7 +408,7 @@ var elem = document.forms['myForm'];
 
 - **（4）、childElementCount**
 
-  *childElementCount* 属性返回当前节点的所有Element子节点的数目。
+  该属性返回当前节点的所有Element子节点的数目。
 
 ### 6.2、ChildNode接口
 
@@ -416,7 +416,7 @@ var elem = document.forms['myForm'];
 
 - **(1)、remove()**
 
-  *remove* 方法用于移除当前节点。
+  该方法用于移除当前节点。
 
   ```javascript
   el.remove()
@@ -426,15 +426,15 @@ var elem = document.forms['myForm'];
 
 - **(2)、before()**
 
-  *before*方法用于在当前节点的前面，插入一个同级节点。如果参数是节点对象，插入DOM的就是该节点对象；如果参数是文本，插入DOM的就是参数对应的文本节点。
+  该方法用于在当前节点的前面，插入一个同级节点。如果参数是节点对象，插入DOM的就是该节点对象；如果参数是文本，插入DOM的就是参数对应的文本节点。
 
 - **(3)、after()**
 
-  *after*方法用于在当前节点的后面，插入一个同级节点。如果参数是节点对象，插入DOM的就是该节点对象；如果参数是文本，插入DOM的就是参数对应的文本节点。
+  该方法用于在当前节点的后面，插入一个同级节点。如果参数是节点对象，插入DOM的就是该节点对象；如果参数是文本，插入DOM的就是参数对应的文本节点。
 
 - **(4)、replaceWith()**
 
-  *replaceWith* 方法使用参数指定的节点，替换当前节点。如果参数是节点对象，替换当前节点的就是该节点对象；如果参数是文本，替换当前节点的就是参数对应的文本节点。
+  该方法使用参数指定的节点，替换当前节点。如果参数是节点对象，替换当前节点的就是该节点对象；如果参数是文本，替换当前节点的就是参数对应的文本节点。
 
 
 # 二、文档节点
@@ -560,7 +560,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
 
   在浏览器打开上面网页，将会显示 *hello world*。
 
-  *document.write*是JavaScript语言标准化之前就存在的方法，现在完全有更符合标准的方法向文档写入内容（比如对**innerHTML** 属性赋值）。所以，除了某些特殊情况，应该尽量**避免使用** *document.write* 这个方法。
+  *document.write* 是JavaScript语言标准化之前就存在的方法，现在完全有更符合标准的方法向文档写入内容（比如对**innerHTML** 属性赋值）。所以，除了某些特殊情况，应该尽量**避免使用** *document.write* 这个方法。
 
   *document.writeln*方法与*write*方法完全一致，除了会在输出内容的尾部添加换行符。
 
@@ -603,7 +603,7 @@ document.writeln(2);
 
   该方法返回当前元素节点的最接近的父元素（或者当前节点本身），条件是必须匹配给定的CSS选择器（可以是CSS3高级选择器）。如果不满足匹配，则返回null。（了解）
 
-### 6、节点生成
+## 6、节点生成
 
   以下方法可以用于生成DOM节点：
 
