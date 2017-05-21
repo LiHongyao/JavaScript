@@ -330,7 +330,7 @@ function testIPhone() {
   	loginState: true
   	// ...
   }
-  // 当用户出发了“个人中心”的点击事件函数
+  // 当用户触发了“个人中心”的点击事件函数
   function toUserCenter() {
   	// 如果已经登录
   	if (userInfo.loginState) {
@@ -365,9 +365,28 @@ function testIPhone() {
 
 - **search**
 
-  设置或返回从问号“`?`”开始的URL，及查询部分。
+  设置或返回从问号“`?`”开始的URL，及查询部分。通常，我们可以通过 *search* 属性在页面之间进行传值。
 
-  除了这些属性外，location对象包含了三个方法：
+  ```javascript
+  function locSearchValToObj(searchStr) {
+      // 异常处理
+      if (!searchStr) {
+          return null;
+      }else {
+          var str = searchStr.slice(1);
+          var strArr = str.split('&');
+          var obj = {};
+          strArr.forEach(function(item, idx, arr){
+              var arr = item.split('=');
+              var key = decodeURI(arr[0]);
+              var val = decodeURI(arr[1]);
+              obj[key] = val;
+          });
+          return obj;
+      }
+  }
+  ```
+
 
 - **assign()**
 
