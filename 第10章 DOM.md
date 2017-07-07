@@ -18,9 +18,9 @@
 
 - **Document**：整个文档树的顶层节点
 - **DocumentType**：*doctype*标签（比如*<!DOCTYPE html>*）（了解）
-- **Element**：网页的各种HTML标签（比如*\<body>*、*\<a>*等）
-- **Attribute**：网页元素的属性（比如*class="right"*）
-- **Text**：标签之间或标签包含的文本
+- **Element**：网页的各种HTML标签（比如*\<body>*、*\<a>*等）*（☆）*
+- **Attribute**：网页元素的属性（比如*class="right"*）*（☆）*
+- **Text**：标签之间或标签包含的文本*（☆）*
 - **Comment**：注释
 - **DocumentFragment**：文档的片段（了解）
 
@@ -71,21 +71,21 @@
 
 | 类型                     | 描述   | nodeName             | nodeType |
 | ---------------------- | ---- | -------------------- | -------- |
-| ELEMENT_NODE           | 元素节点 | 大写的HTML元素名           | 1        |
-| ATTRIBUTE_NODE         | 属性节点 | 等同于Attr.name         | 2        |
-| TEXT_NODE              | 文本节点 | #text                | 3        |
+| ELEMENT_NODE*（☆）*      | 元素节点 | 大写的HTML元素名           | 1        |
+| ATTRIBUTE_NODE*（☆）*    | 属性节点 | 等同于Attr.name（属性名）    | 2        |
+| TEXT_NODE*（☆）*         | 文本节点 | #text                | 3        |
 | COMMENT_NODE           | 注释节点 | #comment             | 8        |
 | DOCUMENT_NODE          | 文档节点 | #document            | 9        |
 | DOCUMENT_FRAGMENT_NODE |      | #document-fragment   | 11       |
 | DOCUMENT_TYPE_NODE     |      | 等同于DocumentType.name | 10       |
 
-- **（2）、Node.nodeValue**
+- **（2）、Node.nodeValue*（☆）***
 
   该属性返回一个字符串，表示当前节点本身的文本值，该属性可读写。
 
-  由于只有 **Text**节点、**Comment** 节点有文本值，因此只有这两类节点的 *nodeValue* 可以返回结果，其他类型的节点一律返回 `null`。同样的，也只有这两类节点可以设置 *nodeValue* 属性的值。对于那些返回 *null* 的节点，设置 *nodeValue* 属性是无效的。
+  由于只有 **Text**节点、**Comment** 节点有文本值，因此只有这两类节点的 `nodeValue` 可以返回结果，其他类型的节点一律返回 `null`。同样的，也只有这两类节点可以设置 `nodeValue` 属性的值。对于那些返回 `null` 的节点，设置 `nodeValue` 属性是无效的。
 
-- **（3）、Node.textContent**
+- **（3）、Node.textContent*（☆）***
 
   该属性返回当前节点和它的所有后代节点的文本内容。
 
@@ -105,11 +105,11 @@ document.getElementById('divA').textContent
 document.getElementById('test').textContent = '<p>GoodBye!</p>';
 ```
 
-  上面代码在插入文本时，会将 *\<p>* 标签解释为文本，而不会当作标签处理。
+  上面代码在插入文本时，会将 `<p>` 标签解释为文本，而不会当作标签处理。
 
-  对于 *Text* 节点和 *Comment* 节点，该属性的值与 *nodeValue* 属性相同。对于其他类型的节点，该属性会将每个子节点的内容连接在一起返回，但是不包括*Comment*节点。如果一个节点没有子节点，则返回空字符串。
+  对于 **Text** 节点和 **Comment** 节点，该属性的值与 `nodeValue` 属性相同。对于其他类型的节点，该属性会将每个子节点的内容连接在一起返回，但是不包括 **Comment** 节点。如果一个节点没有子节点，则返回空字符串。
 
-  *document* 节点和 *doctype* 节点的 *textContent* 属性为 *null*。如果要读取整个文档的内容，可以使用 `document.documentElement.textContent`
+  **document** 节点和 **doctype&** 节点的 **textContent** 属性为 `null`。如果要读取整个文档的内容，可以使用 `document.documentElement.textContent`
 
 - **（4）、Node.baseURI**
 
@@ -129,57 +129,57 @@ console.log(document.baseURI);
 <base target="_blank" href="http://www.example.com/page.html">
 ```
 
-  设置了以后，*baseURI*属性就返回*\<base>*标签设置的值。
+  设置了以后，*baseURI* 属性就返回`<base>`标签设置的值。
 
 ## 3、相关节点属性
 
   以下属性返回当前节点的相关节点。
 
-- **（1）、Node.ownerDocument（了解）**
+- **（1）、Node.ownerDocument**
 
-  该属性返回当前节点所在的顶层文档对象，即 `document` 对象。document 对象本身的 ownerDocument 属性，返回null。
+  该属性返回当前节点所在的顶层文档对象，即 **document** 对象。document 对象本身的 ownerDocument 属性，返回 `null`。
 
-- **（2）、Node.nextSibling**
+- **（2）、Node.nextSibling** *（☆）*
 
   该属性返回紧跟在当前节点后面的第一个同级节点。如果当前节点后面没有同级节点，则返回null。注意，该属性还包括文本节点和名称节点。因此如果当前节点后面有空格，该属性会返回一个文本节点，内容为空格。
 
-- **（3）、Node.nextElementSibling**
+- **（3）、Node.nextElementSibling** *（☆）*
 
   该属性返回紧跟在当前节点后面的第一个同级Element节点，也就是说它不会返回文本节点（包括空格或换行的文本节点）。它属于ECMAScript 5标准新增的属性。
 
-- **（4）、Node.previousSibling**
+- **（4）、Node.previousSibling** *（☆）*
 
   该属性返回当前节点前面的、距离最近的一个同级节点。如果当前节点前面没有同级节点，则返回null。对于当前节点前面有空格，则  *previousSibling*  属性会返回一个内容为空格的文本节点。
 
-- **（5）、Node.previousElementSibling**
+- **（5）、Node.previousElementSibling** *（☆）*
 
   该属性用于返回紧跟在当前节点前面的第一个同级Element节点，它同样不会返回文本节点（包括空格或换行的文本节点）。它属于ECMAScript 5标准新增的属性。
 
-- **（6）、Node.parentNode**
+- **（6）、Node.parentNode** *（☆）*
 
   该属性返回当前节点的父节点。对于一个节点来说，它的父节点只可能是三种类型：*element* 节点、*document* 节点
 
   和 *documentfragment* 节点。对于 *document* 节点和 *documentfragment* 节点，它们的父节点都是 `null`。另外，对于那些生成后还没插入DOM树的节点，父节点也是 `null`。
 
-- **（7）、Node.parentElement**
+- **（7）、Node.parentElement** *（☆）*
 
-  该属性返回当前节点的父Element节点。如果当前节点没有父节点，或者父节点类型不是Element节点，则返回null。
+  该属性返回当前节点的父 Element节点。如果当前节点没有父节点，或者父节点类型不是Element节点，则返回null。
 
   在IE浏览器中，只有Element节点才有该属性，其他浏览器则是所有类型的节点都有该属性。
 
-- **（8）、Node.childNodes**
+- **（8）、Node.childNodes**  *（☆）*
 
   该属性返回一个 *NodeList* 集合，成员包括当前节点的所有子节点。注意，除了HTML元素节点，该属性返回的还包括*Text* 节点和 *Comment* 节点。如果当前节点不包括任何子节点，则返回一个空的NodeList集合。由于NodeList对象是一个动态集合，一旦子节点发生变化，立刻会反映在返回结果之中。
 
 - **（9）、Node.childElementCount**
 
-  该属性返回的是当前元素节点内子元素Element节点的个数，而通过上面的*Node.childNodes.length*返回的节点会包含文本节点和注释节点。它属于ECMAScript 5的内容。
+  该属性返回的是当前元素节点内子元素Element节点的个数（类似于：*Node.children.length*），而通过上面的*Node.childNodes.length*返回的节点会包含文本节点和注释节点。它属于ECMAScript 5的内容。
 
-- **（10）、Node.firstChild** 和 **Node.lastChild**
+- **（10）、Node.firstChild** 和 **Node.lastChild** *（☆）*
 
   *firstChild* 属性返回当前节点的第一个子节点，如果当前节点没有子节点，则返回null。*firstChild* 返回的除了HTML元素子节点，还可能是文本节点或名称节点。*Node.lastChild* 属性返回当前节点的最后一个子节点，如果当前节点没有子节点，则返回null。
 
-- **（11）、Node.firstElementChild** 和 **Node.lastElementChild**
+- **（11）、Node.firstElementChild** 和 **Node.lastElementChild** *（☆）*
 
   *firstElementChild* 属性返回当前节点的第一个Element子节点，如果当前节点没有子节点，则返回null。*Node.lastElementChild* 属性返回当前节点的最后一个Element子节点，如果当前节点没有子节点，则返回null。它们同样属于ECMAScript 5标准新增的属性。
 
@@ -190,13 +190,13 @@ console.log(document.baseURI);
 
   该方法接受一个节点对象作为参数，将其作为最后一个子节点，插入当前节点。
 
-- **（2）、Node.hasChildNodes()**
+- **（2）、Node.hasChildNodes()** *（了解）*
 
   该方法返回一个布尔值，表示当前节点是否有子节点。
 
-- **（3）、Node.cloneNode()**
+- **（3）、Node.cloneNode()**  *（了解）*
 
-  该方法用于克隆一个节点。它接受一个布尔值作为参数，表示是否同时克隆子节点，默认是false，即不克隆子节点。
+  该方法用于克隆一个节点。它接受一个布尔值作为参数，表示是否同时克隆子节点，默认是 false，即不克隆子节点。
 
   克隆一个节点之后，DOM树有可能出现两个有相同ID属性的HTML元素，这时应该修改其中一个HTML元素的ID属性。
 
@@ -220,18 +220,18 @@ console.log(document.baseURI);
 
   该方法接受一个节点作为参数，返回一个布尔值，表示参数节点是否为当前节点的后代节点。需要注意的是，如果将当前节点传入contains方法，也会返回true。
 
-- **（8）、Node.isEqualNode()**
+- **（8）、Node.isEqualNode()** *（了解）*
 
   该方法返回一个布尔值，用于检查两个节点是否相等。所谓相等的节点，指的是两个节点的类型相同、属性相同、子节点相同。
 
-- **（9）、Node.normalize()**
+- **（9）、Node.normalize()**  *（了解）*
 
   该方法用于清理当前节点内部的所有Text节点。它会去除空的文本节点，并且将毗邻的文本节点合并成一个。
 
 
-## 5、节点集合
+## 5、节点集合 *（了解）*
 
-  节点都是单个对象，有时会需要一种数据结构，能够容纳多个节点。DOM提供两种集合对象，用于实现这种节点的集合：*NodeList* 和 *HTMLCollection*。
+  节点都是单个对象，有时会需要一种数据结构，能够容纳多个节点。DOM提供两种集合对象，用于实现这种节点的集合：*NodeList*  和 *HTMLCollection*。
 
   这两个对象都是构造函数。
 
@@ -364,7 +364,7 @@ var elem = document.forms['myForm'];
 
   由于*item*方法和*namedItem*方法，都可以用方括号运算符代替，所以建议一律使用方括号运算符
 
-## 6、ParentNode接口与ChildNode接口
+## 6、ParentNode && ChildNode
 
   不同的节点除了继承Node接口以外，还会继承其他接口。**ParentNode** 接口用于获取当前节点的Element子节点，**ChildNode** 接口用于处理当前节点的子节点（包含但不限于Element子节点）。
 
@@ -579,19 +579,23 @@ document.writeln(2);
 
 ## 5、节点查询
 
-- **（1）、document.getElementById()**
+- **（1）、document.getElementById()** *（☆）*
 
   该方法返回匹配指定 `id` 属性的元素节点。如果没有发现匹配的节点，则返回 `null` 。
 
-- **（2）、document.getElementsByTagName()**
+- **（2）、document.getElementsByTagName()** *（☆）*
 
   该方法返回所有指定HTML标签的元素，返回值是一个类似数组的 **HTMLCollection** 对象，该对象可以实时反映HTML文档的变化。如果没有任何匹配的元素，就返回一个空集。与getElementsByTagName方法一样，getElementsByClassName方法不仅可以在document对象上调用，也可以在任何元素节点上调用。
 
-- **（3）、document.getElementsByName()**
+- **（3）、document.getElementsByClassName()** *（☆）*
+
+  根据类名找元素，返回HTMLCollection 集合类型。
+
+- **（4）、document.getElementsByName()** 
 
   该方法用于选择拥有 `name` 属性的HTML元素，返回一个类似数组的对象，因为name属性相同的元素可能不止一个。
 
-- **（4）、document.querySelector()，document.querySelectorAll()**
+- **（4）、document.querySelector()，document.querySelectorAll()** *（☆）*
 
   *document.querySelector()* 方法接受一个CSS选择器作为参数，返回匹配该选择器的元素节点。如果有多个节点满足匹配条件，则返回第一个匹配的节点。如果没有发现匹配的节点，则返回null。
 
