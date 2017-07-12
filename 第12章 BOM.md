@@ -47,6 +47,13 @@ window对象下主要包含了以下子对象：
 
   需要注意的是innerWidth、innerHeight、outerWidth、outerHeight都会包含滚动条的宽度。这些属性都是只读的，它们会根据当前浏览器的尺寸或内容的变化而动态地跟随变化。
 
+```css
+/*隐藏滚动条*/
+body::-webkit-scrollbar {
+    display: none;
+}
+```
+
 # 三、窗口方法
 
 ## 1、window.open() 和 window.close()
@@ -100,7 +107,7 @@ window对象下主要包含了以下子对象：
 
 <!-- JavaScript部分 -->
 <script type="text/javascript">
-	var blank     = document.getElementById('blank');
+	var blank       = document.getElementById('blank');
 	var openBaidu   = document.getElementById('openBaidu');
 	var openTencent = document.getElementById('openTencent');
 
@@ -144,7 +151,9 @@ window对象下主要包含了以下子对象：
 	let oSel = document.getElementById('selDisplay');
 
 	oDiv.onmouseup = function() {
+        // 获取选中对象
 		let selObj = getSelection();
+        // 将选中对象转为字符串
 		let selTxt = selObj.toString();
 		oSel.innerHTML = `您选中的内容是：<b>“${selTxt}”</b>`;
 	}
@@ -297,7 +306,7 @@ function testIPhone() {
   ![](IMGS/part_10_12.jpg)
 
     若在PC端判断当前的浏览器厂商也提供了一个属性，就是“navigator.*vendor*”。虽然这个属性得到了现在主流浏览器的支持，但除了谷歌会返回“Google Inc.”的字符串结果外，其它浏览器目前返回的仍然是一个空字符串（以Google Chrome 57版本同期时段为例），相信以后更多浏览器厂商会加上这个信息。
-# 八、位置对象 location
+# 八、位置对象 location（☆）
 
   该对象同样属于window对象中的一个子对象，它用于描述当前页面的地址信息。首先我们拿百度首页来做这个对象的测试，简单观察该对象的相关属性属性。
 
