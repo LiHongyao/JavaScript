@@ -17,10 +17,10 @@
   节点的类型有七种：
 
 - **Document**：整个文档树的顶层节点
-- **DocumentType**：*doctype*标签（比如*<!DOCTYPE html>*）（了解）
-- **Element**：网页的各种HTML标签（比如*\<body>*、*\<a>*等）*（☆）*
-- **Attribute**：网页元素的属性（比如*class="right"*）*（☆）*
-- **Text**：标签之间或标签包含的文本*（☆）*
+- **DocumentType**：*doctype*标签（比如 `<!DOCTYPE html>` ）（了解）
+- **Element**：网页的各种HTML标签（比如 `<body>`、`<a>`等）（☆）
+- **Attribute**：网页元素的属性（比如 `class="right"` ）`（☆）`
+- **Text**：标签之间或标签包含的文本（☆）
 - **Comment**：注释
 - **DocumentFragment**：文档的片段（了解）
 
