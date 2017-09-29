@@ -109,7 +109,7 @@ document.getElementById('test').textContent = '<p>GoodBye!</p>';
 
   对于 **Text** 节点和 **Comment** 节点，该属性的值与 `nodeValue` 属性相同。对于其他类型的节点，该属性会将每个子节点的内容连接在一起返回，但是不包括 **Comment** 节点。如果一个节点没有子节点，则返回空字符串。
 
-  **document** 节点和 **doctype&** 节点的 **textContent** 属性为 `null`。如果要读取整个文档的内容，可以使用 `document.documentElement.textContent`
+  **document** 节点和 **doctype** 节点的 **textContent** 属性为 `null`。如果要读取整个文档的内容，可以使用 `document.documentElement.textContent`
 
 - **（4）、Node.baseURI**
 
@@ -229,7 +229,7 @@ console.log(document.baseURI);
   该方法用于清理当前节点内部的所有Text节点。它会去除空的文本节点，并且将毗邻的文本节点合并成一个。
 
 
-## 5、节点集合 *（了解）*
+## 5、节点集合
 
   节点都是单个对象，有时会需要一种数据结构，能够容纳多个节点。DOM提供两种集合对象，用于实现这种节点的集合：*NodeList*  和 *HTMLCollection*。
 
@@ -368,7 +368,7 @@ var elem = document.forms['myForm'];
 
   不同的节点除了继承Node接口以外，还会继承其他接口。**ParentNode** 接口用于获取当前节点的Element子节点，**ChildNode** 接口用于处理当前节点的子节点（包含但不限于Element子节点）。
 
-### 6.1、ParentNode接口
+### 6.1、ParentNode
 
   **ParentNode** 接口用于获取Element子节点。Element节点、Document节点和DocumentFragment节点，部署了ParentNode 接口。凡是这三类节点，都具有以下四个属性，用于获取Element子节点。
 
@@ -410,7 +410,7 @@ var elem = document.forms['myForm'];
 
   该属性返回当前节点的所有Element子节点的数目。
 
-### 6.2、ChildNode接口
+### 6.2、ChildNode
 
   **ChildNode** 接口用于处理子节点（包含但不限于Element子节点）。Element节点、DocumentType节点和CharacterData接口，部署了ChildNode接口。凡是这三类节点（接口），都可以使用下面四个方法。
 
@@ -439,20 +439,20 @@ var elem = document.forms['myForm'];
 
 # 二、文档节点
 
-  **document** 节点是文档的根节点，每张网页都有自己的 *document* 节点。`window.document` 属性就指向这个节点。只要浏览器开始载入HTML文档，这个节点对象就存在了，可以直接调用。获取文档节点的方式如下：
+  **document** 节点是文档的根节点，每张网页都有自己的 document 节点。`window.document` 属性就指向这个节点。只要浏览器开始载入HTML文档，这个节点对象就存在了，可以直接调用。获取文档节点的方式如下：
 
-- 对于正常的网页，直接使用*document*或*window.document*。
-- 对于*iframe*载入的网页，使用*iframe*节点的*contentDocument*属性。（了解）
-- 对Ajax操作返回的文档，使用*XMLHttpRequest*对象的*responseXML*属性。（了解）
-- 对于包含某个节点的文档，使用该节点的*ownerDocument*属性。（了解）
+- 对于正常的网页，直接使用 document 或 window.document。
+- 对于 iframe 载入的网页，使用 iframe 节点的 contentDocument 属性。（了解）
+- 对Ajax操作返回的文档，使用 XMLHttpRequest 对象的 responseXML 属性。（了解）
+- 对于包含某个节点的文档，使用该节点的 ownerDocument 属性。（了解）
 
-  上面这四种 *document* 节点，都部署了[Document接口](http://dom.spec.whatwg.org/#interface-document)，因此有共同的属性和方法。当然，各自也有一些自己独特的属性和方法，比如HTML和XML文档的 *document* 节点就不一样。
+  上面这四种 document 节点，都部署了[Document接口](http://dom.spec.whatwg.org/#interface-document)，因此有共同的属性和方法。当然，各自也有一些自己独特的属性和方法，比如HTML和XML文档的 document 节点就不一样。
 
 ## 1、节点属性
 
 - **（1）、document.doctype，document.documentElement，document.defaultView**
 
-  对于HTML文档来说，*document* 对象一般有两个子节点。第一个子节点是 *document.doctype*，它是一个对象，包含了当前文档类型（Document Type Declaration，简写DTD）信息。对于HTML5文档，该节点就代表 `<!DOCTYPE html>`。如果网页没有声明DTD，该属性返回 `null`。*document.firstChild*通常就返回这个节点
+  对于HTML文档来说，document 对象一般有两个子节点。第一个子节点是 document.doctype，它是一个对象，包含了当前文档类型（Document Type Declaration，简写DTD）信息。对于HTML5文档，该节点就代表 `<!DOCTYPE html>`。如果网页没有声明DTD，该属性返回 `null`。document.firstChild 通常就返回这个节点
 
 ```javascript
 var doctype = document.doctype;
@@ -460,9 +460,9 @@ doctype // "<!DOCTYPE html>"
 doctype.name // "html"
 ```
 
-  *document.documentElement* 属性返回当前文档的根节点（root）。它通常是document节点的第二个子节点，紧跟在document.doctype节点后面。对于HTML网页，该属性返回 `<html>`节点。
+  document.documentElement 属性返回当前文档的根节点（root）。它通常是document节点的第二个子节点，紧跟在document.doctype节点后面。对于HTML网页，该属性返回 `<html>`节点。
 
-  *document.defaultView* 属性，在浏览器中返回document对象所在的window对象，否则返回`null`。
+  document.defaultView 属性，在浏览器中返回document对象所在的window对象，否则返回`null`。
 
 ```javascript
 document.defaultView === window // true
@@ -470,7 +470,7 @@ document.defaultView === window // true
 
 - **（2）、document.body，document.head**
 
-  *document.head* 属性返回当前文档的 `<head>` 节点，*document.body* 属性返回当前文档的 `<body>` 节点。
+  document.head 属性返回当前文档的 `<head>` 节点，document.body 属性返回当前文档的 `<body>` 节点。
 
 ```javascript
 document.head === document.querySelector('head') // true
@@ -479,11 +479,11 @@ document.body === document.querySelector('body') // true
 
 -  **（3）、document.activeElement**
 
-  *document.activeElement* 属性返回当前文档中获得焦点的那个元素。用户通常可以使用Tab键移动焦点，使用空格键激活焦点。比如，如果焦点在一个链接上，此时按一下空格键，就会跳转到该链接。
+  document.activeElement 属性返回当前文档中获得焦点的那个元素。用户通常可以使用Tab键移动焦点，使用空格键激活焦点。比如，如果焦点在一个链接上，此时按一下空格键，就会跳转到该链接。
 
 ## 2、集合属性
 
-  以下属性返回文档内部特定元素的集合，都是类似数组的对象。这些集合都是动态的，原节点有任何变化，立刻会反映在集合中。并且这些集合返回的都是 **HTMLCollection** 对象实例。由于 *HTMLCollection* 实例可以用HTML元素的`id`或`name`属性引用，因此如果一个元素有`id`或`name`属性，就可以在上面这四个属性上引用。
+  以下属性返回文档内部特定元素的集合，都是类似数组的对象。这些集合都是动态的，原节点有任何变化，立刻会反映在集合中。并且这些集合返回的都是 **HTMLCollection** 对象实例。由于 HTMLCollection 实例可以用HTML元素的`id`或`name`属性引用，因此如果一个元素有`id`或`name`属性，就可以在上面这四个属性上引用。
 
 - **（1）、document.links，document.forms，document.images，document.embeds**
   - document.links：返回当前文档所有设定了`href`属性的`a`及`area`元素。
@@ -507,13 +507,13 @@ document.body === document.querySelector('body') // true
 
 - **（1）、document.open()，document.close()**
 
-  *document.open* 方法用于新建一个文档，供write方法写入内容。它实际上等于清除当前文档，重新写入内容。不要将此方法与 *window.open()* 混淆，后者用来打开一个新窗口，与当前文档无关。
+  document.open 方法用于新建一个文档，供write方法写入内容。它实际上等于清除当前文档，重新写入内容。不要将此方法与 window.open() 混淆，后者用来打开一个新窗口，与当前文档无关。
 
-  *document.close*方法用于关闭*open*方法所新建的文档。一旦关闭，*write*方法就无法写入内容了。如果再调用*write*方法，就等同于又调用*open*方法，新建一个文档，再写入内容。
+  document.close 方法用于关闭 open方法所新建的文档。一旦关闭，write方法就无法写入内容了。如果再调用 write方法，就等同于又调用open方法，新建一个文档，再写入内容。
 
 - **（2）、document.write()，document.writeln()**
 
-  *document.write*方法用于向当前文档写入内容。只要当前文档还没有用*close*方法关闭，它所写入的内容就会追加在已有内容的后面。
+  document.write 方法用于向当前文档写入内容。只要当前文档还没有用close方法关闭，它所写入的内容就会追加在已有内容的后面。
 
 ```javascript
 // 页面显示“helloworld”
@@ -523,13 +523,13 @@ document.write('world');
 document.close();
 ```
 
-  注意，*document.write* 会当作HTML代码解析，不会转义。
+  注意，document.write 会当作HTML代码解析，不会转义。
 
 ```javascript
 document.write('<p>hello world</p>');
 ```
 
-  如果页面已经解析完成（*DOMContentLoaded*事件发生之后），再调用*write*方法，它会先调用*open*方法，擦除当前文档所有内容，然后再写入。
+  如果页面已经解析完成（*DOMContentLoaded*事件发生之后），再调用write方法，它会先调用open方法，擦除当前文档所有内容，然后再写入。
 
 ```javascript
 document.addEventListener('DOMContentLoaded', function (event) {
@@ -545,7 +545,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
 });
 ```
 
-  如果在页面渲染过程中调用*write*方法，并不会调用*open*方法。（可以理解成，*open*方法已调用，但*close*方法还未调用）
+  如果在页面渲染过程中调用write方法，并不会调用open方法。（可以理解成，open方法已调用，但close方法还未调用）
 
 ```html
 <html>
@@ -597,9 +597,9 @@ document.writeln(2);
 
 - **（4）、document.querySelector()，document.querySelectorAll()** *（☆）*
 
-  *document.querySelector()* 方法接受一个CSS选择器作为参数，返回匹配该选择器的元素节点。如果有多个节点满足匹配条件，则返回第一个匹配的节点。如果没有发现匹配的节点，则返回null。
+  document.querySelector() 方法接受一个CSS选择器作为参数，返回匹配该选择器的元素节点。如果有多个节点满足匹配条件，则返回第一个匹配的节点。如果没有发现匹配的节点，则返回null。
 
-  *document.querySelectorAll()* 方法与 *querySelector()* 用法类似，区别是返回一个NodeList对象，包含所有匹配给定选择器的节点。
+  document.querySelectorAll() 方法与 querySelector() 用法类似，区别是返回一个NodeList对象，包含所有匹配给定选择器的节点。
 
   这两个方法都支持复杂的CSS选择器。但是，它们不支持CSS伪元素的选择器（比如`:first-line`和`:first-letter`）和伪类的选择器（比如`:link`和`:visited`），即无法选中伪元素和伪类。
 
@@ -662,7 +662,7 @@ document.writeln(2);
 
 - **（2）、Element.id**
 
-  该属性返回指定元素的id属性，是一个可读可写的属性。
+  该属性返回指x定元素的id属性，是一个可读可写的属性。
 
 - **（3）、Element.tagName**
 
@@ -738,6 +738,28 @@ el.style.cssText = 'width:100px; height:100px; background-color:red;'
 - **item()**：返回指定索引位置的class。
 - **toString()**：将class的列表转为字符串。
 
+
+# 七、拓展
+
+## 1、获取非行间样式
+
+```javascript
+/**
+ * 获取非行间样式
+ */
+function getStyle(obj, attr) {
+	// 兼容IE
+	if (obj.currentStyle) {
+		return obj.currentStyle[attr];
+	}else {
+		return getComputedStyle(obj, false)[attr];
+	}
+}
+```
+
+# 七、DOM 相关技术文章
+
+- [高频dom操作和页面性能优化探索](https://feclub.cn/post/content/dom)
 
 
 

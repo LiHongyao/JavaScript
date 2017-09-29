@@ -74,20 +74,20 @@ body::-webkit-scrollbar {
 
   新窗口的URL，为一个字符串。具体可以配置以下内容：
 
-  - *width*：窗口宽度，值为一个像素数值
-  - *height*：窗口高度，值为一个像素数值
-  - *left*：窗口的屏幕X坐标，值为一个像素数值
-  - *top*：窗口的屏幕Y坐标，值为一个像素数值
-  - *channelmode*：是否“影院模式”显示窗口，值：yes/no（默认）
-  - *fullscreen*：是否全屏显示，处于全屏模式的窗口必须同时处于剧院模式，值：yes/no（默认）
-  - *directories*：是否添加目录按钮，值：yes（默认）/no
-  - *location*：是否显示地址字段，值：yes（默认）/no
-  - *menubar*：是否显示菜单栏，值：yes（默认）/no
-  - *resizable*：窗口是否可以调整尺寸，值：yes（默认）/no
-  - *scrollbars*：是否显示滚动条，值：yes（默认）/no
-  - *status*：是否显示状态栏，值：yes（默认）/no
-  - *titlebar*：是否显示标题栏，值：yes（默认）/no
-  - *toolbar*：是否显示工具栏，值：yes（默认）/no
+  - width：窗口宽度，值为一个像素数值
+  - height：窗口高度，值为一个像素数值
+  - left：窗口的屏幕X坐标，值为一个像素数值
+  - top：窗口的屏幕Y坐标，值为一个像素数值
+  - channelmode：是否“影院模式”显示窗口，值：yes/no（默认）
+  - fullscreen：是否全屏显示，处于全屏模式的窗口必须同时处于剧院模式，值：yes/no（默认）
+  - directories：是否添加目录按钮，值：yes（默认）/no
+  - location：是否显示地址字段，值：yes（默认）/no
+  - menubar：是否显示菜单栏，值：yes（默认）/no
+  - resizable：窗口是否可以调整尺寸，值：yes（默认）/no
+  - scrollbars：是否显示滚动条，值：yes（默认）/no
+  - status：是否显示状态栏，值：yes（默认）/no
+  - titlebar：是否显示标题栏，值：yes（默认）/no
+  - toolbar*：是否显示工具栏，值：yes（默认）/no
 
   在这些配置项中，各浏览器的支持情况都不是很理想，在目前标准（包括HTML5标准和ECMAScript标准）支持最好的Google Chrome上也只支持上面的前四个配置。所以，如非定制浏览器开发，否则没有必要去进行配置。
 
