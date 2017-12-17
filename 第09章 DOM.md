@@ -15,7 +15,7 @@ DOM的最小组成单位叫做节点（Node）。文档的树形结构（DOM树�
 节点的类型有七种：
 
 - **Document**：整个文档树的顶层节点
-- **DocumentType**：*doctype*标签（比如 `<!DOCTYPE html>` ）
+- **DocumentType**：*doctype* 标签（比如 `<!DOCTYPE html>` ）
 - **Element**：网页的各种HTML标签（比如 `<body>`、`<a>`等）
 - **Attribute**：网页元素的属性（比如 `class="right"` ）
 - **Text**：标签之间或标签包含的文本
@@ -38,7 +38,7 @@ DOM的最小组成单位叫做节点（Node）。文档的树形结构（DOM树�
 
 ##  2、节点树
 
-一个文档的所有节点，按照所在的层级，可以抽象成一种树状结构。这种树状结构就是DOM。
+一个文档的所有节点，按照所在的层级，可以抽象成一种树状结构。这种树状结构就是DOM树。
 
 最顶层的节点就是 **document** 节点，它代表了整个文档。文档里面最高一层的HTML标签，一般是 `<html>`，它构成树结构的根节点（root node），其他HTML标签节点都是它的下级。
 
@@ -167,7 +167,7 @@ nodeItem = nodeList[index]
 
 ### 3.2、HTMLCollection
 
-**HTMLCollection** 实例对象与 **NodeList** 实例对象类似，也是节点的集合，返回一个类似数组的对象。*document.links*、*docuement.forms*、*document.images*等属性，返回的都是 **HTMLCollection** 实例对象。
+**HTMLCollection** 实例对象与 **NodeList** 实例对象类似，也是节点的集合，返回一个类似数组的对象。*document.links*、*docuement.forms*、*document.images、children*等属性，返回的都是 **HTMLCollection** 实例对象。
 
 **HTMLCollection** 实例对象与 **NodeList** 实例对象的区别在于：
 
@@ -197,9 +197,9 @@ var elem = document.forms['myForm'];
 
 由于*item*方法和*namedItem*方法，都可以用方括号运算符代替，所以建议一律使用方括号运算符
 
-# # DOM 节点遍历
+# # DOM Node
 
-浏览器提供了一个Node对象，所有节点都是Node的示例，因此Node具备的属性与方法，其他节点也都具备。
+浏览器提供了一个Node对象，所有节点都是Node的实例，因此Node具备的属性与方法，其他节点也都具备。
 
 - **Node.ownerDocument**
 
@@ -312,6 +312,8 @@ document.activeElement 属性返回当前文档中获得焦点的那个元素。
 - **document.title**：文档标题
 - **document.cookie**：浏览器Cookie
 - **document.location**：返回location对象，提供了当前文档的URL信息
+
+> 提示：只需要掌握 document.title 就可以了，其他项我们可以直接通过BOM来操作。
 
 ## 4、文档读写
 
@@ -431,6 +433,10 @@ HTML元素包括标签名和若干个键值对，这个键值对就称为“属�
 
   该方法用于为当前元素节点新增属性。如果同名属性已存在，则相当于编辑已存在的属性。该方法含有两个参数，第一个参数表示属性名，第二个参数表示需要对属性设置的值。
 
+- **Element.setAttributeNode()**
+
+  该方法用于为当前元素节点新增属性，参数为通过 *document.createAttribute()* 创建的属性节点。
+
 - **Element.hasAttribute()**
 
   该方法返回一个布尔值，表示当前元素节点是否包含指定属性。参数为指定的属性名称。
@@ -517,9 +523,9 @@ HTML元素包括标签名和若干个键值对，这个键值对就称为“属�
   第一个插入参数允许的值如下：
 
   - beforebegin：在当前元素节点的前面。
-  - afterbegin：在当前元素节点的里面，插在它的第一个子元素之前。
   - beforeend：在当前元素节点的里面，插在它的最后一个子元素之后。
   - afterend：在当前元素节点的后面。
+  - afterbegin：在当前元素节点的里面，插在它的第一个子元素之前。
 
 ## 3、替换节点
 
@@ -545,6 +551,7 @@ HTML元素包括标签名和若干个键值对，这个键值对就称为“属�
 
 - **nodeValue**：设置/获取文本值，只有文本节点和注释节点才有 nodeValue 属性，元素节点要获取文本值可通过 *el.firstChild.nodeValue* 获取。
 - **Element.textContent**：设置/获取当前元素节点及其后代节点文本内容。该属性会忽略标签。
+- **Element.innerText**：设置/获取当前元素节点及其后代节点文本内容。
 
 # # DOM Style
 
@@ -598,14 +605,21 @@ function getStyle(obj, attr) {
 	if (obj.currentStyle) {
 		return obj.currentStyle[attr];
 	}else {
-		return getComputedStyle(obj, false)[attr];
+		return getComputedStyle(obj, null)[attr];
 	}
 }
 ```
 
-## 2、DOM 相关技术文章
+## 2、DOM 性能优化
 
 - [高频dom操作和页面性能优化探索](https://feclub.cn/post/content/dom)
+- 通过修改 class 更新样式
+- 使用 innerHTML 批量生产 DOM
+- 使用 DocumentFragment  批量生产 DOM
+- 避免使用 +=，将拼接元素放入数组通过 join() 方法效率更高
+- 创建节点之后应立即append
+- 通过 absolute 或 显示/隐藏元素 后再操作DOM可以减少重排/重绘
+- 进来使用 id 来遍历 DOM 元素
 
 
 
