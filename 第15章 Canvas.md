@@ -1,12 +1,327 @@
+> 参考：[CANVAS BLOGS](http://www.cnblogs.com/tim-li/archive/2012/08/06/2580252.html#17)
+>
+> 
+
 # # 简介
 
-HTML5 \<canvas> 标签用于绘制图像（通过脚本，通常是 JavaScript）。不过，\<canvas> 元素本身并没有绘制能力（它仅仅是图形的容器） - 您必须使用脚本来完成实际的绘图任务。getContext() 方法可返回一个对象，该对象提供了用于在画布上绘图的方法和属性。
+Canvas是HTML5新增的组件，它就像一块幕布，可以用JavaScript在上面绘制各种图表、动画等。
+
+没有Canvas的年代，绘图只能借助Flash插件实现，页面不得不用JavaScript和Flash进行交互。有了Canvas，我们就再也不需要Flash了，直接使用JavaScript完成绘制。
+
+一个Canvas定义了一个指定尺寸的矩形框，在这个范围内我们可以随意绘制：
+
+```html
+<canvas id="test-canvas" width="500" height="300"></canvas>
+```
+
+由于浏览器对HTML5标准支持不一致，所以，通常在 `<canvas>` 内部添加一些说明性HTML代码，如果浏览器支持Canvas，它将忽略 `<canvas>` 内部的HTML，如果浏览器不支持Canvas，它将显示 `<canvas>` 内部的HTML：
+
+```html
+<canvas id="test-stock" width="500" height="300">
+    <p>Current Price: 25.51</p>
+</canvas>
+```
+
+在使用Canvas前，用 `canvas.getContext` 来测试浏览器是否支持Canvas：
+
+```html
+<canvas id="test-canvas" width="500" heigth="300">
+    <p>你的浏览器不支持Canvas</p>
+</canvas>
+```
+
+```javascript
+var canvas = document.getElementById('test-canvas');
+if (canvas.getContext) {
+    console.log('你的浏览器支持Canvas!');
+} else {
+    console.log('你的浏览器不支持Canvas!');
+}
+```
+
+`getContext('2d') `方法让我们拿到一个 **CanvasRenderingContext2D** 对象，所有的绘图操作都需要通过这个对象完成。
+
+```javascript
+var ctx = canvas.getContext('2d');
+```
+
+如果需要绘制3D怎么办？HTML5还有一个WebGL规范，允许在Canvas中绘制3D图形：
+
+```javascript
+gl = canvas.getContext("webgl");
+```
+
+本节我们只专注于绘制2D图形。
+
+接下来我们还需要了解下Canvas的坐标系：
+
+![](IMGS/canvas-coordinate-system.png)
+
+Canvas的坐标以左上角为原点，水平向右为X轴，垂直向下为Y轴，以像素为单位，所以每个点都是非负整数。
+
+Canvas元素绘制图像的时候有两种方法，分别是
+
+- ctx.fill() ：填充
+- ctx.stroke()：绘制边框
+
+在进行图形绘制前，要设置好绘图的样式：
+
+- ctx.fillStyle：填充的样式
+- ctx.strokeStyle：边框样式
+
+你还可以设置边框宽度：
+
+- ctx.lineWidth
+
+# # 开始
+
+HTML 基本结构如下，示例中我将统一使用这个画布。
+
+```html
+<canvas class="test-canvas" width="500" height="300" style="border: 1px solid #d3d3d3">
+    <p>您的浏览器不支持Canvas！</p>
+</canvas>
+```
+
+## 1、文字 
+
+- 填充文字：*context.fillText(text,x,y)*
+- 绘制文字轮廓：*context.strokeText(text,x,y)*
+
+> 参数解读：
+
+- `text`：要绘制的文字
+- `x`：文字起点的x坐标
+- `y`：文字起点的y坐标
+
+> 其他配置：
+
+- *ctx.font*：设置字体样式
+
+- *ctx.textAlign*：设置字体水平对齐方式（*start、end、left、right、center*）
+
+  ![](IMGS/canvas-text-align.png)
+
+- *ctx.textBaseline*：设置字体垂直对齐方式（*top、hanging、middle、alphabetic、ideographic、bottom*）
+
+  ![](IMGS/canvas-textBaseline.png)
+
+- *context.measureText(text)*：计算字体长度
+
+```javascript
+// 获取DOM元素
+var canvas = document.querySelector(".test-canvas");
+// 获取上下文（画布）
+var ctx    = canvas.getContext("2d");
+
+ctx.strokeStyle = "blue";
+ctx.font = "italic 36px 微软雅黑";
+ctx.textAlign = "center";
+ctx.textBaseline = "middle";
+ctx.strokeText("Hello, world!", 250, 150);
+```
+
+![](IMGS/canvas-font.png)
+
+## 2、矩形
+
+- 填充矩形：*context.fillRect(x,y,width,height)*
+- 绘制矩形：*strokeRect(x,y,width,height)*
+
+```javascript
+var canvas = document.querySelector(".test-canvas");
+var ctx    = canvas.getContext("2d");
+
+// 绘制
+ctx.strokeStyle = "#000";
+ctx.strokeRect(50, 75, 175, 150);
+
+// 填充
+ctx.fillStyle = "#333";
+ctx.fillRect(275, 75, 175, 150);
+```
+
+![](IMGS/canvas-rect.png)
+
+## 3、清除矩形区域
+
+清除矩形区域：*context.clearRect(x,y,width,height)*
+
+```javascript
+var canvas = document.querySelector(".test-canvas");
+var ctx    = canvas.getContext("2d");
+
+ctx.strokeStyle = "#000";
+ctx.strokeRect(50, 75, 175, 150);
+
+ctx.fillStyle = "#333";
+ctx.fillRect(275, 75, 175, 150);
+
+// 清除矩形区域
+ctx.clearRect(175, 110,150, 80);
+```
+
+![](IMGS/canvas-clearRect.png)
+
+## 4、圆弧
+
+- 绘制圆弧：*context.arc(x, y, radius, starAngle,endAngle, anticlockwise)*
+
+> 参数解读：
+
+- `x`：圆心x坐标
+- `y`：圆心y坐标
+- `starAngle`：开始角度
+- `endAngle`：结束角度
+- `anticlockwise`：是否逆时针（ *true* 为逆时针，*false* 为顺时针）
+
+![](IMGS/canvas-arc-1.png)
+
+```javascript
+var canvas = document.querySelector(".test-canvas");
+var ctx    = canvas.getContext("2d");
+
+ctx.beginPath();
+ctx.arc(125, 150, 75, 0, 2 * Math.PI, false);
+ctx.closePath();
+ctx.fillStyle = "#333";
+ctx.fill();
+
+
+ctx.beginPath();
+ctx.arc(325, 150, 75, 0, 45, true);
+ctx.strokeStyle = "#333";
+ctx.closePath();
+ctx.stroke()
+```
+
+![](IMGS/canvas-arc-2.png)
+
+## 5、线段
+
+- *context.moveTo(x,y)*
+- *context.lineTo(x,y)*
+
+每次画线都从moveTo的点到lineTo的点，
+
+如果没有moveTo那么第一次lineTo的效果和moveTo一样，
+
+每次lineTo后如果没有moveTo，那么下次lineTo的开始点为前一次lineTo的结束点。
+
+```javascript
+var canvas = document.querySelector(".test-canvas");
+var ctx    = canvas.getContext("2d");
+
+ctx.moveTo(50, 100);
+ctx.lineTo(450, 100);
+ctx.stroke();
+
+ctx.moveTo(50, 150);
+ctx.lineTo(183, 150);
+ctx.lineTo(250, 250);
+ctx.lineTo(316, 150);
+ctx.lineTo(450, 150);
+ctx.strokeStyle = "#333";
+ctx.stroke();
+```
+
+![](IMGS/canvas-moveto-lineto.png)
+
+## 6、贝塞尔曲线
+
+[贝塞尔曲线扫盲](http://www.html-js.com/article/1628)
+
+[动态绘制贝塞尔曲线](http://myst729.github.io/bezier-curve/)
+
+- 三次贝塞尔曲线：*context.bezierCurveTo(cp1x,cp1y,cp2x,cp2y,x,y)*
+- 二次贝塞尔曲线：*context.quadraticCurveTo(qcpx,qcpy,qx,qy)*
+
+```javascript
+var canvas = document.querySelector(".test-canvas");
+var ctx    = canvas.getContext("2d");
+
+ctx.moveTo(50, 100);
+ctx.bezierCurveTo(100, 200, 150, 50, 250, 170);
+ctx.stroke();
+```
+
+![](IMGS/canvas-bezier.png)
+
+## 7、线性渐变
+
+- 创建线性渐变：*var lg =ctx.createLinearGradient(xStart,yStart,xEnd,yEnd)*
+- 颜色节点：*lg.addColorStop(offset,color)*
+
+> 参数解读
+
+- `xstart`：渐变开始点x坐标
+- `ystart`：渐变开始点y坐标
+
+*    `xEnd`：渐变结束点x坐标
+
+
+*    `yEnd`：渐变结束点y坐标
+*    `offset`：设定的颜色离渐变结束点的偏移量(0~1)
+*    `color`：绘制时要使用的颜色
+
+![](IMGS/canvas-linearGradient.png)
+
+```javascript
+var canvas = document.querySelector(".test-canvas");
+var ctx    = canvas.getContext("2d");
+
+var lg = ctx.createLinearGradient(0, 0, 400, 200);
+lg.addColorStop( 0, "blue");
+lg.addColorStop(.4, "white");
+lg.addColorStop( 1, "red");
+
+ctx.fillStyle = lg;
+ctx.fillRect(50, 50, 400, 200);
+```
+
+![](IMGS/canvas-linearGradient-2.png)
+
+## 8、径向渐变
+
+- 创建径向渐变：*rg=ctx.createRadialGradient(xStart,yStart,radiusStart,xEnd,yEnd,radiusEnd)*
+- 颜色节点：*rg.addColorStop(offset,color)*
+
+![](IMGS/canvas-radialGradient-1.png)
+
+```javascript
+var canvas = document.querySelector(".test-canvas");
+var ctx    = canvas.getContext("2d");
+
+
+var rg = ctx.createRadialGradient(250, 150, 0, 250, 150, 100);
+rg.addColorStop(.1, "red");
+rg.addColorStop( 1, "black");
+
+ctx.beginPath();
+ctx.arc(250, 150, 100,0, 2*Math.PI, true);
+ctx.closePath();
+
+ctx.fillStyle = rg;
+ctx.fill();
+```
+
+![](IMGS/canvas-radialGradient-2.png)
+
+## 9、图形变形
+
+- 位移：*ctx.translate(x, y)*
+- 旋转：*ctx.rotate(angle)*
+- 缩放：*ctx.scale(x, y)*
+
+## 10、图形组合
+
+
 
 # # API 
 
 > 提示：API 模块参考 [菜鸟教程](http://www.runoob.com/tags/ref-canvas.html) 
 
-## 2.1、颜色、样式和阴影
+## 1、颜色、样式和阴影
 
 | 属性                                       | 描述                    |
 | ---------------------------------------- | --------------------- |
@@ -24,7 +339,7 @@ HTML5 \<canvas> 标签用于绘制图像（通过脚本，通常是 JavaScript�
 | [createRadialGradient()](http://www.runoob.com/tags/canvas-createradialgradient.html) | 创建放射状/环形的渐变（用在画布内容上）。 |
 | [addColorStop()](http://www.runoob.com/tags/canvas-addcolorstop.html) | 规定渐变对象中的颜色和停止位置。      |
 
-## 2.2、线条样式
+## 2、线条样式
 
 | [lineCap](http://www.runoob.com/tags/canvas-linecap.html) | 设置或返回线条的结束端点样式。       |
 | ---------------------------------------- | --------------------- |
@@ -32,7 +347,7 @@ HTML5 \<canvas> 标签用于绘制图像（通过脚本，通常是 JavaScript�
 | [lineWidth](http://www.runoob.com/tags/canvas-linewidth.html) | 设置或返回当前的线条宽度。         |
 | [miterLimit](http://www.runoob.com/tags/canvas-miterlimit.html) | 设置或返回最大斜接长度。          |
 
-## 2.3、矩形
+## 3、矩形
 
 | 方法                                       | 描述              |
 | ---------------------------------------- | --------------- |
@@ -41,7 +356,7 @@ HTML5 \<canvas> 标签用于绘制图像（通过脚本，通常是 JavaScript�
 | [strokeRect()](http://www.runoob.com/tags/canvas-strokerect.html) | 绘制矩形（无填充）。      |
 | [clearRect()](http://www.runoob.com/tags/canvas-clearrect.html) | 在给定的矩形内清除指定的像素。 |
 
-## 2.4、路径
+## 4、路径
 
 | 方法                                       | 描述                                 |
 | ---------------------------------------- | ---------------------------------- |
@@ -58,7 +373,7 @@ HTML5 \<canvas> 标签用于绘制图像（通过脚本，通常是 JavaScript�
 | [arcTo()](http://www.runoob.com/tags/canvas-arcto.html) | 创建两切线之间的弧/曲线。                      |
 | [isPointInPath()](http://www.runoob.com/tags/canvas-ispointinpath.html) | 如果指定的点位于当前路径中，则返回 true，否则返回 false。 |
 
-## 2.5、转换
+## 5、转换
 
 | 方法                                       | 描述                             |
 | ---------------------------------------- | ------------------------------ |
@@ -68,7 +383,7 @@ HTML5 \<canvas> 标签用于绘制图像（通过脚本，通常是 JavaScript�
 | [transform()](http://www.runoob.com/tags/canvas-transform.html) | 替换绘图的当前转换矩阵。                   |
 | [setTransform()](http://www.runoob.com/tags/canvas-settransform.html) | 将当前转换重置为单位矩阵。然后运行 transform()。 |
 
-## 2.6、文本
+## 6、文本
 
 | 属性                                       | 描述                    |
 | ---------------------------------------- | --------------------- |
@@ -82,13 +397,13 @@ HTML5 \<canvas> 标签用于绘制图像（通过脚本，通常是 JavaScript�
 | [strokeText()](http://www.runoob.com/tags/canvas-stroketext.html) | 在画布上绘制文本（无填充）。  |
 | [measureText()](http://www.runoob.com/tags/canvas-measuretext.html) | 返回包含指定文本宽度的对象。  |
 
-## 2.7、图像绘制
+## 7、图像绘制
 
 | 方法                                       | 描述              |
 | ---------------------------------------- | --------------- |
 | [drawImage()](http://www.runoob.com/tags/canvas-drawimage.html) | 向画布上绘制图像、画布或视频。 |
 
-## 2.8、像素操作
+## 8、像素操作
 
 | 属性                                       | 描述                               |
 | ---------------------------------------- | -------------------------------- |
@@ -102,14 +417,14 @@ HTML5 \<canvas> 标签用于绘制图像（通过脚本，通常是 JavaScript�
 | [getImageData()](http://www.runoob.com/tags/canvas-getimagedata.html) | 返回 ImageData 对象，该对象为画布上指定的矩形复制像素数据。 |
 | [putImageData()](http://www.runoob.com/tags/canvas-putimagedata.html) | 把图像数据（从指定的 ImageData 对象）放回画布上。      |
 
-## 2.9、合成
+## 9、合成
 
 | 属性                                       | 描述                     |
 | ---------------------------------------- | ---------------------- |
 | [globalAlpha](http://www.runoob.com/tags/canvas-globalalpha.html) | 设置或返回绘图的当前 alpha 或透明值。 |
 | [globalCompositeOperation](http://www.runoob.com/tags/canvas-globalcompositeoperation.html) | 设置或返回新图像如何绘制到已有的图像上。   |
 
-## 2.10、其他
+## 10、其他
 
 | 方法            | 描述               |
 | ------------- | ---------------- |
