@@ -1,7 +1,3 @@
-> 参考：[CANVAS BLOGS](http://www.cnblogs.com/tim-li/archive/2012/08/06/2580252.html#17)
->
-> 
-
 # # 简介
 
 Canvas是HTML5新增的组件，它就像一块幕布，可以用JavaScript在上面绘制各种图表、动画等。
@@ -39,7 +35,7 @@ if (canvas.getContext) {
 }
 ```
 
-`getContext('2d') `方法让我们拿到一个 **CanvasRenderingContext2D** 对象，所有的绘图操作都需要通过这个对象完成。
+`getContext('2d') ` 方法让我们拿到一个 **CanvasRenderingContext2D** 对象，所有的绘图操作都需要通过这个对象完成。
 
 ```javascript
 var ctx = canvas.getContext('2d');
@@ -83,7 +79,7 @@ HTML 基本结构如下，示例中我将统一使用这个画布。
 </canvas>
 ```
 
-## 1、文字 
+## 01. 文字 
 
 - 填充文字：*context.fillText(text,x,y)*
 - 绘制文字轮廓：*context.strokeText(text,x,y)*
@@ -123,7 +119,7 @@ ctx.strokeText("Hello, world!", 250, 150);
 
 ![](IMGS/canvas-font.png)
 
-## 2、矩形
+## 02. 矩形
 
 - 填充矩形：*context.fillRect(x,y,width,height)*
 - 绘制矩形：*strokeRect(x,y,width,height)*
@@ -143,7 +139,7 @@ ctx.fillRect(275, 75, 175, 150);
 
 ![](IMGS/canvas-rect.png)
 
-## 3、清除矩形区域
+## 03. 清除矩形区域
 
 清除矩形区域：*context.clearRect(x,y,width,height)*
 
@@ -163,7 +159,7 @@ ctx.clearRect(175, 110,150, 80);
 
 ![](IMGS/canvas-clearRect.png)
 
-## 4、圆弧
+## 04. 圆弧
 
 - 绘制圆弧：*context.arc(x, y, radius, starAngle,endAngle, anticlockwise)*
 
@@ -197,7 +193,7 @@ ctx.stroke()
 
 ![](IMGS/canvas-arc-2.png)
 
-## 5、线段
+## 05. 线段
 
 - *context.moveTo(x,y)*
 - *context.lineTo(x,y)*
@@ -227,7 +223,7 @@ ctx.stroke();
 
 ![](IMGS/canvas-moveto-lineto.png)
 
-## 6、贝塞尔曲线
+## 06. 贝塞尔曲线
 
 [贝塞尔曲线扫盲](http://www.html-js.com/article/1628)
 
@@ -247,7 +243,7 @@ ctx.stroke();
 
 ![](IMGS/canvas-bezier.png)
 
-## 7、线性渐变
+## 07. 线性渐变
 
 - 创建线性渐变：*var lg =ctx.createLinearGradient(xStart,yStart,xEnd,yEnd)*
 - 颜色节点：*lg.addColorStop(offset,color)*
@@ -281,7 +277,7 @@ ctx.fillRect(50, 50, 400, 200);
 
 ![](IMGS/canvas-linearGradient-2.png)
 
-## 8、径向渐变
+## 08. 径向渐变
 
 - 创建径向渐变：*rg=ctx.createRadialGradient(xStart,yStart,radiusStart,xEnd,yEnd,radiusEnd)*
 - 颜色节点：*rg.addColorStop(offset,color)*
@@ -307,129 +303,256 @@ ctx.fill();
 
 ![](IMGS/canvas-radialGradient-2.png)
 
-## 9、图形变形
+## 09. 图形变形
 
 - 位移：*ctx.translate(x, y)*
 - 旋转：*ctx.rotate(angle)*
 - 缩放：*ctx.scale(x, y)*
 
-## 10、图形组合
+## 10. 图形组合
+
+图形组合就是两个图形相互叠加了图形的表现形式，是后画的覆盖掉先画的呢，还是相互重叠的部分不显示等等，至于怎么显示取决于 `type`值。
+
+语法形式：*context.globalCompositeOperation=type*
+
+| type 值           | 描述                                 |
+| ---------------- | ---------------------------------- |
+| source-over（默认值） | 在原有图形上绘制新图形                        |
+| destination-over | 在原有图形下绘制新图形                        |
+| source-in        | 显示原有图形和新图形的交集，新图形在上，所以颜色为新图形的颜色    |
+| destination-in   | 显示原有图形和新图形的交集，原有图形在上，所以颜色为原有图形的颜色  |
+| source-out       | 只显示新图形非交集部分                        |
+| destination-out  | 只显示原有图形非交集部分                       |
+| source-atop      | 显示原有图形和交集部分，新图形在上，所以交集部分的颜色为新图形的颜色 |
+| destination-atop | 显示新图形和交集部分，新图形在下，所以交集部分的颜色为原有图形的颜色 |
+| lighter          | 原有图形和新图形都显示，交集部分做颜色叠加              |
+| xor              | 重叠部分不显示                            |
+| copy             | 只显示新图形                             |
+
+看图理解：
+
+![](IMGS/canvas-Graphic-combination.png)
+
+代码示例：
+
+```javascript
+var canvas = document.querySelector(".test-canvas");
+var ctx    = canvas.getContext("2d");
+
+// 蓝色矩形
+ctx.fillStyle = 'blue';
+ctx.fillRect(150, 100, 200, 100);
+
+// 设置组合方式
+ctx.globalCompositeOperation = 'lighter';
+// 设置新图形（红色圆形）
+ctx.beginPath();
+ctx.fillStyle = 'red';
+ctx.arc(250, 150, 180, 0, Math.PI * 2, false);
+ctx.closePath();
+ctx.fill();
+```
+
+![](IMGS/canvas-Graphic-combination-1.PNG)
+
+## 11. 绘制图形阴影
+
+* context.shadowOffsetX：阴影的横向位移量（默认值为0）
+* context.shadowOffsetY：阴影的纵向位移量（默认值为0）
+* context.shadowColor：阴影的颜色
+* context.shadowBlur：阴影的模糊范围（值越大越模糊）
+
+```javascript
+ctx.shadowOffsetX = 15;
+ctx.shadowOffsetY = 15;
+ctx.shadowColor   = "#808080";
+ctx.shadowBlur    = 10;
+
+ctx.fillStyle = '#333';
+ctx.fillRect(150, 100, 200, 100);
+```
+
+![](IMGS/canvas-shadow.png)
+
+## 12. 绘制图像
+
+绘图：*context.drawImage*
+
+图像平铺：*context.createPattern(image,type)*
+
+图像裁剪：*context.clip()*
+
+像素处理：*var imagedata=context.getImageData(sx,sy,sw,sh)*
+
+### 12.1. 绘图
+
+绘图主要有三种方式
+
+> **第 01 种方式**
+
+- *context.drawImage(image,x,y)*
+
+> 参数解读：
+
+- `image`：Image对象 *var img=new Image(); img.src="url(...)";*
+- `x`：绘制图像的x坐标
+- ` y`：绘制图像的y坐标
+
+> **第 02 种方式**
+
+-  *context.drawImage(image,x,y,w,h)*
+
+> 参数解读：
+
+- `image`：Image对象 *var img=new Image(); img.src="url(...)";*
+- `x`：绘制图像的x坐标
+- ` y`：绘制图像的y坐标
+- `w`：绘制图像的宽度
+- `h`：绘制图像的高度
+
+> **第 03 种方式**
+
+- *context.drawImage(image,sx,sy,sw,sh,dx,dy,dw,dh)*：选取图像的一部分矩形区域进行绘制
+
+> 参数解读：
+
+- `image`：Image对象 *var img=new Image(); img.src="url(...)";*
+
+*        `sx`：图像上的x坐标
 
 
+*        `sy`：图像上的y坐标
+*        `sw`：矩形区域的宽度
+*        `sh`：矩形区域的高度
+*        `dx`：画在canvas的x坐标
+*        `dy`：画在canvas的y坐标
+*        `dw`：画出来的宽度
+*        `dh`：画出来的高度
+
+![](IMGS/canvas-drawImg.png)
+
+### 12.2. 平铺
+
+- *context.createPattern(image,type)*
+
+> 参数解读：
+
+type 属性值
+
+- no-repeat：不平铺
+- repeat-x：横方向平铺
+- repeat-y：纵方向平铺
+- repeat：全方向平铺
+
+```javascript
+var canvas = document.querySelector(".test-canvas");
+var ctx    = canvas.getContext("2d");
+
+// 创建图片
+var img = new Image();
+// 设置图片
+img.src = 'ruban.jpeg';
+// 图片加载完成
+img.onload = function () {
+    // 设置平铺方式
+    var ptrn = ctx.createPattern(img, 'repeat');
+    ctx.fillStyle = ptrn;
+    ctx.fillRect(50, 50, 400, 200);
+};
+```
+
+![](IMGS/canvas-img-repeat.png)
+
+### 12.3. 裁剪
+
+- context.clip()
+
+只绘制封闭路径区域内的图像，不绘制路径外部图像，用的时候先创建裁剪区域，再绘制图像（之后绘制的图形都会采用这个裁剪区域，要取消这个裁剪区域就需要用到保存恢复状态，下面有讲）
+
+```javascript
+var canvas = document.querySelector(".test-canvas");
+var ctx    = canvas.getContext("2d");
+
+// 绘制一个黑色的矩形区域做背景
+ctx.fillStyle = 'black';
+ctx.fillRect(0, 0, 500, 300);
+
+// 创建图片
+// 图片宽度 500 x 889
+var img = new Image();
+// 设置图片
+img.src = 'YAOGE.JPG';
+// 图片加载完成
+img.onload = function () {
+    // 绘制裁剪区域
+    ctx.beginPath();
+    ctx.arc(250, 150, 120, 0, Math.PI * 2, true);
+    ctx.closePath();
+    // 裁剪
+    ctx.clip();
+    // 加载图片
+    ctx.drawImage(img, 30, -380);
+};
+```
+
+![](IMGS/canvas-img-clip.png)
+
+## 13. 保存/恢复状态 
+
+- 保存：*context.save()*，调用该方法，会保存当前context的状态、属性（把他理解成游戏存档）
+- 恢复：*context.restore()*，调用该方法就能恢复到save时候context的状态、属性（游戏回档）
+
+在上面的裁剪图片提过，一旦设定了裁剪区域，后来绘制的图形都只显示裁剪区域内的内容，要“取消”这个裁剪区域才能正常绘制其他图形，其实这个“取消”是利用 *save()* 方法和 *restore()* 方法来实现的。
+
+```javascript
+var canvas = document.querySelector(".test-canvas");
+var ctx    = canvas.getContext("2d");
+
+ctx.fillStyle = '#333';
+// 保存当前ctx状态
+ctx.save();
+
+ctx.fillStyle = 'red';
+ctx.fillRect(50, 75, 175, 150);
+
+// 恢复到刚刚保存的状态
+ctx.restore();
+ctx.fillRect(275, 75, 175, 150);
+```
+
+![](IMGS/canvas-save-restore.png)
+
+## 14. 保存文件
+
+在canvas中绘出的图片只是canvas标签而已，并非是真正的图片，是不能右键，另存为的，我们可以利用*canvas.toDataURL()* 这个方法把canvas绘制的图形生成一幅图片，生成图片后，就能对图片进行相应的操作了。
+
+```html
+<canvas class="test-canvas" width="500" height="300" style="border: 1px solid #d3d3d3">
+    <p>您的浏览器不支持Canvas！</p>
+</canvas>
+<img src="" id="img">
+```
+
+```javascript
+var canvas = document.querySelector(".test-canvas");
+// ......
+var imgTag = document.getElementById('img');
+imgTag.src = canvas.toDataURL();
+```
+
+执行完之后图片标签为：
+
+![](IMGS/canvas-toDataURL.png)
+
+## 15. canvas 动画
+
+canvas 动画实现的基本原理就是结合定时器绘制，并定时清除整个canvas重新绘制。
 
 # # API 
 
-> 提示：API 模块参考 [菜鸟教程](http://www.runoob.com/tags/ref-canvas.html) 
+菜鸟教程：http://www.runoob.com/tags/ref-canvas.html) 
 
-## 1、颜色、样式和阴影
+WebGL中文网：http://www.hewebgl.com/
 
-| 属性                                       | 描述                    |
-| ---------------------------------------- | --------------------- |
-| [fillStyle](http://www.runoob.com/tags/canvas-fillstyle.html) | 设置或返回用于填充绘画的颜色、渐变或模式。 |
-| [strokeStyle](http://www.runoob.com/tags/canvas-strokestyle.html) | 设置或返回用于笔触的颜色、渐变或模式。   |
-| [shadowColor](http://www.runoob.com/tags/canvas-shadowcolor.html) | 设置或返回用于阴影的颜色。         |
-| [shadowBlur](http://www.runoob.com/tags/canvas-shadowblur.html) | 设置或返回用于阴影的模糊级别。       |
-| [shadowOffsetX](http://www.runoob.com/tags/canvas-shadowoffsetx.html) | 设置或返回阴影与形状的水平距离。      |
-| [shadowOffsetY](http://www.runoob.com/tags/canvas-shadowoffsety.html) | 设置或返回阴影与形状的垂直距离。      |
 
-| 方法                                       | 描述                    |
-| ---------------------------------------- | --------------------- |
-| [createLinearGradient()](http://www.runoob.com/tags/canvas-createlineargradient.html) | 创建线性渐变（用在画布内容上）。      |
-| [createPattern()](http://www.runoob.com/tags/canvas-createpattern.html) | 在指定的方向上重复指定的元素。       |
-| [createRadialGradient()](http://www.runoob.com/tags/canvas-createradialgradient.html) | 创建放射状/环形的渐变（用在画布内容上）。 |
-| [addColorStop()](http://www.runoob.com/tags/canvas-addcolorstop.html) | 规定渐变对象中的颜色和停止位置。      |
 
-## 2、线条样式
-
-| [lineCap](http://www.runoob.com/tags/canvas-linecap.html) | 设置或返回线条的结束端点样式。       |
-| ---------------------------------------- | --------------------- |
-| [lineJoin](http://www.runoob.com/tags/canvas-linejoin.html) | 设置或返回两条线相交时，所创建的拐角类型。 |
-| [lineWidth](http://www.runoob.com/tags/canvas-linewidth.html) | 设置或返回当前的线条宽度。         |
-| [miterLimit](http://www.runoob.com/tags/canvas-miterlimit.html) | 设置或返回最大斜接长度。          |
-
-## 3、矩形
-
-| 方法                                       | 描述              |
-| ---------------------------------------- | --------------- |
-| [rect()](http://www.runoob.com/tags/canvas-rect.html) | 创建矩形。           |
-| [fillRect()](http://www.runoob.com/tags/canvas-fillrect.html) | 绘制"被填充"的矩形。     |
-| [strokeRect()](http://www.runoob.com/tags/canvas-strokerect.html) | 绘制矩形（无填充）。      |
-| [clearRect()](http://www.runoob.com/tags/canvas-clearrect.html) | 在给定的矩形内清除指定的像素。 |
-
-## 4、路径
-
-| 方法                                       | 描述                                 |
-| ---------------------------------------- | ---------------------------------- |
-| [fill()](http://www.runoob.com/tags/canvas-fill.html) | 填充当前绘图（路径）。                        |
-| [stroke()](http://www.runoob.com/tags/canvas-stroke.html) | 绘制已定义的路径。                          |
-| [beginPath()](http://www.runoob.com/tags/canvas-beginpath.html) | 起始一条路径，或重置当前路径。                    |
-| [moveTo()](http://www.runoob.com/tags/canvas-moveto.html) | 把路径移动到画布中的指定点，不创建线条。               |
-| [closePath()](http://www.runoob.com/tags/canvas-closepath.html) | 创建从当前点回到起始点的路径。                    |
-| [lineTo()](http://www.runoob.com/tags/canvas-lineto.html) | 添加一个新点，然后在画布中创建从该点到最后指定点的线条。       |
-| [clip()](http://www.runoob.com/tags/canvas-clip.html) | 从原始画布剪切任意形状和尺寸的区域。                 |
-| [quadraticCurveTo()](http://www.runoob.com/tags/canvas-quadraticcurveto.html) | 创建二次贝塞尔曲线。                         |
-| [bezierCurveTo()](http://www.runoob.com/tags/canvas-beziercurveto.html) | 创建三次贝塞尔曲线。                         |
-| [arc()](http://www.runoob.com/tags/canvas-arc.html) | 创建弧/曲线（用于创建圆形或部分圆）。                |
-| [arcTo()](http://www.runoob.com/tags/canvas-arcto.html) | 创建两切线之间的弧/曲线。                      |
-| [isPointInPath()](http://www.runoob.com/tags/canvas-ispointinpath.html) | 如果指定的点位于当前路径中，则返回 true，否则返回 false。 |
-
-## 5、转换
-
-| 方法                                       | 描述                             |
-| ---------------------------------------- | ------------------------------ |
-| [scale()](http://www.runoob.com/tags/canvas-scale.html) | 缩放当前绘图至更大或更小。                  |
-| [rotate()](http://www.runoob.com/tags/canvas-rotate.html) | 旋转当前绘图。                        |
-| [translate()](http://www.runoob.com/tags/canvas-translate.html) | 重新映射画布上的 (0,0) 位置。             |
-| [transform()](http://www.runoob.com/tags/canvas-transform.html) | 替换绘图的当前转换矩阵。                   |
-| [setTransform()](http://www.runoob.com/tags/canvas-settransform.html) | 将当前转换重置为单位矩阵。然后运行 transform()。 |
-
-## 6、文本
-
-| 属性                                       | 描述                    |
-| ---------------------------------------- | --------------------- |
-| [font](http://www.runoob.com/tags/canvas-font.html) | 设置或返回文本内容的当前字体属性。     |
-| [textAlign](http://www.runoob.com/tags/canvas-textalign.html) | 设置或返回文本内容的当前对齐方式。     |
-| [textBaseline](http://www.runoob.com/tags/canvas-textbaseline.html) | 设置或返回在绘制文本时使用的当前文本基线。 |
-
-| 方法                                       | 描述              |
-| ---------------------------------------- | --------------- |
-| [fillText()](http://www.runoob.com/tags/canvas-filltext.html) | 在画布上绘制"被填充的"文本。 |
-| [strokeText()](http://www.runoob.com/tags/canvas-stroketext.html) | 在画布上绘制文本（无填充）。  |
-| [measureText()](http://www.runoob.com/tags/canvas-measuretext.html) | 返回包含指定文本宽度的对象。  |
-
-## 7、图像绘制
-
-| 方法                                       | 描述              |
-| ---------------------------------------- | --------------- |
-| [drawImage()](http://www.runoob.com/tags/canvas-drawimage.html) | 向画布上绘制图像、画布或视频。 |
-
-## 8、像素操作
-
-| 属性                                       | 描述                               |
-| ---------------------------------------- | -------------------------------- |
-| [width](http://www.runoob.com/tags/canvas-imagedata-width.html) | 返回 ImageData 对象的宽度。              |
-| [height](http://www.runoob.com/tags/canvas-imagedata-height.html) | 返回 ImageData 对象的高度。              |
-| [data](http://www.runoob.com/tags/canvas-imagedata-data.html) | 返回一个对象，其包含指定的 ImageData 对象的图像数据。 |
-
-| 方法                                       | 描述                                  |
-| ---------------------------------------- | ----------------------------------- |
-| [createImageData()](http://www.runoob.com/tags/canvas-createimagedata.html) | 创建新的、空白的 ImageData 对象。              |
-| [getImageData()](http://www.runoob.com/tags/canvas-getimagedata.html) | 返回 ImageData 对象，该对象为画布上指定的矩形复制像素数据。 |
-| [putImageData()](http://www.runoob.com/tags/canvas-putimagedata.html) | 把图像数据（从指定的 ImageData 对象）放回画布上。      |
-
-## 9、合成
-
-| 属性                                       | 描述                     |
-| ---------------------------------------- | ---------------------- |
-| [globalAlpha](http://www.runoob.com/tags/canvas-globalalpha.html) | 设置或返回绘图的当前 alpha 或透明值。 |
-| [globalCompositeOperation](http://www.runoob.com/tags/canvas-globalcompositeoperation.html) | 设置或返回新图像如何绘制到已有的图像上。   |
-
-## 10、其他
-
-| 方法            | 描述               |
-| ------------- | ---------------- |
-| save()        | 保存当前环境的状态。       |
-| restore()     | 返回之前保存过的路径状态和属性。 |
-| createEvent() |                  |
-| getContext()  |                  |
-| toDataURL()   |                  |
