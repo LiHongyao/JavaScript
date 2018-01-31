@@ -548,11 +548,17 @@ imgTag.src = canvas.toDataURL();
 
 canvas 动画实现的基本原理就是结合定时器绘制，并定时清除整个canvas重新绘制。
 
-# # API 
+[canvas-block 时钟demo示例](https://lihongyao.github.io/practise/javascript/09.%20canvas-clock/index.html)
 
-菜鸟教程：http://www.runoob.com/tags/ref-canvas.html) 
+# # 参考/资料 
 
-WebGL中文网：http://www.hewebgl.com/
+1. [runoob-canvas](http://www.runoob.com/tags/ref-canvas.html)
+2. [w3school-canvas](http://www.w3school.com.cn/tags/html_ref_canvas.asp)
+3. [Canvas-Tutorial](https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial)
+4. [WebGL](http://www.hewebgl.com/)
+5. [Canvas-demos](https://github.com/supperjet/H5-Animation)
+
+
 
 
 
