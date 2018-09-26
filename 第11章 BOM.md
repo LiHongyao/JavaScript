@@ -42,12 +42,12 @@ window 对象下的属性和方法非常之多，多至现在也没有一份权�
 - **window.innerHeight**：浏览器窗口的可见高度
 - **window.outerWidth**：浏览器窗口的实际宽度（包括浏览器菜单和边框）
 - **window.outerHeight**：浏览器窗口的实际高度（包括浏览器菜单和边框）
-- **window.window.pageXOffsett**：浏览器窗口滚动条水平滚动的距离
+- **window.pageXOffsett**：浏览器窗口滚动条水平滚动的距离
 - **window.pageYOffset**：浏览器窗口滚动条垂直滚动的距离
 
 > 提示：
 >
-> window.pageXOffset 类似于 scrollTop
+> window.pageYOffset 类似于 scrollTop
 >
 > ```
 > document.documentElement.scrollTop || document.body.scrollTop

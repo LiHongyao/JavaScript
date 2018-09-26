@@ -86,7 +86,7 @@ typeof HTMLCollection // "function"
 
 NodeList  实例对象是一个“类似数组”的对象，它的成员是节点对象。
 
-*Node.childNodes*、*document.querySelectorAll()* 返回的都是 NodeList 实例对象。
+Node.childNodes、document.querySelectorAll() 返回的都是 NodeList 实例对象。
 
 ```javascript
 // instanceof 用于判断对象或函数的类型
@@ -104,7 +104,7 @@ parent.childNodes.length // 3
 
 上面代码中，`parent.childNodes` 返回的是一个 NodeList 实例对象。当 `parent` 节点新增一个子节点以后，该对象的成员个数就增加了1。
 
-*document.querySelectorAll* 方法返回的是一个静态集合。DOM内部的变化，并不会实时反映在该方法的返回结果之中。
+document.querySelectorAll 方法返回的是一个静态集合。DOM内部的变化，并不会实时反映在该方法的返回结果之中。
 
 **NodeList** 接口实例对象提供 `length` 属性和数字索引，因此可以像数组那样，使用数字索引取出每个节点，但是它本身并不是数组，不能使用 *pop* 或 *push* 之类数组特有的方法。
 
@@ -372,9 +372,9 @@ document.addEventListener('DOMContentLoaded', function (event) {
 
   在浏览器打开上面网页，将会显示 *hello world*。
 
-  *document.write* 是JavaScript语言标准化之前就存在的方法，现在完全有更符合标准的方法向文档写入内容（比如对**innerHTML** 属性赋值）。所以，除了某些特殊情况，应该尽量**避免使用** *document.write* 这个方法。
+  document.write 是JavaScript语言标准化之前就存在的方法，现在完全有更符合标准的方法向文档写入内容（比如对**innerHTML** 属性赋值）。所以，除了某些特殊情况，应该尽量**避免使用** document.write 这个方法。
 
-  *document.writeln*方法与*write*方法完全一致，除了会在输出内容的尾部添加换行符。
+  document.writeln方法与write方法完全一致，除了会在输出内容的尾部添加换行符。
 
 ```javascript
 document.write(1);
@@ -454,7 +454,7 @@ HTML元素包括标签名和若干个键值对，这个键值对就称为“属�
 
 - **Element.attributes**：该属性返回当前元素所有属性节点的一个类似数组对象。
 
-- **Element.id**：该属性返回指x定元素的id属性，是一个可读可写的属性。
+- **Element.id**：该属性返回指定元素的id属性，是一个可读可写的属性。
 
 - **Element.tagName**：该属性返回指定元素的大写标签名，与 nodeName 属性的值相等。但在事件对象（event）上通常使用tagName更加常见。
 
@@ -523,8 +523,8 @@ HTML元素包括标签名和若干个键值对，这个键值对就称为“属�
   第一个插入参数允许的值如下：
 
   - beforebegin：在当前元素节点的前面。
-  - beforeend：在当前元素节点的里面，插在它的最后一个子元素之后。
   - afterend：在当前元素节点的后面。
+  - beforeend：在当前元素节点的里面，插在它的最后一个子元素之后。
   - afterbegin：在当前元素节点的里面，插在它的第一个子元素之前。
 
 ## 3、替换节点
@@ -549,7 +549,7 @@ HTML元素包括标签名和若干个键值对，这个键值对就称为“属�
 
 # # DOM Text
 
-- **nodeValue**：设置/获取文本值，只有文本节点和注释节点才有 nodeValue 属性，元素节点要获取文本值可通过 *el.firstChild.nodeValue* 获取。
+- **nodeValue**：设置/获取文本值，只有文本节点和注释节点才有 nodeValue 属性，元素节点要获取文本值可通过 el.firstChild.nodeValue 获取。
 - **Element.textContent**：设置/获取当前元素节点及其后代节点文本内容。该属性会忽略标签。
 - **Element.innerText**：设置/获取当前元素节点及其后代节点文本内容。
 

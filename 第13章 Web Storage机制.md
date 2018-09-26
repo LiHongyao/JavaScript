@@ -104,7 +104,7 @@ localStorage.getItem("userInfo");
 
 这个时候我们需要用JSON提供的两个方法来完成“Web Storage”对对象的存储，即：parse()和stringify()方法，使用方法如例：
 
-```javascript
+```js
 var obj = {
 	name: "Henrry Lee",
 	age: 24,
