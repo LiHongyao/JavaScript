@@ -6,6 +6,8 @@
 
 ## 1. 概述
 
+JavaScript是世界上最流行的脚本语言，因为你在电脑、手机、平板上浏览的所有的网页，以及无数基于HTML5的手机App，交互逻辑都是由JavaScript驱动的。
+
 JavaScript是一种轻量级的 **脚本语言**。所谓“脚本语言”，指的是它不具备开发操作系统的能力，而是只用来编写控制其他大型应用程序的“脚本”。
 
 JavaScript是一种 **嵌入式语言**。它本身提供的核心语法，规模相当小，只能用来做一些数学和逻辑运算。JavaScript本身不提供任何与I/O（输入/输出）相关的API，都要靠宿主环境（host）提供，所以JavaScript只合适嵌入更大型的应用程序环境，去调用宿主环境提供的底层API。
@@ -47,31 +49,31 @@ JavaScript的发明目的，就是作为浏览器的内置脚本语言，为网�
 
   随着HTML5的出现，浏览器本身的功能越来越强，不再仅仅能浏览网页，而是越来越像一个平台，JavaScript因此得以调用许多系统功能，比如操作本地文件、操作图片、调用摄像头和麦克风等等。这使得JavaScript可以完成许多以前无法想象的事情。
 
-  ​
+  
 
 - **Node**
 
   Node项目使得JavaScript可以用于开发服务器端的大型项目，网站的前后端都用JavaScript开发已经成为了现实。目前，有越来越多的嵌入式平台能够安装Node.js，于是JavaScript就能为这些平台开发应用程序。
 
-  ​
+  
 
 - **数据库操作**
 
   JavaScript甚至也可以用来操作数据库。NoSQL数据库这个概念，本身就是在JSON（JavaScript Object Notation，JavaScript对象表示法）格式的基础上诞生的，大部分NoSQL数据库允许JavaScript直接操作。基于SQL语言的开源数据库PostgreSQL支持JavaScript作为操作语言，可以部分取代SQL查询语言。
 
-  ​
+  
 
 - **跨移动平台**
 
   JavaScript也正在成为手机应用的开发语言。一般来说，Android平台使用Java语言开发，iOS平台使用Objective-C或Swift语言开发。许多人正在努力，让JavaScript成为各个平台的通用开发语言。PhoneGap项目就是将JavaScript和HTML5打包在一个容器之中，使得它能同时在iOS和Android上运行。Facebook的React Native项目则是将JavaScript写的组件，编译成原生组件，从而使它们具备优秀的性能。Mozilla基金会的手机操作系统Firefox OS，更是直接将JavaScript作为操作系统的平台语言。
 
-  ​
+  
 
 - **内嵌脚本语言**
 
   越来越多的应用程序，将JavaScript作为内嵌的脚本语言，比如Adobe公司的著名PDF阅读器Acrobat、Linux桌面环境GNOME 3。
 
-  ​
+  
 
 - **跨平台的桌面应用程序**
 
@@ -84,8 +86,6 @@ JavaScript的发明目的，就是作为浏览器的内置脚本语言，为网�
 - **学习环境无处不在**
 
   只要有浏览器，就能运行JavaScript程序；只要有文本编辑器，就能编写JavaScript程序。这意味着，几乎所有电脑都原生提供JavaScript学习环境，不用另行安装复杂的IDE（集成开发环境）和编译器。
-
-
 
 - **简单性**
 
@@ -115,13 +115,13 @@ JavaScript的发明目的，就是作为浏览器的内置脚本语言，为网�
 
    JavaScript的标准还在快速进化中，并不断合理化，并添加更适用的语法特性
 
-   ​
+   
 
 - **支持编译运行**
 
     JavaScript语言本身，虽然是一种解释型语言，但是在现代浏览器中，JavaScript都是编译后运行。程序会被高度优化，运行效率接近二进制程序。而且，JavaScript引擎正在快速发展，性能将越来越好。
 
-    ​
+    
 
 - **事件驱动和非阻塞式设计**
 
