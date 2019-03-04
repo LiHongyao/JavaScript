@@ -14,7 +14,7 @@ JavaScript是一种 **嵌入式语言**。它本身提供的核心语法，规�
 
 目前，已经嵌入JavaScript的宿主环境有多种，最常见的环境就是浏览器，另外还有服务器环境，也就是Node项目。
 
-从语法角度看，JavaScript语言是一种 **对象模型语言**。各种宿主环境通过这个模型，描述自己的功能和操作接口，从而通过JavaScript控制这些功能。但是，JavaScript并不是纯粹的“面向对象语言”，还支持函数式编程。这导致几乎任何一个问题，JavaScript都有多种解决方法。
+从语法角度看，JavaScript语言是一种 **面向对象语言**。各种宿主环境通过这个模型，描述自己的功能和操作接口，从而通过JavaScript控制这些功能。但是，JavaScript并不是纯粹的“面向对象语言”，还支持函数式编程。这导致几乎任何一个问题，JavaScript都有多种解决方法。
 
 JavaScript的核心语法部分相当精简，只包括两个部分：基本的语法构造（比如操作符、控制结构、语句）和标准库（就是一系列具有各种功能的对象比如 *Array*、*Date*、*Math* 等）。除此之外，各种宿主环境提供额外的API（即只能在该环境使用的接口），以便JavaScript调用。以浏览器为例，它提供的额外API可以分成三大类。
 
@@ -216,7 +216,7 @@ JavaScript的基本语法和对象体系，是模仿Java而设计的。但是，
 
 ```html
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
@@ -248,7 +248,7 @@ JavaScript的基本语法和对象体系，是模仿Java而设计的。但是，
 ```html
 <!-- index.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
@@ -262,4 +262,7 @@ JavaScript的基本语法和对象体系，是模仿Java而设计的。但是，
 </html>
 ```
 
-> tips：这里建议大家使用外链方式，将js代码独立放置到一个文件中，便于我们后期维护整合优化。-
+> tips：
+>
+> 1. 这里建议大家使用外链方式，将js代码独立放置到一个文件中，便于我们后期维护整合优化。
+> 2. 一般建议将引入脚本的位置放在body结束标签之前
