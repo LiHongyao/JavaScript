@@ -2,7 +2,7 @@
 
 DOM是JavaScript操作网页的接口，全称为 “**文档对象模型** ”（Document Object Model）。它的作用是将网页转为一个JavaScript对象，从而可以用脚本进行各种操作（比如增删内容）。
 
-浏览器会根据DOM模型，将结构化文档（比如HTML和XML）解析成一系列的节点，再由这些节点组成一个树状结构。所有的节点和最终的树状结构，都有规范的对外接口。所以，DOM可以理解成网页的编程接口。DOM有自己的国际标准，目前的通用版本是DOM 3，下一代版本DOM 4正在拟定中。
+浏览器会根据DOM模型，将结构化文档（比如HTML和XML）解析成一系列的节点，再由这些节点组成一个树状结构。所有的节点和最终的树状结构，都有规范的对外接口。所以，DOM可以理解成网页的编程接口。
 
 严格地说，DOM不属于JavaScript，但是操作DOM是JavaScript最常见的任务，而JavaScript也是最常用于DOM操作的语言。本章介绍的就是JavaScript对DOM标准的实现和用法。
 
@@ -14,27 +14,27 @@ DOM的最小组成单位叫做节点（Node）。文档的树形结构（DOM树�
 
 节点的类型有七种：
 
-- **Document**：整个文档树的顶层节点
+- **Document**：整个文档树的顶层节点 
 - **DocumentType**：*doctype* 标签（比如 `<!DOCTYPE html>` ）
-- **Element**：网页的各种HTML标签（比如 `<body>`、`<a>`等）
-- **Attribute**：网页元素的属性（比如 `class="right"` ）
-- **Text**：标签之间或标签包含的文本
-- **Comment**：注释
+- **Element**：网页的各种HTML标签（比如 `<body>`、`<a>`等）*
+- **Attribute**：网页元素的属性（比如 `class="right"` ）*
+- **Text**：标签之间或标签包含的文本*
+- **Comment**：注释 
 - **DocumentFragment**：文档的片段
 
 > 提示：这七种节点都属于浏览器原生提供的节点对象的派生对象，具有一些共同的属性和方法。
 
 我们可通过 nodeName 和 nodeType 属性判断对应节点的名称和类型。
 
-| 类型                     | 描述   | nodeName             | nodeType |
-| ---------------------- | ---- | -------------------- | -------- |
-| ELEMENT_NODE           | 元素节点 | 大写的HTML元素名           | 1        |
-| ATTRIBUTE_NODE         | 属性节点 | 等同于Attr.name（属性名）    | 2        |
-| TEXT_NODE              | 文本节点 | #text                | 3        |
-| COMMENT_NODE           | 注释节点 | #comment             | 8        |
-| DOCUMENT_NODE          | 文档节点 | #document            | 9        |
-| DOCUMENT_FRAGMENT_NODE |      | #document-fragment   | 11       |
-| DOCUMENT_TYPE_NODE     |      | 等同于DocumentType.name | 10       |
+| 类型                   | 描述     | nodeName                  | nodeType |
+| ---------------------- | -------- | ------------------------- | -------- |
+| ELEMENT_NODE *         | 元素节点 | 大写的HTML元素名          | 1        |
+| ATTRIBUTE_NODE *       | 属性节点 | 等同于Attr.name（属性名） | 2        |
+| TEXT_NODE *            | 文本节点 | #text                     | 3        |
+| COMMENT_NODE           | 注释节点 | #comment                  | 8        |
+| DOCUMENT_NODE          | 文档节点 | #document                 | 9        |
+| DOCUMENT_FRAGMENT_NODE |          | #document-fragment        | 11       |
+| DOCUMENT_TYPE_NODE     |          | 等同于DocumentType.name   | 10       |
 
 ##  2、节点树
 
@@ -98,6 +98,7 @@ NodeList 实例对象可能是动态集合，也可能是静态集合。所谓�
 ```javascript
 var parent = document.getElementById('parent');
 parent.childNodes.length // 2
+// 添加子节点
 parent.appendChild(document.createElement('div'));
 parent.childNodes.length // 3
 ```
@@ -123,19 +124,7 @@ var div_list  = document.querySelectorAll('div');
 var div_array = Array.prototype.slice.call(div_list);
 ```
 
-注意，采用上面的方法将 **NodeList** 实例转为真正的数组以后，`div_array` 就是一个静态集合了，不再能动态反映DOM的变化。
-
-另一种方法是通过 *call* 方法，间接在 NodeList 实例上使用数组方法。
-
-```javascript
-var forEach = Array.prototype.forEach;
-
-forEach.call(element.childNodes, function(child){
-  child.parentNode.style.color = '#0F0';
-});
-```
-
-上面代码让数组的 *forEach* 方法在 NodeList 实例对象上调用。注意，Chrome浏览器在 *NodeList.prototype* 上部署了*forEach*方法，所以可以直接使用，但它是非标准的。
+> 注意，采用上面的方法将 **NodeList** 实例转为真正的数组以后，`div_array` 就是一个静态集合了，不再能动态反映DOM的变化。
 
 遍历 NodeList 实例对象的首选方法，是使用 `for` 循环。
 
@@ -147,7 +136,7 @@ for (var i = 0; i < myNodeList.length; ++i) {
 
 不要使用 `for...in` 循环去遍历NodeList实例对象，因为 `for...in` 循环会将非数字索引的 **length** 属性和下面要讲到的 **item** 方法，也遍历进去，而且不保证各个成员遍历的顺序。
 
-NodeList 实例对象的 *item* 方法，接受一个数字索引作为参数，返回该索引对应的成员。如果取不到成员，或者索引不合法，则返回*null*。
+NodeList 实例对象的 *item* 方法，接受一个数字索引作为参数，返回该索引对应的成员。如果取不到成员，或者索引不合法，则返回 `null`。
 
 ```javascript
 nodeItem = nodeList.item(index)
@@ -171,18 +160,18 @@ nodeItem = nodeList[index]
 
 **HTMLCollection** 实例对象与 **NodeList** 实例对象的区别在于：
 
-- a、HTMLCollection实例对象的成员只能是*Element*节点，NodeList 实例对象的成员可以包含其他节点。
-- b、HTMLCollection实例对象都是动态集合，节点的变化会实时反映在集合中。NodeList 实例对象可以是静态集合。
-- c、HTMLCollection实例对象可以用 `id` 属性或 `name` 属性引用节点元素，NodeList 只能使用数字索引引用。
+- HTMLCollection实例对象的成员只能是 Element（元素）节点，NodeList 实例对象的成员可以包含其他节点，比如文本节点和注释节点。
+- HTMLCollection实例对象都是动态集合，节点的变化会实时反映在集合中。NodeList 实例对象可以是静态集合。
+- HTMLCollection实例对象可以用 `id` 属性或 `name` 属性引用节点元素，NodeList 只能使用数字索引引用。
 
-**HTMLCollection** 实例的 *item* 方法，可以根据成员的位置参数（从`0`开始），返回该成员。如果取不到成员或数字索引不合法，则返回*null*。
+**HTMLCollection** 实例的 `item` 方法，可以根据成员的位置参数（从`0`开始），返回该成员。如果取不到成员或数字索引不合法，则返回 `null`。
 
 ```javascript
-var c = document.images;
-var img1 = c.item(1);
+var images = document.images;
+var img = images.item(1);
 
 // 等价于下面的写法
-var img1 = c[1];
+var img = images[1];
 ```
 
 **HTMLCollection** 实例的 *namedItem* 方法根据成员`ID`属性或`name`属性，返回该成员。如果没有对应的成员，则返回`null`。这个方法是 *NodeList* 实例不具有的。
@@ -199,25 +188,25 @@ var elem = document.forms['myForm'];
 
 # # DOM Node
 
-浏览器提供了一个Node对象，所有节点都是Node的实例，因此Node具备的属性与方法，其他节点也都具备。
+浏览器提供了一个Node对象，**所有节点都是Node的实例，因此Node具备的属性与方法，其他节点也都具备。**
 
 - **Node.ownerDocument**
 
   该属性返回当前节点所在的顶层文档对象，即 document 对象。document 对象本身的 ownerDocument 属性，返回 `null`。
 
-- **Node.firstChild & Node.firstElementChild** 
+- **Node.firstChild、Node.firstElementChild** 
 
   获取当前节点的第一个子节点。二者的区别在于前者包括了文本节点和注释节点。
 
-- **Node.lastChild & Node.lastElementChild**
+- **Node.lastChild、Node.lastElementChild**
 
   获取当前节点的最后一个子节点。二者的区别在于前者包括了文本节点和注释节点。
 
-- **Node.nextSibling & Node.nextElementSibling** 
+- **Node.nextSibling、Node.nextElementSibling** 
 
   获取当前节点的下一个同级节点。二者的区别在于前者包括文本节点和注释节点。
 
-- **Node.previousSibling & Node.previousElementSibling**
+- **Node.previousSibling、Node.previousElementSibling**
 
   获取当前节点的上一个同级节点。二者的区别在于前者包括文本节点和注释节点。
 
@@ -249,9 +238,9 @@ var elem = document.forms['myForm'];
 
 # # DOM Dcoument
 
-**document** 节点是文档的根节点，每张网页都有自己的 document 节点。`window.document` 属性就指向这个节点。只要浏览器开始载入HTML文档，这个节点对象就存在了，可以直接调用。获取文档节点的方式如下：
+**document** 节点是文档的顶层节点，每张网页都有自己的 document 节点。`window.document` 属性就指向这个节点。只要浏览器开始载入HTML文档，这个节点对象就存在了，可以直接调用。获取文档节点的方式如下：
 
-- 对于正常的网页，直接使用 document 或 window.document。
+- 对于正常的网页，直接使用 document 或 window.document。*
 - 对于 iframe 载入的网页，使用 iframe 节点的 contentDocument 属性。（了解）
 - 对Ajax操作返回的文档，使用 XMLHttpRequest 对象的 responseXML 属性。（了解）
 - 对于包含某个节点的文档，使用该节点的 ownerDocument 属性。（了解）
@@ -309,101 +298,25 @@ document.activeElement 属性返回当前文档中获得焦点的那个元素。
 - **document.URL**：文档网址
 - **document.domain**：获取域名
 - **document.lastModified**：返回当前文档最后修改的时间戳，格式为字符串
-- **document.title**：文档标题
+- **document.title**：文档标题 *
 - **document.cookie**：浏览器Cookie
 - **document.location**：返回location对象，提供了当前文档的URL信息
 
 > 提示：只需要掌握 document.title 就可以了，其他项我们可以直接通过BOM来操作。
 
-## 4、文档读写
+## 4、节点查询
 
-- **document.open()，document.close()**
+- **document.getElementById()** ：根据id查找元素
 
-  document.open 方法用于新建一个文档，供write方法写入内容。它实际上等于清除当前文档，重新写入内容。不要将此方法与 window.open() 混淆，后者用来打开一个新窗口，与当前文档无关。
+- **document.getElementsByTagName()** ：根据标签名查找元素（了解）
 
-  document.close 方法用于关闭 open方法所新建的文档。一旦关闭，write方法就无法写入内容了。如果再调用 write方法，就等同于又调用open方法，新建一个文档，再写入内容。
+- **document.getElementsByClassName()** ：根据类名找元素
 
-- **document.write()，document.writeln()**
+- **document.getElementsByName()** ：根据name属性值查找元素（了解）
 
-  document.write 方法用于向当前文档写入内容。只要当前文档还没有用close方法关闭，它所写入的内容就会追加在已有内容的后面。
+- **document.querySelector()，document.querySelectorAll()** ：这两个方法接受一个CSS选择器作为参数，返回匹配该选择器的元素节点。二者的区别在于前者指返回一个，后者可以返回多个。
 
-```javascript
-// 页面显示“helloworld”
-document.open();
-document.write('hello');
-document.write('world');
-document.close();
-```
-
-  注意，document.write 会当作HTML代码解析，不会转义。
-
-```javascript
-document.write('<p>hello world</p>');
-```
-
-  如果页面已经解析完成（*DOMContentLoaded*事件发生之后），再调用write方法，它会先调用open方法，擦除当前文档所有内容，然后再写入。
-
-```javascript
-document.addEventListener('DOMContentLoaded', function (event) {
-	document.write('<p>Hello World!</p>');
-});
-
-// 等同于
-
-document.addEventListener('DOMContentLoaded', function (event) {
-    document.open();
-    document.write('<p>Hello World!</p>');
-    document.close();
-});
-```
-
-  如果在页面渲染过程中调用write方法，并不会调用open方法。（可以理解成，open方法已调用，但close方法还未调用）
-
-```html
-<html>
-  <body>
-  		hello
-  <script type="text/javascript">
-   		document.write("world")
-  </script>
-  </body>
-</html>
-```
-
-  在浏览器打开上面网页，将会显示 *hello world*。
-
-  document.write 是JavaScript语言标准化之前就存在的方法，现在完全有更符合标准的方法向文档写入内容（比如对**innerHTML** 属性赋值）。所以，除了某些特殊情况，应该尽量**避免使用** document.write 这个方法。
-
-  document.writeln方法与write方法完全一致，除了会在输出内容的尾部添加换行符。
-
-```javascript
-document.write(1);
-document.write(2);
-// 12
-
-document.writeln(1);
-document.writeln(2);
-// 1
-// 2
-```
-
-  注意，`writeln`方法添加的是ASCII码的换行符，渲染成HTML网页时不起作用，即在网页上显示不出换行。
-
-## 5、节点查询
-
-- **document.getElementById()** ：该方法返回匹配指定 `id` 属性的元素节点。如果没有发现匹配的节点，则返回 `null` 。
-
-- **document.getElementsByTagName()** ：该方法返回所有指定HTML标签的元素，返回值是一个类似数组的 **HTMLCollection** 对象，该对象可以实时反映HTML文档的变化。如果没有任何匹配的元素，就返回一个空集。与getElementsByTagName方法一样，getElementsByClassName方法不仅可以在document对象上调用，也可以在任何元素节点上调用。
-
-- **document.getElementsByClassName()** ：根据类名找元素，返回HTMLCollection 集合类型。
-
-- **document.getElementsByName()** ：该方法用于选择拥有 `name` 属性的HTML元素，返回一个类似数组的对象，因为name属性相同的元素可能不止一个。
-
-- **document.querySelector()，document.querySelectorAll()** ：document.querySelector() 方法接受一个CSS选择器作为参数，返回匹配该选择器的元素节点。如果有多个节点满足匹配条件，则返回第一个匹配的节点。如果没有发现匹配的节点，则返回null。
-
-  document.querySelectorAll() 方法与 querySelector() 用法类似，区别是返回一个NodeList对象，包含所有匹配给定选择器的节点。
-
-  这两个方法都支持复杂的CSS选择器。但是，它们不支持CSS伪元素的选择器（比如`:first-line`和`:first-letter`）和伪类的选择器（比如`:link`和`:visited`），即无法选中伪元素和伪类。
+  > 注意：无法选中伪元素和伪类。
 
 
 ## 6、节点生成
