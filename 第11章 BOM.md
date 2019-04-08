@@ -1,8 +1,8 @@
 # # 概述
 
-  **BOM**（Browers Object Model，浏览器对象模型）是浏览器为JavaScript提供的一个API（Application Programming Interface，应用编程接口），所以它不是原生JavaScript提供的。通过BOM我们可以访问和设置浏览器的一些属性和函数。
+**BOM**（Browers Object Model，浏览器对象模型）是浏览器为JavaScript提供的一个API（Application Programming Interface，应用编程接口），所以它不是原生JavaScript提供的。通过BOM我们可以访问和设置浏览器的一些属性和函数。
 
-  对于BOM的几乎所有操作都依赖于一个全局对象，那就是“**window**”对象。由于它是一个全局对象，所以很多时候在访问它内部的子对象的属性和方法的时候都是可以将window一词省略不写的，如“window.screen”可以直接写成“screen”也能正常访问该子对象。
+对于BOM的几乎所有操作都依赖于一个全局对象，那就是“**window**”对象。由于它是一个全局对象，所以很多时候在访问它内部的子对象的属性和方法的时候都是可以将window一词省略不写的，如“window.screen”可以直接写成“screen”也能正常访问该子对象。
 
 window对象下主要包含了以下子对象：
 
@@ -13,18 +13,18 @@ window对象下主要包含了以下子对象：
 - **navigator**：浏览器信息导航对象
 - **screen**：浏览器屏幕对象
 
-  除了这些属性，window对象还提供了一些方法函数，如：*alert()*、*open()*、*close()*、*setTimeout()*、*clearTimeout()*、*setIntelval()*、*clearInterval()*等。
+除了这些属性，window对象还提供了一些方法，如：*alert()*、*open()*、*close()*、*setTimeout()*、*clearTimeout()*、*setIntelval()*、*clearInterval()*等。
 
-  BOM到现在都没有一个组织对其进行标准化，JavaScript语法的标准化组织是ECMA，DOM的标准化组织是W3C，但这并不妨碍浏览器厂商们对其的支持。随着Web编程技术的发展，浏览器厂商在很多BOM的内容上都达成了共识，这使得很多没有标准的属性和方法也可以在大多数现代浏览器上正常的使用。
+BOM到现在都没有一个组织对其进行标准化，JavaScript语法的标准化组织是ECMA，DOM的标准化组织是W3C，但这并不妨碍浏览器厂商们对其的支持。随着Web编程技术的发展，浏览器厂商在很多BOM的内容上都达成了共识，这使得很多没有标准的属性和方法也可以在大多数现代浏览器上正常的使用。
 
-  在全局环境下，window对象以下几种表示法：
+在全局环境下，window对象以下几种表示法：
 
 - **window**
 - **this**
 - **self**
-- **fremes**
+- **frames**
 
-  它们在全局环境下都是指向window对象
+它们在全局环境下都是指向window对象
 
 ![](IMGS/get_window.jpeg)
 
@@ -32,18 +32,20 @@ window对象下主要包含了以下子对象：
 
 window 对象下的属性和方法非常之多，多至现在也没有一份权威的统计表明window下到底有多少个属性和方法，这个只需要打开Google Chrome（主要推荐，但也可以是其它非IE系列的主流浏览器）的控制台，然后输入“window.”（后面需要加上“点”）就可以看到window下的属性了，而且里面很多属性下还包含二级、三级甚至更多级的属性。也就是说想要完全去掌握window下的所有属性和方法肯定是不现实的，我们只需要掌握一些常用的，对我们实际项目开发中有一定帮助的即可。接下来我们我们开始对window的这些主要属性和方法进行讲解。
 
-# # 窗口属性
+# # 窗口属性 *
 
 用于描述当前浏览器窗口的相关属性，这对于现在这个屏幕小到“160x160”（如智能手表），大到“4096×2160”（4K屏幕）的互联网时代来说，要做到同一个项目在不同分辨率屏幕的设备上做出响应式的设计一直是前端开发工程师头痛的问题。虽然说现在已经有很多CSS框架都或多或少的能帮上一些忙，但它们都有各自的局限性，而且还存在一些学习成本。但是如果能掌握原生JavaScript一些关于浏览器窗口的属性，对于我们做响应式设计也有不小的帮助。
 
 浏览器窗口相关的主要属性有以下（数值表示的单位统一为像素）:
 
-- **window.innerWidth**：浏览器窗口的可见宽度
-- **window.innerHeight**：浏览器窗口的可见高度
-- **window.outerWidth**：浏览器窗口的实际宽度（包括浏览器菜单和边框）
-- **window.outerHeight**：浏览器窗口的实际高度（包括浏览器菜单和边框）
-- **window.pageXOffsett**：浏览器窗口滚动条水平滚动的距离
-- **window.pageYOffset**：浏览器窗口滚动条垂直滚动的距离
+| 属性        | 描述                                         |
+| ----------- | -------------------------------------------- |
+| innerWith   | 浏览器窗口的可见宽度                         |
+| innerHeight | 浏览器窗口的可见高度                         |
+| outerWidth  | 浏览器窗口的实际宽度（包括浏览器菜单和边框） |
+| outerHeight | 浏览器窗口的实际高度（包括浏览器菜单和边框） |
+| pageXOffset | 浏览器窗口滚动条水平滚动的距离               |
+| pageYOffset | 浏览器窗口滚动条垂直滚动的距离               |
 
 > 提示：
 >
@@ -62,9 +64,9 @@ body::-webkit-scrollbar {
 }
 ```
 
-# # 窗口方法
+# # 窗口方法 *
 
-## 1、window.open() 和 window.close()
+## 1、open()  & close()
 
 window.open() 方法用于打开一个新的窗口（或标签页），而window.close() 用于关闭当前窗口，他们同样可以将方法前的window对象省略不写，也能达到同样的方法效果。
 
@@ -103,35 +105,33 @@ window.open() 方法用于打开一个新的窗口（或标签页），而window
 
   在浏览器历史中替换或新建记录，为一个布尔值。true为替换，false为新建。
 
-  我们来看一个示例：
+我们来看一个示例：
 
 ```html
-<!-- HTML部分 -->
 <form>
 	<button type="button" id="blank">新窗口</button>
 	<button type="button" id="openBaidu">百度</button>
 	<button type="button" id="openTencent">腾讯</button>
 </form>
-
-<!-- JavaScript部分 -->
-<script type="text/javascript">
-	var blank       = document.getElementById('blank');
-	var openBaidu   = document.getElementById('openBaidu');
-	var openTencent = document.getElementById('openTencent');
-
-	blank.onclick = function() {
-		window.open();
-	}
-	openBaidu.onclick = function() {
-		window.open("https://www.baidu.com", "百度", "width=900, height=500, top=100,left=100");
-	}
-	openTencent.onclick = function() {
-		window.open("http://www.qq.com/", "腾讯", "channelmode=yes, fullscreen=yes");
-	}
-</script>
 ```
 
-## 2、window.print()
+```js
+var blank       = document.getElementById('blank');
+var openBaidu   = document.getElementById('openBaidu');
+var openTencent = document.getElementById('openTencent');
+blank.onclick = function() {
+    window.open();
+}
+openBaidu.onclick = function() {
+    window.open("https://www.baidu.com", "百度", "width=900, height=500, top=100,left=100");
+}
+openTencent.onclick = function() {
+    window.open("http://www.qq.com/", "腾讯", "channelmode=yes, fullscreen=yes");
+}
+	
+```
+
+## 2、print()
 
 在PC端很多网站的《XXX服务条款》或需要用传统笔来填写和签名的表格都会有一个“打印”按钮，用于连接有打印机的设备打印当前的页面。这个时候只需要简单一句代码即可实现，如例：
 
@@ -141,31 +141,28 @@ window.open() 方法用于打开一个新的窗口（或标签页），而window
 
 在点击了绑定 `print()` 按钮之后只需要按照平时页面打印的常规设置即可使用打印机进行打印。这里需要注意的一个小细节是，在打印页面最上方会有两段小的文字，一个是当前电脑上的月份和日期，后面一个是写在HTML的\<head>标签里\<title>标签内的文本内容，可以根据需要设置。
 
-## 3、window.getSelection()
+## 3、getSelection() 
 
 `getSelection()` 方法返回一个 **Selection** 对象，表示用户现在选中的文本。而用这个方法的 `toString()` 方法可以用于返回被选中的文本。我们来通过一个简单的示例来了解该方法的实际运用：
 
 ```html
-<!-- HTML部分 -->
 <div id="selText">
 	<pre>曾经沧海难为水，除却巫山不是云。</pre>
 	<pre>取次花丛懒回顾，半缘修道半缘君。</pre>
 </div>
 <p id="selDisplay">您选中的内容是：</p>
+```
 
-<!-- JavaScript部分 -->
-<script type="text/javascript">
-	var oDiv = document.getElementById('selText');
-	var oSel = document.getElementById('selDisplay');
-
-	oDiv.onmouseup = function() {
-        // 获取选中对象
-		var selObj = getSelection();
-        // 将选中对象转为字符串
-		var selTxt = selObj.toString();
-		oSel.innerHTML = `您选中的内容是：<b>“${selTxt}”</b>`;
-	}
-</script>
+```js
+var oDiv = document.getElementById('selText');
+var oSel = document.getElementById('selDisplay');
+oDiv.onmouseup = function() {
+    // 获取选中对象
+    var selObj = getSelection();
+    // 将选中对象转为字符串
+    var selTxt = selObj.toString();
+    oSel.innerHTML = "您选中的内容是：<b>“" + selTxt + "”</b>";
+}
 ```
 
 示例中使用了一个 `mouseup` 事件来激活用户选择文本的操作。
@@ -230,22 +227,29 @@ window.open() 方法用于打开一个新的窗口（或标签页），而window
 
 在Ajax不盛行的年代，\<iframe>标签是在页面内嵌入网站的最好选择，但随着JavaScript相关编程技术的高速发展，使用\<iframe>标签嵌套子页面的形式已经开始不被推荐，而是用Ajax的异步加载的形式去请求“ 文档片段 ”，这样可以使得页面不需要再去加载子页面内的整个css和js等文件，和一些不必要的标签（包括整个\<head>标签和文档声明）。这样一来就使得页面加载的速度得到很大提升，页面也不会因为跳转刷新出现短暂白屏的情况，从而使得用户体验得到提升。不需要页面跳转，网站所有功能都通过一个页面完成的页面现在的术语叫法为“*SPA*”（single page application，译为：单页面应用程序。也有叫“SPWA”，其中的“W”表示“web”），是现在Web互联网应用开发的一个主流趋势。
 
-# # 屏幕对象 screen
+# # 屏幕对象 screen 
 
-屏幕对象相关属性都是只读的，它们返回浏览器相对于当前计算机屏幕的数据信息。
-
-screen对象是用于描述当前浏览器相对于屏幕信息的主要对象，所含属性如下：
+屏幕对象相关属性都是只读的，它们返回浏览器相对于当前计算机屏幕的数据信息。screen对象是用于描述当前浏览器相对于屏幕信息的主要对象，所含属性如下：
 
 ![](IMGS/screen.jpeg)
 
-其中availWidth和availHeight表示的是当前的浏览器窗口相对于屏幕而言的可用宽度和高度，而colorDepth和pixelDepth表示的是颜色深度和像素深度这些色彩图形学上的东西。
+|             | -                                |
+| ----------- | -------------------------------- |
+| availWidth  | 览器窗口相对于屏幕而言的可用宽度 |
+| availHeight | 览器窗口相对于屏幕而言的可用高度 |
+| colorDepth  | 颜色深度                         |
+| pixelDepth  | 像素深度                         |
+| width       | 屏幕宽度                         |
+| height      | 屏幕高度                         |
 
 和屏幕相关的还有以下属性：
 
-- **screenLeft**：返回当前浏览器窗口距离屏幕左侧的像素数值
-- **screenTop**：返回当前浏览器窗口距离屏幕上侧的像素数值
-- **screenX**：作用和screenLeft相同
-- **screenY**：作用和screenTop相同
+| 属性       | 描述                                     |
+| ---------- | ---------------------------------------- |
+| screenLeft | 返回当前浏览器窗口距离屏幕左侧的像素数值 |
+| screenTop  | 返回当前浏览器窗口距离屏幕上侧的像素数值 |
+| screenX    | 作用和screenLeft相同                     |
+| screenY    | 作用和screenTop相同                      |
 
 之所以出现这样同功能的属性归根到底，还是因为BOM一直没有一个标准造成的，根据资料显示支持screenLeft和screenTop的浏览器有：IE、Chrome、Safari、Opera，但Firxfox不支持。而支持screenX和screenY的浏览器有：Firxfox、Chrome、Safari、Opera，但IE不支持。
 
@@ -311,7 +315,7 @@ function testIPhone() {
   ![](IMGS/part_10_12.jpg)
 
   若在PC端判断当前的浏览器厂商也提供了一个属性，就是“navigator.*vendor*”。虽然这个属性得到了现在主流浏览器的支持，但除了谷歌会返回“Google Inc.”的字符串结果外，其它浏览器目前返回的仍然是一个空字符串（以Google Chrome 57版本同期时段为例），相信以后更多浏览器厂商会加上这个信息。
-# # 位置对象 location
+# # 位置对象 location *
 
 该对象同样属于window对象中的一个子对象，它用于描述当前页面的地址信息。首先我们拿百度首页来做这个对象的测试，简单观察该对象的相关属性属性。
 
@@ -411,7 +415,7 @@ function testIPhone() {
 
   该方法的使用和assign()一样，区别是该方法不会留下历史记录。因为从名称可以大概明白它的实现方式是用一个页面“替换”掉当前的Web页面，这样不会留下历史记录，即通过点击浏览器的返回按钮无法回到之前的页面。
 
-# # 历史对象 history
+# # 历史对象 history *
 
 浏览器有一个history对象，这个对象用于保存页面浏览通过超链接或程序链接跳转的记录，通常会将其直译为“*历史记录*”对象。首先，按照我们“一贯的作风”，将这个对象在浏览器的控制台进行一次输出观察。
 

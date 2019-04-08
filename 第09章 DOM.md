@@ -319,7 +319,7 @@ document.activeElement 属性返回当前文档中获得焦点的那个元素。
   > 注意：无法选中伪元素和伪类。
 
 
-## 6、节点生成
+## 5、节点生成
 
   以下方法可以用于生成DOM节点：
 
@@ -338,11 +338,11 @@ HTML元素包括标签名和若干个键值对，这个键值对就称为“属�
 
   元素属性集合，`Element.attributes[idx]` 返回属性节点对象。属性节点对象有 `name` 和 `value` 属性，*name* 属性用于访问属性节点对象名，该属性只读。*value* 属性用于访问或设置该属性节点对象值。
 
-- **Element.getAttribute()**
+- **Element.getAttribute()** *
 
   该方法返回当前元素节点的指定属性。如果指定属性不存在，则返回null。参数为指定的属性名称。
 
-- **Element.setAttribute()**
+- **Element.setAttribute()** *
 
   该方法用于为当前元素节点新增属性。如果同名属性已存在，则相当于编辑已存在的属性。该方法含有两个参数，第一个参数表示属性名，第二个参数表示需要对属性设置的值。
 
@@ -350,40 +350,40 @@ HTML元素包括标签名和若干个键值对，这个键值对就称为“属�
 
   该方法用于为当前元素节点新增属性，参数为通过 *document.createAttribute()* 创建的属性节点。
 
-- **Element.hasAttribute()**
+- **Element.hasAttribute()** *
 
   该方法返回一个布尔值，表示当前元素节点是否包含指定属性。参数为指定的属性名称。
 
-- **Element.removeAttribute()**
+- **Element.removeAttribute()** *
 
   该方法用于移除属性节点。
 
-- **dataset属性**
+- **dataset属性** *
 
   dataset 属性用于获取或设置用户自定义的属性名（data-*）,该属性设置属性名和 `setAttribute()` 方法不同，它是通过赋值的方式实现的。
 
 
 # # DOM Element
 
-- **Element.attributes**：该属性返回当前元素所有属性节点的一个类似数组对象。
+- **Element.attributes**：该属性返回当前元素所有属性节点的一个类似数组对象。*（了解）*
 
 - **Element.id**：该属性返回指定元素的id属性，是一个可读可写的属性。
 
-- **Element.tagName**：该属性返回指定元素的大写标签名，与 nodeName 属性的值相等。但在事件对象（event）上通常使用tagName更加常见。
+- **Element.tagName**：该属性返回指定元素的大写标签名，与 nodeName 属性的值相等。但在事件对象（event）上通常使用tagName更加常见。*（了解）*
 
 - **Element.innerHTML**：该属性返回该元素包含的HTML代码。该属性可读写，常用来设置某个Element节点的内容。如果将该属性设为空字符串，等于删除了它包含的所有节点。
 
-- **Element.outerHTML**：该属性返回一个字符串，内容为指定元素节点的所有HTML代码，包括它自身和包含的所有子元素。该属性是同样是可读可写的，对它进行赋值，等于替换掉当前元素。但是如果该Element节点已经被赋值给一个变量了，在使用outerHTML替换原来的标签后，之前的变量值还是能够访问，也就是说被替换掉的内容依然保存于内存。(了解)
+- **Element.outerHTML**：该属性返回一个字符串，内容为指定元素节点的所有HTML代码，包括它自身和包含的所有子元素。该属性是同样是可读可写的，对它进行赋值，等于替换掉当前元素。但是如果该Element节点已经被赋值给一个变量了，在使用outerHTML替换原来的标签后，之前的变量值还是能够访问，也就是说被替换掉的内容依然保存于内存。*（了解）*
 
-- **Element.matches()**：该方法用于匹配当前的Element节点是否匹配方法参数内的CSS选择器字符串，CSS选择器必须是完整的选择符（如id前需要加上“#”，class前面要加上“.”，属性选择器要用“[]”括起来等）。它返回的是一个布尔值。
+- **Element.matches()**：该方法用于匹配当前的Element节点是否匹配方法参数内的CSS选择器字符串，CSS选择器必须是完整的选择符（如id前需要加上“#”，class前面要加上“.”，属性选择器要用“[]”括起来等）。它返回的是一个布尔值。*（了解）*
 
 - **Element.scrollIntoView()**
 
-  该方法滚动当前元素，进入浏览器的可见区域，类似于设置window.location.hash的效果。
+  该方法滚动当前元素，进入浏览器的可见区域。
 
   该方法可以接受一个布尔值作为参数。如果为true，表示元素的顶部与当前区域的可见部分的顶部对齐（前提是当前区域可滚动）；如果为false，表示元素的底部与当前区域的可见部分的尾部对齐（前提是当前区域可滚动）。如果没有提供该参数，默认为true。
 
-- **Element.focus()**
+- **Element.focus()** *（了解）*
 
   该方法可以让元素获得焦点。用户使用键盘Tab键可以切换获得焦点的元素，都可以使用该方法来获得焦点。
 
@@ -391,7 +391,7 @@ HTML元素包括标签名和若干个键值对，这个键值对就称为“属�
 
   该方法返回一个布尔值，表示当前节点是否有子节点。
 
-- **Element.cloneNode()** 
+- **Element.cloneNode()**  
 
   该方法用于克隆一个节点。它接受一个布尔值作为参数，表示是否同时克隆子节点，默认是 false，即不克隆子节点。克隆一个节点之后，DOM树有可能出现两个有相同ID属性的HTML元素，这时应该修改其中一个HTML元素的ID属性。
 
@@ -399,15 +399,15 @@ HTML元素包括标签名和若干个键值对，这个键值对就称为“属�
 
   该方法接受一个节点作为参数，返回一个布尔值，表示参数节点是否为当前节点的后代节点。需要注意的是，如果将当前节点传入contains方法，也会返回true。
 
-- **Element.isEqualNode()**
+- **Element.isEqualNode()** *（了解）*
 
   该方法返回一个布尔值，用于检查两个节点是否相等。所谓相等的节点，指的是两个节点的类型相同、属性相同、子节点相同。
 
-- **Element.normalize()**  
+- **Element.normalize()**   *（了解）*
 
   该方法用于清理当前节点内部的所有Text节点。它会去除空的文本节点，并且将毗邻的文本节点合并成一个。
 
-## 1、插入节点
+## 1、插入节点 *
 
 - **Element.appendChild()**
 
@@ -425,7 +425,7 @@ HTML元素包括标签名和若干个键值对，这个键值对就称为“属�
 
   该方法用于将某个节点插入当前节点的指定位置。它接受两个参数，第一个参数是所要插入的节点，第二个参数是当前节点的一个子节点，新的节点将插在这个节点的前面。该方法返回被插入的新节点。
 
-  如果*insertBefore()*方法的第二个参数为*null*，则新节点将插在当前节点的最后位置，即变成最后一个子节点。如果所要插入的节点是当前DOM现有的节点，则该节点将从原有的位置移除，插入新的位置。
+  如果*insertBefore()*方法的第二个参数为 `null`，则新节点将插在当前节点的最后位置，即变成最后一个子节点。如果所要插入的节点是当前DOM现有的节点，则该节点将从原有的位置移除，插入新的位置。
 
   由于不存在insertAfter()方法，如果要插在当前节点的某个子节点后面，可以用insertBefore方法结合nextSibling属性模拟。
 
@@ -437,10 +437,10 @@ HTML元素包括标签名和若干个键值对，这个键值对就称为“属�
 
   - beforebegin：在当前元素节点的前面。
   - afterend：在当前元素节点的后面。
-  - beforeend：在当前元素节点的里面，插在它的最后一个子元素之后。
   - afterbegin：在当前元素节点的里面，插在它的第一个子元素之前。
+  - beforeend：在当前元素节点的里面，插在它的最后一个子元素之后。
 
-## 3、替换节点
+## 3、替换节点 *
 
 - **Element.replaceWith()**
 
@@ -450,7 +450,7 @@ HTML元素包括标签名和若干个键值对，这个键值对就称为“属�
 
   该方法用于将一个新的节点，替换当前节点的某一个子节点。它接受两个参数，第一个参数是用来替换的新节点，第二个参数将要被替换走的子节点。它返回被替换走的那个节点。
 
-## 4、移除节点
+## 4、移除节点 *
 
 - **Element.remove()**
 
@@ -460,19 +460,18 @@ HTML元素包括标签名和若干个键值对，这个键值对就称为“属�
 
   该方法接受一个子节点作为参数，用于从当前节点移除该子节点。它返回被移除的子节点。
 
-# # DOM Text
+# # DOM Text *
 
 - **nodeValue**：设置/获取文本值，只有文本节点和注释节点才有 nodeValue 属性，元素节点要获取文本值可通过 el.firstChild.nodeValue 获取。
 - **Element.textContent**：设置/获取当前元素节点及其后代节点文本内容。该属性会忽略标签。
-- **Element.innerText**：设置/获取当前元素节点及其后代节点文本内容。
 
-# # DOM Style
+# # DOM Style *
 
 每一个网页元素对应一个DOM节点对象。这个对象的 **style** 属性可以直接操作，用来读写行内CSS样式。style对象的属性值都是字符串，设置时必须包括单位，但是不含规则结尾的分号。比如，`divStyle.width`不能写为`100`，而要写为`100px`。
 
 ```javascript
 var el = document.getElementById('div');
-el.style.width = '100px';
+el.style.width  = '100px';
 el.style.height = '100px';
 el.style.backgroundColor = 'red';
 ```
@@ -486,7 +485,7 @@ el.style.cssText = 'width:100px; height:100px; background-color:red;'
 
 > 提示：我们可以使用 `document.body.style.CSS样式属性名` 或 `document.body.style["CSS样式属性名"]` 的方式来检测当前的浏览器是否支持某一CSS样式，只要返回的值是一个非undefined的值，就说明当前浏览器是支持该CSS样式的。
 
-# # DOM Class
+# # DOM Class *
 
 每个Element节点对象都具有两个关于Class的属性：className 和 classList。
 
@@ -500,9 +499,9 @@ el.style.cssText = 'width:100px; height:100px; background-color:red;'
 
 classList  对象有下列方法：
 
-- **add()**：增加一个class。
-- **remove()**：移除一个class。
-- **contains()**：检查当前元素是否包含某个class。
+- **add()**：增加一个class。 *
+- **remove()**：移除一个class。 *
+- **contains()**：检查当前元素是否包含某个class。 *
 - **toggle()**：将某个class移入或移出当前元素。
 - **item()**：返回指定索引位置的class。
 - **toString()**：将class的列表转为字符串。
