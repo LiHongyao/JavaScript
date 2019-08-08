@@ -161,16 +161,17 @@ document.styleSheets
 // 12. 获取页面所有的<embeds>
 document.embeds
 // 13. 获取/设置网页标题
-document.title
+document.title *
 ```
 
-# 四、节点操作
+# 四、节点操作 *
 
 ## 1、创建节点
 
 ```js
 // 创建节点
 var el = document.createElement("a");
+var el = "<div class='box'>CHINA</div>";
 ```
 
 ## 2、操作属性
@@ -285,6 +286,8 @@ if(el.style.color == undefined) {
 }
 ```
 
+> 提示：通过脚本添加/读取的样式是行内样式。
+
 ## 7、替换节点
 
 ```js
@@ -304,7 +307,7 @@ el.remove();
 parent.removeChild(el);
 ```
 
-# 五、节点其他信息
+# 五、补充知识
 
 ```js
 // 01. 获取元素的id
@@ -331,22 +334,90 @@ el.isEqualNode();
 
 > 了解
 
-# 六、拓展
+# 六、表单操作
 
-## 1、获取非行间样式
+```js
+// 1. 获取输入框输入的值
+input.value
+
+// 2. 获取单选值
+radios.forEach(function(radio) {
+    radio.onchange = function() {
+        console.log(this.value);
+    }
+});
+
+// 3. 获取select选中值
+// - 单选
+select.value
+// - 多选
+select.selectedOptions
+```
+
+# 七、拓展知识
+
+## 1、获取非行间样式 *
 
 ```javascript
-function getStyle(obj, attr) {
+function getStyle(el, attr) {
 	// 兼容IE
-	if (obj.currentStyle) {
-		return obj.currentStyle[attr];
+	if (el.currentStyle) {
+		return el.currentStyle[attr];
 	}else {
-		return getComputedStyle(obj, null)[attr];
+		return getComputedStyle(el, null)[attr];
 	}
 }
 ```
 
-## 2、DOM 性能优化
+## 2、动态加载页面元素 *
+
+在实际开发中，我们需要动态加载页面元素，首先我们需要在html页面中准备一个容器，比如列表：
+
+```html
+<ul class="list"></ul>
+```
+
+然后在脚本中根据数据动态加载`li`标签并添加至`ul`列表内部，具体实现如下：
+
+```js
+// 1. 数据封装（模拟后台返回的数据结构）
+var data = [
+    {
+        "name": "李白",
+        "position": "刺客",
+        "skill": "青莲剑歌",
+        "exp": 500
+    },
+    {
+        "name": "貂蝉",
+        "position": "刺客/法师",
+        "skill": "绽·风华",
+        "exp": 350
+    },
+    {
+        "name": "鲁班",
+        "position": "射手",
+        "skill": "空中支援",
+        "exp": 800
+    }
+];
+// 2. 获取容器
+var list = document.querySelector(".list");
+// 3. 遍历数据拼接li标签
+var htmlStr = "";
+data.forEach(function(hero) {
+    htmlStr += `<li>
+        <p class="name">英雄：${hero.name}</p>
+        <p class="position">定位：${hero.position}</p>
+        <p class="skill">技能：${hero.skill}</p>
+        <p class="exp">熟练度：${hero.exp}</p>
+    </li>`
+})
+// 4. 将拼出出来的标签呈现在页面上
+list.innerHTML = htmlStr;
+```
+
+## 3、DOM 性能优化
 
 - [高频dom操作和页面性能优化探索](https://feclub.cn/post/content/dom)
 - 通过修改 class 更新样式
