@@ -203,7 +203,7 @@ el.className;
 // - 移除类名
 el.className = "";
 
-// 2. 通过classList操作类名
+// 2. 通过classList操作类名 
 // - 添加类名 *
 el.classList.add("link");
 el.classList.add("flag");
