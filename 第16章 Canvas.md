@@ -7,27 +7,21 @@ Canvas是HTML5新增的组件，它就像一块幕布，可以用JavaScript在�
 一个Canvas定义了一个指定尺寸的矩形框，在这个范围内我们可以随意绘制：
 
 ```html
-<canvas id="test-canvas" width="500" height="300"></canvas>
+<canvas id="canvas" width="500" height="300"></canvas>
 ```
 
 由于浏览器对HTML5标准支持不一致，所以，通常在 `<canvas>` 内部添加一些说明性HTML代码，如果浏览器支持Canvas，它将忽略 `<canvas>` 内部的HTML，如果浏览器不支持Canvas，它将显示 `<canvas>` 内部的HTML：
 
 ```html
-<canvas id="test-stock" width="500" height="300">
-    <p>Current Price: 25.51</p>
+<canvas id="canvas" width="500" height="300">
+    <p>浏览器不支持 Canvas！</p>
 </canvas>
 ```
 
 在使用Canvas前，用 `canvas.getContext` 来测试浏览器是否支持Canvas：
 
-```html
-<canvas id="test-canvas" width="500" heigth="300">
-    <p>你的浏览器不支持Canvas</p>
-</canvas>
-```
-
 ```javascript
-var canvas = document.getElementById('test-canvas');
+let canvas = document.querySelector('#canvas');
 if (canvas.getContext) {
     console.log('你的浏览器支持Canvas!');
 } else {
@@ -38,13 +32,13 @@ if (canvas.getContext) {
 `getContext('2d') ` 方法让我们拿到一个 **CanvasRenderingContext2D** 对象，所有的绘图操作都需要通过这个对象完成。
 
 ```javascript
-var ctx = canvas.getContext('2d');
+let ctx = canvas.getContext('2d');
 ```
 
 如果需要绘制3D怎么办？HTML5还有一个WebGL规范，允许在Canvas中绘制3D图形：
 
 ```javascript
-gl = canvas.getContext("webgl");
+let ctx = canvas.getContext("webgl");
 ```
 
 本节我们只专注于绘制2D图形。
@@ -74,7 +68,7 @@ Canvas元素绘制图像的时候有两种方法，分别是
 HTML 基本结构如下，示例中我将统一使用这个画布。
 
 ```html
-<canvas class="test-canvas" width="500" height="300" style="border: 1px solid #d3d3d3">
+<canvas class="canvas" width="500" height="300" style="border: 1px solid #d3d3d3">
     <p>您的浏览器不支持Canvas！</p>
 </canvas>
 ```
@@ -105,16 +99,14 @@ HTML 基本结构如下，示例中我将统一使用这个画布。
 - *context.measureText(text)*：计算字体长度
 
 ```javascript
-// 获取DOM元素
-var canvas = document.querySelector(".test-canvas");
-// 获取上下文（画布）
-var ctx    = canvas.getContext("2d");
+let canvas = document.querySelector('#canvas');
+let context = canvas.getContext('2d');
 
-ctx.strokeStyle = "blue";
-ctx.font = "italic 36px 微软雅黑";
-ctx.textAlign = "center";
-ctx.textBaseline = "middle";
-ctx.strokeText("Hello, world!", 250, 150);
+context.strokeStyle='blue';
+context.font = 'italic 36px 微软雅黑';
+context.textAlign = 'center';
+context.textBaseline = 'middle';
+context.strokeText('Hello, world!', 250, 150);
 ```
 
 ![](IMGS/canvas-font.png)
@@ -125,16 +117,14 @@ ctx.strokeText("Hello, world!", 250, 150);
 - 绘制矩形：*strokeRect(x,y,width,height)*
 
 ```javascript
-var canvas = document.querySelector(".test-canvas");
-var ctx    = canvas.getContext("2d");
+let canvas = document.querySelector('#canvas');
+let context = canvas.getContext('2d');
 
-// 绘制
-ctx.strokeStyle = "#000";
-ctx.strokeRect(50, 75, 175, 150);
+context.fillStyle='#000';
+context.strokeStyle='#333';
 
-// 填充
-ctx.fillStyle = "#333";
-ctx.fillRect(275, 75, 175, 150);
+context.fillRect(50, 75, 175, 150);
+context.strokeRect(275, 75, 175, 150);
 ```
 
 ![](IMGS/canvas-rect.png)
@@ -144,17 +134,16 @@ ctx.fillRect(275, 75, 175, 150);
 清除矩形区域：*context.clearRect(x,y,width,height)*
 
 ```javascript
-var canvas = document.querySelector(".test-canvas");
-var ctx    = canvas.getContext("2d");
+let canvas = document.querySelector('#canvas');
+let context = canvas.getContext('2d');
 
-ctx.strokeStyle = "#000";
-ctx.strokeRect(50, 75, 175, 150);
+context.fillStyle='#000';
+context.strokeStyle='#333';
 
-ctx.fillStyle = "#333";
-ctx.fillRect(275, 75, 175, 150);
+context.fillRect(50, 75, 175, 150);
+context.strokeRect(275, 75, 175, 150);
 
-// 清除矩形区域
-ctx.clearRect(175, 110,150, 80);
+context.clearRect(175, 110,150, 80);
 ```
 
 ![](IMGS/canvas-clearRect.png)
@@ -167,6 +156,7 @@ ctx.clearRect(175, 110,150, 80);
 
 - `x`：圆心x坐标
 - `y`：圆心y坐标
+- `radius`：半径
 - `starAngle`：开始角度
 - `endAngle`：结束角度
 - `anticlockwise`：是否逆时针（ *true* 为逆时针，*false* 为顺时针）
@@ -174,21 +164,20 @@ ctx.clearRect(175, 110,150, 80);
 ![](IMGS/canvas-arc-1.png)
 
 ```javascript
-var canvas = document.querySelector(".test-canvas");
-var ctx    = canvas.getContext("2d");
+let canvas = document.querySelector('#canvas');
+let context = canvas.getContext('2d');
 
-ctx.beginPath();
-ctx.arc(125, 150, 75, 0, 2 * Math.PI, false);
-ctx.closePath();
-ctx.fillStyle = "#333";
-ctx.fill();
+context.beginPath();
+context.arc(125, 150, 75, 0, 2 * Math.PI, false);
+context.closePath();
+context.fillStyle = "#333";
+context.fill();
 
-
-ctx.beginPath();
-ctx.arc(325, 150, 75, 0, 45, true);
-ctx.strokeStyle = "#333";
-ctx.closePath();
-ctx.stroke()
+context.beginPath();
+context.arc(325, 150, 75, 0, 45, true);
+context.strokeStyle = "#333";
+context.closePath();
+context.stroke()
 ```
 
 ![](IMGS/canvas-arc-2.png)
@@ -205,20 +194,19 @@ ctx.stroke()
 每次lineTo后如果没有moveTo，那么下次lineTo的开始点为前一次lineTo的结束点。
 
 ```javascript
-var canvas = document.querySelector(".test-canvas");
-var ctx    = canvas.getContext("2d");
+let canvas = document.querySelector('#canvas');
+let context = canvas.getContext('2d');
+context.moveTo(50, 100);
+context.lineTo(450, 100);
+context.stroke();
 
-ctx.moveTo(50, 100);
-ctx.lineTo(450, 100);
-ctx.stroke();
-
-ctx.moveTo(50, 150);
-ctx.lineTo(183, 150);
-ctx.lineTo(250, 250);
-ctx.lineTo(316, 150);
-ctx.lineTo(450, 150);
-ctx.strokeStyle = "#333";
-ctx.stroke();
+context.moveTo(50, 150);
+context.lineTo(183, 150);
+context.lineTo(250, 250);
+context.lineTo(316, 150);
+context.lineTo(450, 150);
+context.strokeStyle = "#333";
+context.stroke();
 ```
 
 ![](IMGS/canvas-moveto-lineto.png)
@@ -233,8 +221,8 @@ ctx.stroke();
 - 二次贝塞尔曲线：*context.quadraticCurveTo(qcpx,qcpy,qx,qy)*
 
 ```javascript
-var canvas = document.querySelector(".test-canvas");
-var ctx    = canvas.getContext("2d");
+let canvas = document.querySelector('#canvas');
+let context = canvas.getContext('2d');
 
 ctx.moveTo(50, 100);
 ctx.bezierCurveTo(100, 200, 150, 50, 250, 170);
@@ -547,8 +535,6 @@ imgTag.src = canvas.toDataURL();
 ## 15. canvas 动画
 
 canvas 动画实现的基本原理就是结合定时器绘制，并定时清除整个canvas重新绘制。
-
-[canvas-block 时钟demo示例](https://lihongyao.github.io/practise/javascript/09.%20canvas-clock/index.html)
 
 # # 参考/资料 
 
