@@ -169,9 +169,12 @@ document.title *
 ## 1、创建节点
 
 ```js
-// 创建节点
-var el = document.createElement("a");
-var el = "<div class='box'>CHINA</div>";
+// 创建元素节点
+document.createElement();
+// 创建文本节点
+document.createTextNode()
+// 创建属性节点
+
 ```
 
 ## 2、操作属性
