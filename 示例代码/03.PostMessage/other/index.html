@@ -1,0 +1,32 @@
+<!--
+ * @Author: Li-HONGYAO
+ * @Date: 2021-05-10 10:58:38
+ * @LastEditTime: 2021-05-10 13:34:36
+ * @LastEditors: Li-HONGYAO
+ * @Description: 
+ * @FilePath: \other\index.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OTHER PAGE</title>
+</head>
+
+<body>
+  <div>Sub window recived message is:</div>
+  <div class="ct"></div>
+  <script>
+    const ct = document.querySelector('.ct');
+    window.addEventListener('message', e => {
+      ct.textContent = e.data;
+      parent.postMessage('信息已收到!', '*')
+    }, false);
+  </script>
+</body>
+
+
+</html>

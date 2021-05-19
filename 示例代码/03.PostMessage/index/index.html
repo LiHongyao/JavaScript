@@ -1,0 +1,46 @@
+<!--
+ * @Author: Li-HONGYAO
+ * @Date: 2021-05-10 10:46:08
+ * @LastEditTime: 2021-05-10 13:35:10
+ * @LastEditors: Li-HONGYAO
+ * @Description: 
+ * @FilePath: \index\index.html
+-->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>INDEX PAGE</title>
+</head>
+
+<body>
+  <div style="margin-bottom: 16px;">
+    <input placeholder="请输入您要发送的信息" />
+    <br />
+    <br />
+    <button type="button">发送</button>
+  </div>
+  <iframe src="http://127.0.0.1:5500/index.html"></iframe>
+</body>
+
+<script>
+  // 1. 发送消息给子窗口
+  const iframe = document.querySelector('iframe');
+  const input = document.querySelector('input');
+  const button = document.querySelector('button');
+
+  button.addEventListener('click', () => {
+    iframe.contentWindow.postMessage(input.value, '*')
+  }, false);
+  // 2. 监听子窗口返回的消息
+  window.addEventListener('message', e => {
+    console.log(e.data);
+  }, false)
+
+</script>
+
+</html>
