@@ -37,7 +37,7 @@ otherWindow.postMessage(message, targetOrigin, [transfer]);
 
 ## 2. 接收数据
 
-```
+```js
 window.addEventListener("message", receiveMessage, false) ;
 function receiveMessage(event) {
      var origin= event.origin;
