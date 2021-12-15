@@ -1,0 +1,58 @@
+<!--
+ * @Author: Lee
+ * @Date: 2021-12-05 14:00:08
+ * @LastEditors: Lee
+ * @LastEditTime: 2021-12-05 15:02:51
+-->
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>requestAnimationFrame</title>
+    <style>
+      .progress {
+        width: 300px;
+        height: 10px;
+        border-radius: 12px;
+        background: #eee;
+      }
+      .v {
+        height: 100%;
+        background: cornflowerblue;
+        border-radius: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="progress">
+      <div class="v"></div>
+    </div>
+    <script>
+      let progress = document.querySelector('.v');
+      let step = 0;
+      let render = () => {
+        step++;
+        progress.style.width = `${step}%`;
+        if (step < 100) {
+          window.requestAnimationFrame(render);
+        }
+      };
+      render();
+
+      window.onmousemove = ({ clientX, clientY }) => {
+        requestAnimationFrame(() => {
+          console.log(clientX, clientY);
+        });
+      };
+
+      // var lazyLoadList = [A, B, C, D];
+      // lazyLoadList.forEach((module) => {
+      //   window.requestAnimationFrame(() => {
+      //     new module();
+      //   });
+      // });
+    </script>
+  </body>
+</html>
