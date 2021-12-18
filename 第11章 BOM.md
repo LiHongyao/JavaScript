@@ -1,6 +1,6 @@
 # 一、概述
 
-*The Browser Object Model(BOM) allows JavaScript to "talk to" the browser.*
+> The Browser Object Model(BOM) allows JavaScript to "talk to" the browser.
 
 **BOM**（Browers Object Model，浏览器对象模型）是浏览器为JavaScript提供的一个API（Application Programming Interface，应用编程接口），所以它不是原生JavaScript提供的。通过BOM我们可以访问和设置浏览器的一些属性和函数。
 
@@ -26,21 +26,9 @@ BOM到现在都没有一个组织对其进行标准化，JavaScript语法的标�
 - **self**
 - **frames**
 
-它们在全局环境下都是指向window对象：
+它们在全局环境下都是指向 `Window` 对象：
 
-```js
-self
-Window {postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, parent: Window, …}
-
-window
-Window {postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, parent: Window, …}
-
-frames
-Window {postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, parent: Window, …}
-
-this
-Window {postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, parent: Window, …}
-```
+![](./IMGS/bom_window.png)
 
 window 对象下的属性和方法非常之多，多至现在也没有一份权威的统计表明window下到底有多少个属性和方法，这个只需要打开Google Chrome（主要推荐，但也可以是其它非IE系列的主流浏览器）的控制台，然后输入“window.”（后面需要加上“点”）就可以看到window下的属性了，而且里面很多属性下还包含二级、三级甚至更多级的属性。也就是说想要完全去掌握window下的所有属性和方法肯定是不现实的，我们只需要掌握一些常用的，对我们实际项目开发中有一定帮助的即可。接下来我们我们开始对window的这些主要属性和方法进行讲解。
 
@@ -49,15 +37,6 @@ window 对象下的属性和方法非常之多，多至现在也没有一份权�
 用于描述当前浏览器窗口的相关属性，这对于现在这个屏幕小到“160x160”（如智能手表），大到“4096×2160”（4K屏幕）的互联网时代来说，要做到同一个项目在不同分辨率屏幕的设备上做出响应式的设计一直是前端开发工程师头痛的问题。虽然说现在已经有很多CSS框架都或多或少的能帮上一些忙，但它们都有各自的局限性，而且还存在一些学习成本。但是如果能掌握原生JavaScript一些关于浏览器窗口的属性，对于我们做响应式设计也有不小的帮助。
 
 浏览器窗口相关的主要属性有以下（数值表示的单位统一为像素）:
-
-| 属性        | 描述                                         |
-| ----------- | -------------------------------------------- |
-| innerWith   | 浏览器窗口的可见宽度 *                       |
-| innerHeight | 浏览器窗口的可见高度 *                       |
-| outerWidth  | 浏览器窗口的实际宽度（包括浏览器菜单和边框） |
-| outerHeight | 浏览器窗口的实际高度（包括浏览器菜单和边框） |
-| pageXOffset | 浏览器窗口滚动条水平滚动的距离 *             |
-| pageYOffset | 浏览器窗口滚动条垂直滚动的距离 *             |
 
 ![](./IMGS/rect.jpeg)
 
@@ -124,22 +103,9 @@ oDiv.onmouseup = function() {
 
 屏幕对象相关属性都是只读的，它们返回浏览器相对于当前计算机屏幕的数据信息。screen对象是用于描述当前浏览器相对于屏幕信息的主要对象，所含属性如下：
 
-```js
-screen
-Screen {availWidth: 1280, availHeight: 1001, width: 1280, height: 1024, colorDepth: 24, …}
-  availHeight: 1001
-  availLeft: 0
-  availTop: 23
-  availWidth: 1280
-  colorDepth: 24
-  height: 1024
-  orientation: ScreenOrientation {angle: 0, type: "landscape-primary", onchange: null}
-  pixelDepth: 24
-  width: 1280
-  __proto__: Screen
-```
+![](./IMGS/bom_screen.png)
 
-|             | -                                |
+| #           | -                                |
 | ----------- | -------------------------------- |
 | availWidth  | 览器窗口相对于屏幕而言的可用宽度 |
 | availHeight | 览器窗口相对于屏幕而言的可用高度 |
@@ -163,54 +129,15 @@ Screen {availWidth: 1280, availHeight: 1001, width: 1280, height: 1024, colorDep
 
 这个对象用来包含浏览器详细信息的对象，通常用于做浏览器兼容性处理和设备的响应设计。可以打开浏览器输入这个navigator对象的名称来查看不同的浏览器的相关属性，这里我们还是以现在国内使用量[排行第一](http://tongji.baidu.com/data/browser)（并且也是最长时间来对[HTML5](http://html5test.com/)和[ECMAScript 6](https://kangax.github.io/compat-table/es6/)支持最好的浏览器）的Google Chrome进行测试：
 
-```js
-Navigator {vendorSub: "", productSub: "20030107", vendor: "Google Inc.", maxTouchPoints: 0, hardwareConcurrency: 4, …}
-      appCodeName: "Mozilla"
-      appName: "Netscape"
-      appVersion: "5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36"
-      bluetooth: Bluetooth {}
-      clipboard: Clipboard {}
-      connection: NetworkInformation {onchange: null, effectiveType: "4g", rtt: 100, downlink: 10, saveData: false}
-      cookieEnabled: true
-      credentials: CredentialsContainer {}
-      deviceMemory: 8
-      doNotTrack: null
-      geolocation: Geolocation {}
-      hardwareConcurrency: 4
-      keyboard: Keyboard {}
-      language: "zh-CN"
-      languages: (4) ["zh-CN", "zh", "en", "la"]
-      locks: LockManager {}
-      maxTouchPoints: 0
-      mediaCapabilities: MediaCapabilities {}
-      mediaDevices: MediaDevices {ondevicechange: null}
-      mediaSession: MediaSession {metadata: null, playbackState: "none"}
-      mimeTypes: MimeTypeArray {0: MimeType, 1: MimeType, 2: MimeType, 3: MimeType, application/pdf: MimeType, application/x-google-chrome-pdf: MimeType, application/x-nacl: MimeType, application/x-pnacl: MimeType, length: 4}
-      onLine: true
-      permissions: Permissions {}
-      platform: "MacIntel"
-      plugins: PluginArray {0: Plugin, 1: Plugin, 2: Plugin, Chrome PDF Plugin: Plugin, Chrome PDF Viewer: Plugin, Native Client: Plugin, length: 3}
-      presentation: Presentation {receiver: null, defaultRequest: null}
-      product: "Gecko"
-      productSub: "20030107"
-      serviceWorker: ServiceWorkerContainer {ready: Promise, controller: null, oncontrollerchange: null, onmessage: null}
-      storage: StorageManager {}
-      usb: USB {onconnect: null, ondisconnect: null}
-      userActivation: UserActivation {hasBeenActive: true, isActive: true}
-      userAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36"
-      vendor: "Google Inc."
-      vendorSub: ""
-      webkitPersistentStorage: DeprecatedStorageQuota {}
-      webkitTemporaryStorage: DeprecatedStorageQuota {}
-      __proto__: Navigator
-```
+![](./IMGS/bom_navigator.png)
 
-在控制台输出的内容为一个对象，对象展开后会包含比较多的属性，其中“*userAgent*”是一个比较重要的属性。在早期作浏览器判断都是依靠这个属性，不过随着浏览器版本的发展，再用这个属性去区分不同的浏览器已经行不通了。
+在控制台输出的内容为一个对象，对象展开后会包含比较多的属性，其中 `userAgent` 是一个比较重要的属性。在早期作浏览器判断都是依靠这个属性，不过随着浏览器版本的发展，再用这个属性去区分不同的浏览器已经行不通了。
 
-通过观察，可以在里面发现一些其它浏览器的信息，如“Mozilla”（FireFox浏览器厂商）和“Safari”（苹果浏览器）这些额外的信息，所以想通过它来判断当前浏览器究竟是哪个浏览器是不可能了，但是使用这个属性还是可以用于判断当前的设备是PC端还是移动端的。现在我们通过谷歌开发者工具将当前环境模拟为移动端环境，然后再次在控制内输入navigator.userAgent这个属性观察：
+通过观察，可以在里面发现一些其它浏览器的信息，如“Mozilla”（FireFox浏览器厂商）和“Safari”（苹果浏览器）这些额外的信息，所以想通过它来判断当前浏览器究竟是哪个浏览器是不可能了，但是使用这个属性还是可以用于判断当前的设备是PC端还是移动端的。现在我们通过谷歌开发者工具将当前环境模拟为移动端环境，然后再次在控制内输入 `navigator.userAgent` 这个属性观察：
 
-```
-"Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1"
+```javascript
+navigator.userAgent
+'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36'
 ```
 
 ```js
@@ -228,26 +155,7 @@ Navigator {vendorSub: "", productSub: "20030107", vendor: "Google Inc.", maxTouc
 
 该对象用于描述当前页面的地址信息。首先我们拿百度首页来做这个对象的测试，简单观察该对象的相关属性属性。
 
-```js
-Location {replace: ƒ, href: "https://www.baidu.com/", ancestorOrigins: DOMStringList, origin: "https://www.baidu.com", protocol: "https:", …}
-      ancestorOrigins: DOMStringList {length: 0}
-      assign: ƒ assign()
-      hash: ""
-      host: "www.baidu.com"
-      hostname: "www.baidu.com"
-      href: "https://www.baidu.com/"
-      origin: "https://www.baidu.com"
-      pathname: "/"
-      port: ""
-      protocol: "https:"
-      reload: ƒ reload()
-      replace: ƒ ()
-      search: ""
-      toString: ƒ toString()
-      valueOf: ƒ valueOf()
-      Symbol(Symbol.toPrimitive): undefined
-__proto__: Location
-```
+![](./IMGS/bom_location.png)
 
 【实例 1】通过 `location.href` 实现重定向或页面跳转：
 
@@ -298,36 +206,13 @@ function locSearchValToObj(searchStr) {
 
 ## 6、history
 
-浏览器有一个history对象，这个对象用于保存页面浏览通过超链接或程序链接跳转的记录，通常会将其直译为“历史记录”对象。首先，按照我们“一贯的作风”，将这个对象在浏览器的控制台进行一次输出观察。
+浏览器有一个 `history` 对象，这个对象用于保存页面浏览通过超链接或程序链接跳转的记录，通常会将其直译为“历史记录”对象。首先，按照我们“一贯的作风”，将这个对象在浏览器的控制台进行一次输出观察。
 
-```js
-History {length: 1, scrollRestoration: "auto", state: null}
-      length: 1
-      scrollRestoration: "auto"
-      state: null
-__proto__: History
-```
+![](./IMGS/bom_history.png)
 
 可以发现，这个对象只有3个属性，分别是：记录长度、记录回滚和状态，但实际上这个对象的真正实用的方法都是“藏”在了原型里，我将“\_\_proto\_\_”展开后再看看这些方法：
 
-```js
-__proto__: History
-      back: ƒ back()
-      forward: ƒ forward()
-      go: ƒ go()
-      length: (...)
-      pushState: ƒ pushState()
-      replaceState: ƒ replaceState()
-      scrollRestoration: (...)
-      state: (...)
-      constructor: ƒ History()
-      Symbol(Symbol.toStringTag): "History"
-      get length: ƒ length()
-      get scrollRestoration: ƒ scrollRestoration()
-      set scrollRestoration: ƒ scrollRestoration()
-      get state: ƒ state()
-			__proto__: Object
-```
+![](./IMGS/bom_history_proto.png)
 
 细心一点可以发现，这个原型里面基本不包含属性（有也只是之前的那3个属性），基本都是以方法的形式存在的。我们首先来看一下这个对象常用的3个原型方法：
 

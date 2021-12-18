@@ -53,15 +53,15 @@ DOM的最小组成单位叫做节点（Node）。文档的树形结构（DOM树�
 
 ```html
 <!DOCTYPE html>
-<html>  
-	<head>  
-	    <title>DOM Tutorial</title>   
-	</head>   
-	<body>   
-	    <h1>DOM Lesson one</h1>    
-	    <a href="javascript:;">主页</a>   
-	</body>   
-</html> 
+<html>
+  <head>
+    <title>DOM Tutorial</title>
+  </head>
+  <body>
+    <h1>DOM Lesson one</h1>
+    <a href="javascript:;">主页</a>
+  </body>
+</html>
 ```
 
 上述代码的节点树模型：
@@ -75,32 +75,32 @@ DOM的最小组成单位叫做节点（Node）。文档的树形结构（DOM树�
 - NodeList
 - HTMLCollection
 
-访问集合成员可通过下标或 `.item(index)` 获取。
+访问集合成员可通过 `下标` 或 `.item(index)` 获取。
 
-> 提示：NodeList/HTMLCollection 属于类似数组对象，不能直接使用数组方法，如果要通过数组方法来遍历节点集合，你需要将它们转换为真正的数组。
+> 提示：NodeList / HTMLCollection 属于类似数组对象，不能直接使用数组方法，如果要通过数组方法来遍历节点集合，你需要将它们转换为真正的数组。
 
 # 三、节点查询
 
-为了便于演示后面的示例，我们现在HTML编辑如下内容：
+为了便于演示后面的示例，我们现在在 `<body>`标签中插入以下内容：
 
 ```html
-<p id="name">成都睿峰软件职业技能培训中心</p>
+<div id="company">成都哈戳戳科技有限公司</div>
 <ul class="departments">
-    <li>教学部</li>
-    <li>教务部</li>
-    <li>市场部</li>
-    <li>咨询部</li>
-    <li>行政部</li>
-  	<li>财务部</li>
+  <li>教学部</li>
+  <li>教务部</li>
+  <li>市场部</li>
+  <li>咨询部</li>
+  <li>行政部</li>
+  <li>财务部</li>
 </ul>
-<p name="address">成都市高新区天府软件园B区5座1层</p>
+<div name="address">成都市高新区新川科技园A区</div>
 ```
 
 ## 1、直接查找 *
 
 ```js
 // 1. 根据ID查找
-document.getElementById("name"); 
+document.getElementById("company"); 
 // 2. 根据name属性查找
 document.getElementsByName("address");
 // 3. 根据类名查找
@@ -108,7 +108,7 @@ document.getElementsByClassName("departments");
 // 4. 根据标签名查找
 document.getElementsByTagName("li");
 // 5. 根据CSS选择器查找
-document.querySelector("#name"); *
+document.querySelector("#company"); *
 document.querySelectorAll(".departments li"); *
 ```
 
@@ -170,11 +170,11 @@ document.title *
 
 ```js
 // 创建元素节点
-document.createElement();
+document.createElement(tagName);
 // 创建文本节点
-document.createTextNode()
+document.createTextNode(content)
 // 创建属性节点
-
+document.createAttribute(attrName);
 ```
 
 ## 2、操作属性
@@ -344,11 +344,9 @@ el.isEqualNode();
 input.value
 
 // 2. 获取单选值
-radios.forEach(function(radio) {
-    radio.onchange = function() {
-        console.log(this.value);
-    }
-});
+radio.onchange = function() {
+  console.log(this.value);
+}
 
 // 3. 获取select选中值
 // - 单选
@@ -416,7 +414,7 @@ data.forEach(function(hero) {
         <p class="exp">熟练度：${hero.exp}</p>
     </li>`
 })
-// 4. 将拼出出来的标签呈现在页面上
+// 4. 将拼出来的标签呈现在页面上
 list.innerHTML = htmlStr;
 ```
 
