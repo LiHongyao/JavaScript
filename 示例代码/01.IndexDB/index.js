@@ -1,7 +1,7 @@
 /*
  * @Author: Li-HONGYAO
  * @Date: 2021-04-19 17:00:50
- * @LastEditTime: 2021-12-18 18:11:13
+ * @LastEditTime: 2021-12-18 23:13:36
  * @LastEditors: Lee
  * @Description:
  * @FilePath: \01.IndexDB\index.js
@@ -9,25 +9,41 @@
 
 (async function () {
   // 1. 打开数据库
-  const db = await openDB('TEST-DATABASE');
+  const db = await openDB('TEST-DATABASE', 1);
+  remove();
   // addUsr();
   // getUsr();
   // readAll();
-  update();
+  // update();
+    const request = db
+      .transaction(['USRS'], 'readwrite')
+      .objectStore('USRS')
+      .index('姓名')
+      .get('张三');
+    request.onsuccess = function (e) {
+      var result = e.target.result;
+      console.log(result);
+    };
+
+  function remove() {
+    db.transaction(['USRS'], 'readwrite').objectStore('USRS').delete(2);
+  }
   function update() {
-    const objectStore = db.transaction(['USRS'], 'readwrite').objectStore('USRS');
+    const objectStore = db
+      .transaction(['USRS'], 'readwrite')
+      .objectStore('USRS');
     const request = objectStore.get(1);
     request.onsuccess = (e) => {
       const data = e.target.result;
       data.id = 1;
-      data.phone = '13219038892';
-      const putRequest = objectStore.put({...data});
+      data.major = '网络工程';
+      const putRequest = objectStore.put({ ...data });
       putRequest.onsuccess = (e) => {
         console.log('Put success!');
       };
       putRequest.onerror = (e) => {
         console.log(e);
-      }
+      };
     };
   }
   function readAll() {
@@ -50,7 +66,7 @@
       console.log(request.result);
     };
     request.onerror = (e) => {
-      console.log('Get fail with:', e);
+      console.log(e);
     };
   }
   function addUsr() {
@@ -58,11 +74,9 @@
       .transaction(['USRS'], 'readwrite')
       .objectStore('USRS')
       .add({
-        name: 'Gou-YUMEI',
-        age: 22,
+        name: '李四',
         gender: '女',
-        address: '成都市高新区雅和南四路216号',
-        phone: '152288885771',
+        major: '电子商务',
       });
     request.onsuccess = (e) => {
       console.log('Add success!');

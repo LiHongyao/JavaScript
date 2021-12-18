@@ -1,7 +1,7 @@
 /*
  * @Author: Li-HONGYAO
  * @Date: 2021-04-19 17:15:11
- * @LastEditTime: 2021-12-18 17:53:06
+ * @LastEditTime: 2021-12-18 22:51:45
  * @LastEditors: Lee
  * @Description:
  * @FilePath: \01.IndexDB\utils.js
@@ -38,13 +38,15 @@ function openDB(databaseName, version) {
       if (!db.objectStoreNames.contains('USRS')) {
         // 创建USRS对象仓库/主键为自增整数
         // 如果需要指定值为主键，则可以设置：{keyPath: "键" }
-        let objStore = db.createObjectStore('USRS', { autoIncrement: 'id' });
+        let objStore = db.createObjectStore('USRS', {
+          keyPath: 'id',
+          autoIncrement: 'id',
+        });
         // 创建索引，语法形式：objStore.createIndex(名称, 索引, 配置对象)
+        objStore.createIndex('索引', 'id', { unique: true });
         objStore.createIndex('姓名', 'name', { unique: false });
         objStore.createIndex('性别', 'gender', { unique: false });
-        objStore.createIndex('年龄', 'age', { unique: false });
-        objStore.createIndex('电话', 'phone', { unique: true });
-        objStore.createIndex('地址', 'address', { unique: false });
+        objStore.createIndex('专业', 'major', { unique: false });
       }
     };
   });
