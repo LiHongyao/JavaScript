@@ -17,11 +17,11 @@ requestAnimationFrame 的用法跟 setInterval 差不多，与 setInterval 相�
 
 ## 1. 页面可见
 
-当页面被最小化或者被切换成后台标签页时，页面为不可见，浏览器会触发一个 visibilitychange 事件，并设置document.hidden 属性为 true；切换到显示状态时，页面为可见，也同样触发一个 visibilitychange 事件，设置document.hidden属性为false。
+当页面被最小化或者被切换成后台标签页时，页面为不可见，浏览器会触发一个 `visibilitychange` 事件，并设置 `document.hidden` 属性为 `true`；切换到显示状态时，页面为可见，也同样触发一个 `visibilitychange` 事件，设置 `document.hidden` 属性为 `false`。
 
 ## 2. 动画帧请求回调函数列表
 
-每个Document都有一个动画帧请求回调函数列表，该列表可以看成是由 `<handlerId, callback>` 元组组成的集合。其中handlerId是一个整数，唯一地标识了元组在列表中的位置；callback是回调函数。
+每个Document都有一个动画帧请求回调函数列表，该列表可以看成是由 `<handlerId, callback>` 元组组成的集合。其中 handlerId 是一个整数，唯一地标识了元组在列表中的位置；callback是回调函数。
 
 ## 3. 屏幕刷新频率
 
@@ -41,8 +41,8 @@ requestAnimationFrame 的用法跟 setInterval 差不多，与 setInterval 相�
 const handlerId = window.requestAnimationFrame(callback);
 ```
 
-- callback：下一次重绘之前更新动画帧所调用的函数（回调函数）
-- handlerId：请求 ID，大于0的长整型 ，唯一标识了该回调函数在回调列表中的位置;
+- `callback`：下一次重绘之前更新动画帧所调用的函数（回调函数）
+- `handlerId`：请求 ID，大于0的长整型 ，唯一标识了该回调函数在回调列表中的位置;
 
 ## 2. 浏览器执行过程
 
@@ -140,7 +140,7 @@ $(function(){
 })
 ```
 
-而使用raf可将每个模块分别初始化，即**每个模块都有16ms的初始化时间**
+而使用raf可将每个模块分别初始化，即 **每个模块都有16ms的初始化时间**
 
 ```javascript
 var lazyLoadList = [A, B, C, D];
