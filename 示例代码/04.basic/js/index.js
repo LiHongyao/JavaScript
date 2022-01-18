@@ -1,19 +1,16 @@
 /*
  * @Author: Lee
- * @Date: 2021-12-15 10:10:45
+ * @Date: 2022-01-17 15:28:13
  * @LastEditors: Lee
- * @LastEditTime: 2021-12-20 15:05:16
+ * @LastEditTime: 2022-01-18 17:55:28
  */
-(function () {
-  var color = 'blue';
-  function changeColor() {
-    var anotherColor = 'red';
-    function swapColors() {
-      var tempColor = anotherColor;
-      anotherColor = color;
-      color = tempColor;
-    }
-    swapColors();
-  }
-  changeColor();
-})();
+
+var obj = {
+  id: 'awesome',
+  cool: function coolFn() {
+    console.log(this.id);
+  },
+};
+var id = 'not awesome';
+obj.cool(); // awesome
+setTimeout(obj.cool, 100); // not awesome
