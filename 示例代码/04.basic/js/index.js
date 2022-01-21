@@ -1,5 +1,8 @@
-var o = { a: 1 };
-function t() {
-  console.log(this)
-}
-[1, 2, 3].forEach(t, o);
+/*
+ * @Author: Lee
+ * @Date: 2022-01-17 15:28:13
+ * @LastEditors: Lee
+ * @LastEditTime: 2022-01-20 18:21:14
+ */
+
+
