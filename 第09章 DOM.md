@@ -1,44 +1,44 @@
 # 一、概述
 
-DOM是JavaScript操作网页的接口，全称为 “**文档对象模型** ”（Document Object Model）。它的作用是将网页转为一个JavaScript对象，从而可以用脚本进行各种操作（比如增删内容）。
+DOM（**D**ocument **O**bject **M**odel，即 文档对象模型）是 `JavaScript` 操作网页的接口，它的作用是将网页转为一个 `JavaScript` 对象，从而可以用脚本进行各种操作（比如增删内容）。
 
 浏览器会根据DOM模型，将结构化文档（比如HTML和XML）解析成一系列的节点，再由这些节点组成一个树状结构。所有的节点和最终的树状结构，都有规范的对外接口。所以，DOM可以理解成网页的编程接口。
 
-严格地说，DOM不属于JavaScript，但是操作DOM是JavaScript最常见的任务，而JavaScript也是最常用于DOM操作的语言。本章介绍的就是JavaScript对DOM标准的实现和用法。
+严格地说，DOM不属于 `JavaScript`，但是操作DOM是 `JavaScript` 最常见的任务，而 `JavaScript`也 是最常用于DOM操作的语言。本章介绍的就是`JavaScript` 对DOM标准的实现和用法。
 
 # 二、节点
 
-## 1、概念
+## 1. 概念
 
-DOM的最小组成单位叫做节点（Node）。文档的树形结构（DOM树），就是由各种不同类型的节点组成。
+DOM的最小组成单位叫做节点（`Node`）。文档的树形结构（DOM树），就是由各种不同类型的节点组成。
 
 节点的类型有七种：
 
-- **Document**：文档节点 -> 整个文档树的顶层节点 
-- **DocumentType**：*doctype* 标签（比如 `<!DOCTYPE html>` ）
-- **Element**：元素节点 -> 网页的各种HTML标签（比如 `<body>`、`<a>`等）*
-- **Attribute**：属性节点 -> 网页元素的属性（比如 `class="right"` ）*
-- **Text**：文本节点 -> 标签之间或标签包含的文本*
-- **Comment**：注释节点 -> 网页中的注释
-- **DocumentFragment**：文档的片段
+- `Document`：**文档节点**，代表整个文档（DOM树的根节点）
+- `DocumentType`：`doctype` 标签（比如 `<!DOCTYPE html>` ）
+- `Element`：**元素节点**，网页的各种HTML标签（比如 `<body>`、`<a>`等）*
+- `Attribute`：**属性节点**，元素的属性（比如 `class="right"` ）*
+- `Text`：**文本节点** ，代表元素或属性的文本内容 *
+- `Comment`：**注释节点** 
+- `DocumentFragment`：文档的片段
 
 > 提示：这七种节点都属于浏览器原生提供的节点对象的派生对象，具有一些共同的属性和方法。
 
-我们可通过 nodeName 和 nodeType 属性判断对应节点的名称和类型。
+我们可通过 `nodeName` 和 `nodeType` 属性判断对应节点的名称和类型。
 
-| 类型                   | 描述     | nodeName                  | nodeType |
-| ---------------------- | -------- | ------------------------- | -------- |
-| ELEMENT_NODE *         | 元素节点 | 大写的HTML标签名          | 1        |
-| ATTRIBUTE_NODE *       | 属性节点 | 等同于Attr.name（属性名） | 2        |
-| TEXT_NODE *            | 文本节点 | #text                     | 3        |
-| COMMENT_NODE           | 注释节点 | #comment                  | 8        |
-| DOCUMENT_NODE          | 文档节点 | #document                 | 9        |
-| DOCUMENT_FRAGMENT_NODE |          | #document-fragment        | 11       |
-| DOCUMENT_TYPE_NODE     |          | 等同于DocumentType.name   | 10       |
+| 类型                     | 描述     | `nodeName`                   | `nodeType` |
+| ------------------------ | -------- | ---------------------------- | ---------- |
+| `ELEMENT_NODE` *         | 元素节点 | 大写的HTML标签名             | 1          |
+| `ATTRIBUTE_NODE` *       | 属性节点 | 等同于 `Attr.name`（属性名） | 2          |
+| `TEXT_NODE` *            | 文本节点 | `#text`                      | 3          |
+| `COMMENT_NODE`           | 注释节点 | `#comment`                   | 8          |
+| `DOCUMENT_NODE`          | 文档节点 | `#document`                  | 9          |
+| `DOCUMENT_FRAGMENT_NODE` |          | `#document-fragment`         | 11         |
+| `DOCUMENT_TYPE_NODE`     |          | 等同于`DocumentType.name`    | 10         |
 
 > 提示：本节知识点作为了解即可。
 
-##  2、节点树
+##  2. 节点树
 
 一个文档的所有节点，按照所在的层级，可以抽象成一种树状结构。这种树状结构就是DOM树。
 
@@ -68,16 +68,16 @@ DOM的最小组成单位叫做节点（Node）。文档的树形结构（DOM树�
 
 ![](IMGS/nodeTree.png)
 
-## 3、节点集合
+## 3. 节点集合
 
 节点都是单个对象，有时会需要一种数据结构，能够容纳多个节点。DOM提供两种集合对象，用于实现这种节点的集合：
 
-- NodeList
-- HTMLCollection
+- `NodeList`
+- `HTMLCollection`
 
 访问集合成员可通过 `下标` 或 `.item(index)` 获取。
 
-> 提示：NodeList / HTMLCollection 属于类似数组对象，不能直接使用数组方法，如果要通过数组方法来遍历节点集合，你需要将它们转换为真正的数组。
+> 提示：`NodeList` / `HTMLCollection` 属于类似数组对象，不能直接使用数组方法，如果要通过数组方法来遍历节点集合，你需要将它们转换为真正的数组。
 
 # 三、节点查询
 
@@ -96,7 +96,7 @@ DOM的最小组成单位叫做节点（Node）。文档的树形结构（DOM树�
 <div name="address">成都市高新区新川科技园A区</div>
 ```
 
-## 1、直接查找 *
+## 1. 直接查找 *
 
 ```js
 // 1. 根据ID查找
@@ -112,7 +112,7 @@ document.querySelector("#company"); *
 document.querySelectorAll(".departments li"); *
 ```
 
-## 2、间接查找 *
+## 2. 间接查找 *
 
 通过已找到的其他标签来查找。
 
@@ -133,7 +133,7 @@ list.firstElementChild
 list.lastElementChild
 ```
 
-## 3、其他查询
+## 3. 其他查询
 
 ```js
 // 01. 查找文档类型
@@ -166,7 +166,7 @@ document.title *
 
 # 四、节点操作 *
 
-## 1、创建节点
+## 1. 创建节点
 
 ```js
 // 创建元素节点
@@ -175,9 +175,27 @@ document.createElement(tagName);
 document.createTextNode(content)
 // 创建属性节点
 document.createAttribute(attrName);
+// 创建文本片段
+document.createDocumentFragment();
 ```
 
-## 2、操作属性
+> Tips：当我们需要操作某个DOM时，可以将其克隆进文本片段，执行操作之后再挂载到元素上即可，这样可以优化性能，比如 Vue 模板编译原理就是使用文本片段操作DOM的。
+
+```js
+function nodeToFragment(el) {
+  // 1. 创建 fragment 对象
+  var fragment = document.createDocumentFragment();
+  var child;
+  // 2. 将原生节点移动到fragment中
+  while ((child = el.firstChild)) {
+    fragment.appendChild(child);
+  }
+  // 3. 返回 fragment
+  return fragment;
+}
+```
+
+## 2. 操作属性
 
 ```js
 // 1. 设置、修改、读取属性 *
@@ -194,7 +212,7 @@ el.attributes;
 el.dataset.desc = "耀哥博客地址";
 ```
 
-## 3、操作类名
+## 3. 操作类名
 
 ```js
 // 1. 通过classname操作类名 *
@@ -220,7 +238,7 @@ el.classList.item(0); // link
 el.classList.toString();
 ```
 
-## 4、操作内容
+## 4. 操作内容
 
 ```js
 // 1. textContent
@@ -236,9 +254,9 @@ el.innerHTML = "<mark>Henry's</mark> github link";
 el.innerHTML
 ```
 
-> 提示：textContent 设置显示文本，不能识别html标签，而innerHTML可以识别html标签。
+> 提示：`textContent` 设置显示文本，不能识别 HTML标签，而 `innerHTML` 可以识别 HTML 标签。
 
-## 5、插入节点
+## 5. 插入节点
 
 ```js
 // 1. 在指定元素内追加(后面)
@@ -267,7 +285,7 @@ tag.insertAdjacentHTML("beforeend", "<h1>新插入的节点</h1>");
 
 > 提示：insertAdjacentHTML 方法可以识别html标签。
 
-## 6、操作样式
+## 6. 操作样式
 
 ```js
 // 1. 逐一赋值
@@ -291,7 +309,7 @@ if(el.style.color == undefined) {
 
 > 提示：通过脚本添加/读取的样式是行内样式。
 
-## 7、替换节点
+## 7. 替换节点
 
 ```js
 // 1. 主动替换
@@ -300,7 +318,7 @@ tag.replaceWith(el);
 parent.replaceChild(el, child);
 ```
 
-## 8、移除节点
+## 8. 移除节点
 
 ```js
 // 1. 主动移除
@@ -335,8 +353,6 @@ el.contains();
 el.isEqualNode();
 ```
 
-> 了解
-
 # 六、表单操作
 
 ```js
@@ -357,7 +373,7 @@ select.selectedOptions
 
 # 七、拓展知识
 
-## 1、获取非行间样式 *
+## 1. 获取非行间样式 *
 
 ```javascript
 function getStyle(el, attr) {
@@ -370,7 +386,7 @@ function getStyle(el, attr) {
 }
 ```
 
-## 2、动态加载页面元素 *
+## 2. 动态加载页面元素 *
 
 在实际开发中，我们需要动态加载页面元素，首先我们需要在html页面中准备一个容器，比如列表：
 
@@ -418,20 +434,20 @@ data.forEach(function(hero) {
 list.innerHTML = htmlStr;
 ```
 
-## 3、DOM 性能优化
+## 3. DOM 性能优化
 
 - [高频dom操作和页面性能优化探索](https://feclub.cn/post/content/dom)
-- 通过修改 class 更新样式
-- 使用 innerHTML 批量生产 DOM
-- 使用 DocumentFragment  批量生产 DOM
-- 避免使用 +=，将拼接元素放入数组通过 join() 方法效率更高
-- 创建节点之后应立即append
-- 通过 absolute 或 显示/隐藏元素 后再操作DOM可以减少重排/重绘
-- 进来使用 id 来遍历 DOM 元素
+- 通过修改 `class` 更新样式
+- 使用 `innerHTML` 批量生产 DOM
+- 使用 `DocumentFragment`  批量生产 DOM
+- 避免使用 +=，将拼接元素放入数组通过 `join()` 方法效率更高
+- 创建节点之后应立即 `append`
+- 通过 `absolute` 或 显示/隐藏元素 后再操作DOM可以减少重排/重绘
+- 进来使用 `id` 来遍历 `DOM` 元素
 
-## 4、CSS 动画 vs JS动画
+## 4. CSS 动画 vs JS动画
 
-**# CSS动画**
+> `CSS` 动画
 
 优势：
 
@@ -445,7 +461,7 @@ list.innerHTML = htmlStr;
 - 有兼容性问题
 - 运行过程控制较弱，无法附加事件绑定回调函数。CSS动画只能暂停，不能在动画中寻找一个特定的时间点，不能在半路反转动画，不能变换时间尺度，不能在特定的位置添加回调函数或是绑定回放事件，无进度报告。
 
-**# JavaScript动画**
+> `JavaScript` 动画
 
 优势：
 
