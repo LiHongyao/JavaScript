@@ -1,0 +1,48 @@
+<!--
+ * @Author: Li-HONGYAO
+ * @Date: 2021-04-19 17:00:26
+ * @LastEditTime: 2022-12-06 15:44:36
+ * @LastEditors: Lee
+ * @Description: 
+ * @FilePath: \01.IndexDB\index.html
+-->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IndexDB - Test</title>
+  </head>
+  <body>
+    <p>
+      <span>姓名：</span>
+      <input placeholder="请输入姓名" id="name" />
+    </p>
+    <p>
+      <span>年龄：</span>
+      <input placeholder="请输入年龄" id="age" />
+    </p>
+    <p>
+      <span>职位：</span>
+      <input placeholder="请输入职位" id="job" />
+    </p>
+    <p>
+      <span>城市：</span>
+      <input placeholder="请输入城市" id="city" />
+    </p>
+    <p>
+      <span>标识：</span>
+      <input placeholder="操作标识符（ID）" id="flag" />
+    </p>
+    <p id="tips" style="color: blue"></p>
+    <button type="button" onclick="onAdd()">添加数据</button>
+    <button type="button" onclick="onDelete()">删除数据</button>
+    <button type="button" onclick="onPut()">更新数据</button>
+    <button type="button" onclick="onGet()">查询数据</button>
+    <button type="button" onclick="onEach()">遍历</button>
+    <script src="./utils.js"></script>
+    <script src="./index.js"></script>
+  </body>
+</html>

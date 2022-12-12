@@ -1,21 +1,21 @@
 # 一、概述
 
-DOM（**D**ocument **O**bject **M**odel，即 文档对象模型）是 `JavaScript` 操作网页的接口，它的作用是将网页转为一个 `JavaScript` 对象，从而可以用脚本进行各种操作（比如增删内容）。
+[DOM](https://developer.mozilla.org/zh-CN/docs/Web/API/Document_Object_Model)（**D**ocument **O**bject **M**odel，即 文档对象模型）是 JavaScript 操作网页的接口，它的作用是将网页转为一个 JavaScript 对象，从而可以用脚本进行各种操作（比如增删内容）。
 
-浏览器会根据DOM模型，将结构化文档（比如HTML和XML）解析成一系列的节点，再由这些节点组成一个树状结构。所有的节点和最终的树状结构，都有规范的对外接口。所以，DOM可以理解成网页的编程接口。
+浏览器会根据DOM模型，将结构化文档 *（如 HTML / XML）* 解析成一系列的节点，再由这些节点组成一个树状结构。所有的节点和最终的树状结构，都有规范的对外接口。所以，DOM可以理解成网页的编程接口。
 
-严格地说，DOM不属于 `JavaScript`，但是操作DOM是 `JavaScript` 最常见的任务，而 `JavaScript`也 是最常用于DOM操作的语言。本章介绍的就是`JavaScript` 对DOM标准的实现和用法。
+严格地说，DOM不属于 JavaScript，但是操作DOM是 JavaScript 最常见的任务，而 JavaScript 也 是最常用于DOM操作的语言。本章介绍的就是 JavaScript  对DOM标准的实现和用法。
 
 # 二、节点
 
 ## 1. 概念
 
-DOM的最小组成单位叫做节点（`Node`）。文档的树形结构（DOM树），就是由各种不同类型的节点组成。
+DOM 的最小组成单位叫做 **节点**（`Node`）。文档的树形结构（DOM树），就是由各种不同类型的节点组成。
 
 节点的类型有七种：
 
 - `Document`：**文档节点**，代表整个文档（DOM树的根节点）
-- `DocumentType`：`doctype` 标签（比如 `<!DOCTYPE html>` ）
+- `DocumentType`：**doctype** 标签（比如 `<!DOCTYPE html>` ）
 - `Element`：**元素节点**，网页的各种HTML标签（比如 `<body>`、`<a>`等）*
 - `Attribute`：**属性节点**，元素的属性（比如 `class="right"` ）*
 - `Text`：**文本节点** ，代表元素或属性的文本内容 *
@@ -34,17 +34,17 @@ DOM的最小组成单位叫做节点（`Node`）。文档的树形结构（DOM�
 | `COMMENT_NODE`           | 注释节点 | `#comment`                   | 8          |
 | `DOCUMENT_NODE`          | 文档节点 | `#document`                  | 9          |
 | `DOCUMENT_FRAGMENT_NODE` |          | `#document-fragment`         | 11         |
-| `DOCUMENT_TYPE_NODE`     |          | 等同于`DocumentType.name`    | 10         |
+| `DOCUMENT_TYPE_NODE`     |          | 等同于 `DocumentType.name`   | 10         |
 
 > 提示：本节知识点作为了解即可。
 
 ##  2. 节点树
 
-一个文档的所有节点，按照所在的层级，可以抽象成一种树状结构。这种树状结构就是DOM树。
+一个文档的所有节点，按照所在的层级，可以抽象成一种树状结构，这种树状结构就是 **DOM树**。
 
-最顶层的节点就是 document 节点，它代表了整个文档。文档里面最高一层的HTML标签，一般是 `<html>`，它构成树结构的根节点（root node），其他HTML标签节点都是它的下级。
+最顶层的节点就是 `document` 节点，它代表了整个文档。文档里面最高一层的 `HTML` 标签，一般是 `<html>`，它构成树结构的根节点，其他HTML标签节点都是它的下级。
 
-除了根节点以外，其他节点对于周围的节点都存在两种关系。
+除了根节点以外，其他节点对于周围的节点都存在两种关系：
 
 - 父子关系
 - 兄弟关系
@@ -58,8 +58,8 @@ DOM的最小组成单位叫做节点（`Node`）。文档的树形结构（DOM�
     <title>DOM Tutorial</title>
   </head>
   <body>
-    <h1>DOM Lesson one</h1>
-    <a href="javascript:;">主页</a>
+    <h1>DOMs</h1>
+    <a href="#">主页</a>
   </body>
 </html>
 ```
@@ -77,7 +77,7 @@ DOM的最小组成单位叫做节点（`Node`）。文档的树形结构（DOM�
 
 访问集合成员可通过 `下标` 或 `.item(index)` 获取。
 
-> 提示：`NodeList` / `HTMLCollection` 属于类似数组对象，不能直接使用数组方法，如果要通过数组方法来遍历节点集合，你需要将它们转换为真正的数组。
+> 提示：`NodeList` / `HTMLCollection` 属于 **类似数组** 对象，不能直接使用数组方法，如果要通过数组方法来遍历节点集合，你需要将它们转换为真正的数组。
 
 # 三、节点查询
 
@@ -118,15 +118,21 @@ document.querySelectorAll(".departments li"); *
 
 ```js
 // 获取参照节点
-var list = document.querySelector(".departments");
+p
 // 1. 获取上一个兄弟节点
 list.previousElementSibling;
+list.previousSibling
 // 2. 获取下一个兄弟节点
 list.nextElementSibling
+list.nextSibling
 // 3. 获取父节点
 list.parentElement
+list.parentNode
 // 4. 获取所有子节点
-list.children
+list.children   // → 获取所有元素子节点
+list.firstElementChild // → 获取第一个元素子节点
+list.lastElementChild) // → 获取最后一个元素子节点
+list.childElementCount // → 获取子节点的个数
 // 5. 获取第一个子节点
 list.firstElementChild
 // 5. 获取最后一个子节点
@@ -169,17 +175,17 @@ document.title *
 ## 1. 创建节点
 
 ```js
-// 创建元素节点
+// 01. 创建元素节点
 document.createElement(tagName);
-// 创建文本节点
+// 02. 创建文本节点
 document.createTextNode(content)
-// 创建属性节点
+// 03. 创建属性节点
 document.createAttribute(attrName);
-// 创建文本片段
+// 04. 创建文本片段
 document.createDocumentFragment();
 ```
 
-> Tips：当我们需要操作某个DOM时，可以将其克隆进文本片段，执行操作之后再挂载到元素上即可，这样可以优化性能，比如 Vue 模板编译原理就是使用文本片段操作DOM的。
+> **！Tips**：当我们需要操作某个DOM时，可以将其克隆进文本片段，执行操作之后再挂载到元素上即可，这样可以优化性能，比如 Vue 模板编译原理就是使用文本片段操作DOM的。
 
 ```js
 function nodeToFragment(el) {
@@ -243,13 +249,13 @@ el.classList.toString();
 ```js
 // 1. textContent
 // - 设置
-el.textContent = "Henry's github link";
+el.textContent = "China";
 // - 读取
 el.textContent 
 
 // 2. innerHTML
 // - 设置
-el.innerHTML = "<mark>Henry's</mark> github link";
+el.innerHTML = "I love <mark>China</mark>";
 // - 读取
 el.innerHTML
 ```
@@ -283,7 +289,7 @@ insertAdjacentHTML
 tag.insertAdjacentHTML("beforeend", "<h1>新插入的节点</h1>");
 ```
 
-> 提示：insertAdjacentHTML 方法可以识别html标签。
+> 提示：`insertAdjacentHTML` 方法可以识别 `html` 标签。
 
 ## 6. 操作样式
 
@@ -434,16 +440,122 @@ data.forEach(function(hero) {
 list.innerHTML = htmlStr;
 ```
 
-## 3. DOM 性能优化
+## 3. DOM 性能优化 *
 
-- [高频dom操作和页面性能优化探索](https://feclub.cn/post/content/dom)
-- 通过修改 `class` 更新样式
-- 使用 `innerHTML` 批量生产 DOM
-- 使用 `DocumentFragment`  批量生产 DOM
-- 避免使用 +=，将拼接元素放入数组通过 `join()` 方法效率更高
-- 创建节点之后应立即 `append`
-- 通过 `absolute` 或 显示/隐藏元素 后再操作DOM可以减少重排/重绘
-- 进来使用 `id` 来遍历 `DOM` 元素
+[参考 >>](https://feclub.cn/post/content/dom)
+
+通过js操作DOM的代价很高，影响页面性能的主要问题有如下几点：
+
+- 访问和修改DOM元素；
+- 修改DOM元素的样式，导致 **重绘** 或 **重排**；
+- 通过对DOM元素的事件处理，完成与用户的交互功能；
+
+> **重绘**：一些样式的修改，元素的位置和尺寸都没有改变。
+
+> **重排**：元素的位置或尺寸发生了变化，浏览器需要重新计算渲染树，而新的渲染树建立后，浏览器会重新绘制受影响的元素。
+
+页面重绘的速度要比页面重排的速度快，在页面交互中要尽量避免页面的重排操作。浏览器不会在js执行的时候更新DOM，而是会把这些DOM操作存放在一个队列中，在js执行完之后按顺序一次性执行完毕，因此在js执行过程中用户一直在被阻塞。
+
+### 页面渲染过程
+
+一个页面更新时，渲染过程大致如下：
+
+![](./IMGS/page_renders.jpeg)
+
+- JavaScript：通过js来制作动画效果或操作DOM实现交互效果
+- Style：计算样式，如果元素的样式有改变，在这一步重新计算样式，并匹配到对应的DOM上
+- Layout：根据上一步的DOM样式规则，重新进行布局（**重排**）
+- Paint：在多个渲染层上，对新的布局重新绘制（**重绘**）
+- Composite：将绘制好的多个渲染层合并，显示到屏幕上
+
+在网页生成的时候，至少会进行一次布局和渲染，在后面用户的操作时，不断的进行重绘或重排，因此如果在js中存在很多DOM操作，就会不断地触发重绘或重排，影响页面性能。
+
+### DOM操作对页面性能的影响
+
+如前面所说，DOM操作影响页面性能的核心问题主要在于DOM操作导致了页面的 **重绘** 或 **重排**，为了减少由于重绘和重排对网页性能的影响，我们要知道都有哪些操作会导致页面的重绘或者重排。
+
+> **1）导致页面重排的操作**
+
+- 内容改变
+  - 文本改变或图片尺寸改变
+- DOM元素的几何属性的变化
+  - 例如改变DOM元素的宽高值时，原渲染树中的相关节点会失效，浏览器会根据变化后的DOM重新排建渲染树中的相关节点。如果父节点的几何属性变化时，还会使其子节点及后续兄弟节点重新计算位置等，造成一系列的重排。
+- DOM树的结构变化
+  - 添加DOM节点、修改DOM节点位置及删除某个节点都是对DOM树的更改，会造成页面的重排。浏览器布局是从上到下的过程，修改当前元素不会对其前边已经遍历过的元素造成影响，但是如果在所有的节点前添加一个新的元素，则后续的所有元素都要进行重排。
+- 获取某些属性
+  - 除了渲染树的直接变化，当获取一些属性值时，浏览器为取得正确的值也会发生重排，这些属性包括：`offsetTop`、`offsetLeft`、 `offsetWidth`、`offsetHeight`、`scrollTop`、`scrollLeft`、`scrollWidth`、`scrollHeight`、 `clientTop`、`clientLeft`、`clientWidth`、`clientHeight`、`getComputedStyle()`。
+- 浏览器窗口尺寸改变
+  - 窗口尺寸的改变会影响整个网页内元素的尺寸的改变，即DOM元素的集合属性变化，因此会造成重排。
+
+> **2）导致页面重绘的操作**
+
+- 应用新的样式或者修改任何影响元素外观的属性
+  - 只改变了元素的样式，并未改变元素大小、位置，此时只涉及到重绘操作。
+- 重排一定会导致重绘
+  - 一个元素的重排一定会影响到渲染树的变化，因此也一定会涉及到页面的重绘。
+
+### 高频操作DOM会导致的问题
+
+接下来会分享一下在平时项目中由于高频操作DOM影响网页性能的问题。
+
+#### 吸顶导航条相关及scroll滚动优化
+
+**1）存在的问题**
+
+吸顶导航条要求当页面滚动到某个区域时，对应该区域的导航条在设置的显示范围内保持吸顶显示。涉及到的操作：
+
+- 监听页面的scroll事件
+- 在页面滚动时进行计算和DOM操作
+  - 计算：计算当前所在位置是否为对应导航条的显示范围
+  - DOM操作：显示在范围内的导航条并且隐藏其他导航条
+
+由于scroll事件被触发的频率高、间隔近，如果此时进行DOM操作或计算并且这些DOM操作和计算无法在下一次scroll事件发生前完成，就会造成掉帧、页面卡顿，影响用户体验。
+
+**2）优化方案**
+
+针对该项目中的问题，采取的解决方法是：
+
+- 尽量控制DOM的显示或隐藏，而不是删除或添加：
+
+  页面加载时根据当前页面中吸顶导航的数量复制对应的DOM，并且隐藏这些导航。当页面滚动到指定区域后，显示对应的导航。
+
+- 一次性操作DOM：
+
+  将复制的DOM存储到数组中，将该数组 append 到对应的父节点下，而不是根据复制得到DOM的数量依次循环插入到父节点下。
+
+- 多做缓存
+
+  如果某个节点将在后续进行多次操作，可以将该节点利用变量存储起来，而不是每次进行操作时都去查找一遍该节点。
+
+- 使用 `requestAnimationFrame` 优化页面滚动：
+
+  ```javascript
+  // 在页面滚动时对显示范围进行计算
+  // 延迟到整个dom加载完后再调用，并且异步到所有事件后执行
+  $(function () {
+    // animationShow 优化滚动效果，scrollShow 为实际计算显示范围及操作DOM的函数
+    setTimeout(function () {
+      window.Scroller.on('scrollend', animationShow);
+      window.Scroller.on('scrollmove', animationShow);
+    });
+  });
+  function animationShow() {
+    return window.requestAnimationFrame
+      ? window.requestAnimationFrame(scrollShow)
+      : scrollShow();
+  }
+  ```
+
+> 对于scroll的滚动优化还可以采用防抖（Debouncing）和节流（Throttling）的方式，但是防抖和节流的方式还是要借助于setTimeout，因此和requestAnimationFrame相比，还是requestAnimationFrame实现效果好一些。
+
+### 性能优化方案
+
+- 减少在循环内进行DOM操作，在循环外部进行DOM缓存
+  - 避免使用 +=，将拼接元素放入数组通过 `join()` 方法效率更高
+- 只控制DOM节点的显示或隐藏，而不是直接去改变DOM结构
+- 操作DOM前，先把DOM节点删除或隐藏
+- 最小化重绘和重排
+  - 通过类名更新样式
 
 ## 4. CSS 动画 vs JS动画
 
@@ -451,7 +563,7 @@ list.innerHTML = htmlStr;
 
 优势：
 
-- 硬件加速：通过浏览器GPU 来提高动画性能
+- 硬件加速：通过浏览器GPU来提高动画性能
 - 代码相对简单
 - 对于帧速表现不好的低版本浏览器，CSS3可以做到自然降级，而JS则需要撰写额外代码
 
