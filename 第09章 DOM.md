@@ -1,10 +1,10 @@
 # 一、概述
 
-[DOM](https://developer.mozilla.org/zh-CN/docs/Web/API/Document_Object_Model)（**D**ocument **O**bject **M**odel，即 文档对象模型）是 JavaScript 操作网页的接口，它的作用是将网页转为一个 JavaScript 对象，从而可以用脚本进行各种操作（比如增删内容）。
+[DOM](https://developer.mozilla.org/zh-CN/docs/Web/API/Document_Object_Model)（**D**ocument **O**bject **M**odel，即 文档对象模型）是 js 操作网页的接口，它的作用是将网页转为一个 js 对象，从而可以用脚本进行各种操作（比如增删内容）。
 
 浏览器会根据DOM模型，将结构化文档 *（如 HTML / XML）* 解析成一系列的节点，再由这些节点组成一个树状结构。所有的节点和最终的树状结构，都有规范的对外接口。所以，DOM可以理解成网页的编程接口。
 
-严格地说，DOM不属于 JavaScript，但是操作DOM是 JavaScript 最常见的任务，而 JavaScript 也 是最常用于DOM操作的语言。本章介绍的就是 JavaScript  对DOM标准的实现和用法。
+严格地说，DOM不属于 js，但是操作DOM是 js 最常见的任务，而 js 也 是最常用于DOM操作的语言。本章介绍的就是 js 对DOM标准的实现和用法。
 
 # 二、节点
 

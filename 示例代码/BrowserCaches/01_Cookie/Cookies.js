@@ -2,7 +2,7 @@
  * @Author: Lee
  * @Date: 2022-12-05 09:52:11
  * @LastEditors: Lee
- * @LastEditTime: 2022-12-06 10:38:43
+ * @LastEditTime: 2023-05-04 14:41:12
  * @Description:
  */
 
@@ -54,7 +54,7 @@ class DocCookies {
    * 创建或覆盖一个 cookie
    * @param {string} name 要创建或覆盖的 cookie 的名字
    * @param {any} value cookie 的值
-   * @param {any} expire 过期时间，例如一年为 60*60*24*365（可选）
+   * @param {any} expires 过期时间，例如一年为 60*60*24*365（可选）
    * @param {string} path 存储路径，默认为当前文档位置的路径（可选）
    * @param {string} domain 存储域名，默认为当前文档位置的路径的域名部分（可选）
    * @param {boolean} secure cookie 只会被 https 传输（可选）
@@ -65,7 +65,7 @@ class DocCookies {
       return false;
     }
     var sExpires = '';
-    if (expire) {
+    if (expires) {
       switch (expires.constructor) {
         case Number:
           sExpires =

@@ -1,0 +1,64 @@
+<!--
+ * @Author: Lee
+ * @Date: 2023-05-04 10:32:06
+ * @LastEditors: Lee
+ * @LastEditTime: 2023-05-04 10:44:37
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>函数防抖与节流</title>
+</head>
+
+<body>
+
+
+  <input placeholder="Search..." />
+
+  <script>
+    // -- 函数防抖
+    function debounce(callback, delay = 500) {
+      let t = null;
+      return function (...args) {
+        clearTimeout(t);
+        t = setTimeout(() => {
+          callback.apply(this, args);
+        }, delay);
+      }
+    }
+    const input = document.querySelector("input");
+    input.oninput = debounce(function () {
+      console.log('__Search__');
+    });
+
+    // -- 函数节流
+function throttle(callback, delay = 500) {
+  // 1. 设置一个开关
+  let isOn = true;
+  return function (...args) {
+    // 2. 如果当前正在执行某个任务，则忽略
+    if (!isOn) return;
+    // 3. 更新开关状态
+    isOn = false;
+    // 4. 启用定时器
+    setTimeout(() => {
+      callback.apply(this, args);
+      isOn = true;
+    }, delay);
+  }
+}
+window.onresize = throttle(function (event) {
+  console.log(event.target.innerWidth, event.target.innerHeight);
+});
+
+
+
+  </script>
+</body>
+
+</html>

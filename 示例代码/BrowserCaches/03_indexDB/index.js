@@ -1,7 +1,7 @@
 /*
  * @Author: Li-HONGYAO
  * @Date: 2021-04-19 17:00:50
- * @LastEditTime: 2022-12-06 15:44:58
+ * @LastEditTime: 2023-05-04 14:00:14
  * @LastEditors: Lee
  * @Description:
  * @FilePath: \01.IndexDB\index.js
@@ -82,3 +82,5 @@ async function onEach() {
   const resp = await store.each();
   console.log(resp);
 }
+
+

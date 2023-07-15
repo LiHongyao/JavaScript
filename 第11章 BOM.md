@@ -2,9 +2,9 @@
 
 > The Browser Object Model(BOM) allows JavaScript to "talk to" the browser.
 
-**BOM**（Browers Object Model，浏览器对象模型）是浏览器为JavaScript提供的一个API（Application Programming Interface，应用编程接口），所以它不是原生JavaScript提供的。通过BOM我们可以访问和设置浏览器的一些属性和函数。
+**BOM**（**B**rowers **O**bject **M**odel，浏览器对象模型）是浏览器为js提供的一个API（**A**pplication **P**rogramming **I**nterface，应用编程接口），所以它不是原生js提供的。通过BOM我们可以访问和设置浏览器的一些属性和函数。
 
-对于BOM的几乎所有操作都依赖于一个全局对象，那就是 `window` 对象。由于它是一个全局对象，所以很多时候在访问它内部的子对象的属性和方法的时候都是可以将window一词省略不写的，如 `window.console.log()`可以直接写成 `console.log()` 也能正常访问。
+对于BOM的几乎所有操作都依赖于一个全局对象 —— [window](https://developer.mozilla.org/zh-CN/docs/Web/API/Window)。由于它是一个全局对象，所以很多时候在访问它内部的子对象的属性和方法的时候都是可以将window一词省略不写的，如 `window.console.log()`可以直接写成 `console.log()` 也能正常访问。
 
 window 对象下主要包含了以下子对象：
 
@@ -17,7 +17,7 @@ window 对象下主要包含了以下子对象：
 
 除了这些子对象，window对象还提供了一些方法，如：*alert()*、*open()*、*close()*、*setTimeout()*、*clearTimeout()*、*setIntelval()*、*clearInterval()*等。
 
-BOM到现在都没有一个组织对其进行标准化，JavaScript语法的标准化组织是ECMA，DOM的标准化组织是W3C，但这并不妨碍浏览器厂商们对其的支持。随着Web编程技术的发展，浏览器厂商在很多BOM的内容上都达成了共识，这使得很多没有标准的属性和方法也可以在大多数现代浏览器上正常的使用。
+BOM到现在都没有一个组织对其进行标准化，js语法的标准化组织是ECMA，DOM的标准化组织是W3C，但这并不妨碍浏览器厂商们对其的支持。随着Web编程技术的发展，浏览器厂商在很多BOM的内容上都达成了共识，这使得很多没有标准的属性和方法也可以在大多数现代浏览器上正常的使用。
 
 在全局环境下，window对象以下几种表示法：
 
@@ -91,17 +91,19 @@ oDiv.onmouseup = function() {
 
 # 四、窗口对象
 
-## 1、document
+## 1. document
 
 详情参考标准化DOM操作里面的 `document` 对象。
 
-## 2、frames
+## 2. frames
 
-在Ajax不盛行的年代，\<iframe>标签是在页面内嵌入网站的最好选择，但随着JavaScript相关编程技术的高速发展，使用\<iframe>标签嵌套子页面的形式已经开始不被推荐，而是用Ajax的异步加载的形式去请求“ 文档片段 ”，这样可以使得页面不需要再去加载子页面内的整个css和js等文件，和一些不必要的标签（包括整个\<head>标签和文档声明）。这样一来就使得页面加载的速度得到很大提升，页面也不会因为跳转刷新出现短暂白屏的情况，从而使得用户体验得到提升。不需要页面跳转，网站所有功能都通过一个页面完成的页面现在的术语叫法为“*SPA*”（single page application，译为：单页面应用程序。也有叫“SPWA”，其中的“W”表示“web”），是现在Web互联网应用开发的一个主流趋势。
+在Ajax不盛行的年代，\<iframe> 标签是在页面内嵌入网站的最好选择，但随着js相关编程技术的高速发展，使用\<iframe>标签嵌套子页面的形式已经开始不被推荐，而是用Ajax的异步加载的形式去请求文档片段，这样可以使得页面不需要再去加载子页面内的整个CSS和js等文件，和一些不必要的标签（包括整个\<head>标签和文档声明）。这样一来就使得页面加载的速度得到很大提升，页面也不会因为跳转刷新出现短暂白屏的情况，从而使得用户体验得到提升。
 
-## 3、screen 
+不需要页面跳转，网站所有功能都通过一个页面完成的页面现在的术语叫法为 “*SPA*”（**S**ingle **P**age **A**pplication，译为：单页面应用程序。也有叫“SPWA”，其中的“W”表示“web”），是现在Web互联网应用开发的一个主流趋势。
 
-屏幕对象相关属性都是只读的，它们返回浏览器相对于当前计算机屏幕的数据信息。screen对象是用于描述当前浏览器相对于屏幕信息的主要对象，所含属性如下：
+## 3. Screen 
+
+[Screen](https://developer.mozilla.org/zh-CN/docs/Web/API/Screen) 屏幕对象相关属性都是只读的，它们返回浏览器相对于当前计算机屏幕的数据信息。screen 对象是用于描述当前浏览器相对于屏幕信息的主要对象，所含属性如下：
 
 ![](./IMGS/bom_screen.png)
 
@@ -125,11 +127,9 @@ oDiv.onmouseup = function() {
 
 为了解决这样兼容性问题，我们可以用一个自定义的三元表达式的办法来解决：
 
-## 4、navigator
+## 4. Navigator
 
-这个对象用来包含浏览器详细信息的对象，通常用于做浏览器兼容性处理和设备的响应设计。可以打开浏览器输入这个navigator对象的名称来查看不同的浏览器的相关属性，这里我们还是以现在国内使用量[排行第一](http://tongji.baidu.com/data/browser)（并且也是最长时间来对[HTML5](http://html5test.com/)和[ECMAScript 6](https://kangax.github.io/compat-table/es6/)支持最好的浏览器）的Google Chrome进行测试：
-
-![](./IMGS/bom_navigator.png)
+[Navigator](https://developer.mozilla.org/zh-CN/docs/Web/API/Navigator) 用来包含浏览器详细信息的对象，通常用于做浏览器兼容性处理和设备的响应设计。可以打开浏览器输入这个navigator对象的名称来查看不同的浏览器的相关属性.
 
 在控制台输出的内容为一个对象，对象展开后会包含比较多的属性，其中 `userAgent` 是一个比较重要的属性。在早期作浏览器判断都是依靠这个属性，不过随着浏览器版本的发展，再用这个属性去区分不同的浏览器已经行不通了。
 
@@ -151,9 +151,9 @@ navigator.userAgent
 /Android/.test(navigator.userAgent);
 ```
 
-## 5、location
+## 5. Location
 
-该对象用于描述当前页面的地址信息。首先我们拿百度首页来做这个对象的测试，简单观察该对象的相关属性属性。
+[Location](https://developer.mozilla.org/zh-CN/docs/Web/API/Location) 用于描述当前页面的地址信息。首先我们拿百度首页来做这个对象的测试，简单观察该对象的相关属性属性。
 
 ![](./IMGS/bom_location.png)
 
@@ -204,36 +204,18 @@ function locSearchValToObj(searchStr) {
 }
 ```
 
-## 6、history
+## 6. History
 
-浏览器有一个 `history` 对象，这个对象用于保存页面浏览通过超链接或程序链接跳转的记录，通常会将其直译为“历史记录”对象。首先，按照我们“一贯的作风”，将这个对象在浏览器的控制台进行一次输出观察。
+[History >>](https://developer.mozilla.org/zh-CN/docs/Web/API/History) 接口允许操作浏览器的曾经在标签页或者框架里访问的会话历史记录
 
-![](./IMGS/bom_history.png)
-
-可以发现，这个对象只有3个属性，分别是：记录长度、记录回滚和状态，但实际上这个对象的真正实用的方法都是“藏”在了原型里，我将“\_\_proto\_\_”展开后再看看这些方法：
-
-![](./IMGS/bom_history_proto.png)
-
-细心一点可以发现，这个原型里面基本不包含属性（有也只是之前的那3个属性），基本都是以方法的形式存在的。我们首先来看一下这个对象常用的3个原型方法：
-
-- `history.back()`：返回到上一个访问页面，等同于浏览器的后退键。用于制作手机客户端左上角的返回按钮是个不错的选择。不要将返回的按钮设置为一个超链接，因为有的时候不知道是从哪个页面跳到这个页面的，如果用超链接的方式有时是无法正确回到上一个页面的。
-
-- `history.forward()`：前进到下一个访问页面，等同于浏览器的前进键。
-
-- `history.go()`：相对当前记录后退或前进到第几个记录，参数为一个“正负整数”。如例说明：
-
-  ```javascript
-history.go(-2); // 回退到上上个页面
-  history.go(-1); // 回退到上个页面
-  history.go(0);  // 相当于刷新当前页面
-  history.go(1);  // 前进到下个页面
-  history.go(2);  // 前进到下下个页面
-  ```
-
-- `pushState()`：创建历史记录，可以配合popstate事件（H5）
-- `replaceState()`：替换当前的URL，不会产生历史记录（H5）
-
-> 注意：只能用同域的URL替换，例如你不能用http://baidu.com去替换http://google.com。而且state对象不存储不可序列化的对象如DOM。
-
-> 提示：新增的H5方法使用示例可参考 <https://www.jb51.net/html5/606481.html>
+- 属性
+  - length：历史记录长度
+  - scrollRestoration：设置默认滚动恢复行为
+  - state
+- 方法：
+  - `back()`：向后移动一页
+  - `forward`：向前移动一页
+  - `go(delta)`：跳转至指定页
+  - `pushState()`：向当前浏览器会话的历史堆栈中添加一个状态
+  - `replaceState()`：替换当前状态
 

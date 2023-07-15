@@ -2,9 +2,9 @@
 
 在Web应用中，实现动画效果的方法比较多：
 
-- HTML5：Canvas
+- CSS3：Transition（过度） / Animation（动画）
 
-- CSS：Transition（过度） / Animation（动画）
+- HTML5：Canvas
 - JavaScript：setInterval（定时器） / requestAnimationFrame（请求动画帧） / jQuery
 
 本篇文章重点讲解 requestAnimationFrame **请求动画帧**；

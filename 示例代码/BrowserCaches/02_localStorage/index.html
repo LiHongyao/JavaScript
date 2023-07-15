@@ -1,0 +1,43 @@
+<!--
+ * @Author: Lee
+ * @Date: 2022-12-01 17:06:35
+ * @LastEditors: Lee
+ * @LastEditTime: 2023-05-04 15:00:46
+ * @Description: 
+-->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Web Storage</title>
+</head>
+
+<body>
+  <p>
+    <span>键：</span>
+    <input type="text" placeholder="请输入键" oninput="onKeyChange(event)" />
+  </p>
+  <p>
+    <span>值：</span>
+    <input type="text" placeholder="请输入值" oninput="onValueChange(event)" />
+  </p>
+  <button type="button" onclick="onGetItem()">
+    查询Storage
+  </button>
+  <button type="button" onclick="onSetItem()">
+    存储Storage
+  </button>
+  <button type="button" onclick="onRemoveItem()">
+    移除Storage
+  </button>
+  <button type="button" onclick="onClear()">
+    清空Storage
+  </button>
+  <script src="./index.js"></script>
+</body>
+
+</html>
